@@ -1,0 +1,33 @@
+<template>
+
+
+ <router-view >
+ </router-view>
+ 
+</template>
+
+<script>
+
+ export default {
+     data(){
+      return{
+       
+       test1:"Layer test",
+       
+         }
+     } ,
+     
+     computed:{
+     adminNav(){
+      return localStorage.getItem('adminNav');
+     }
+     },
+     methods:{
+      
+     },
+     created(){
+     
+     }
+     }
+     
+</script>
