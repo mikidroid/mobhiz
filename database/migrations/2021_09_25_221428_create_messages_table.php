@@ -20,7 +20,7 @@ class CreateMessagesTable extends Migration
             $table->string('reciever_username');
             $table->string('username');
             $table->string('subject');
-            $table->text('content');
+            $table->text('body');
             $table->string('file')->nullable();
             $table->boolean('read')->default(0);
         });

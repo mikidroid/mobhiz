@@ -14,7 +14,8 @@ class message extends Model
           'reciever_username',
           'username',
           'subject',
-          'content',
+          'body',
+          'read',
           'file' ];
  public function user(){
       return $this->belongsTo(User::class);

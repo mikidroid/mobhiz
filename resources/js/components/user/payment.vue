@@ -1,38 +1,39 @@
 <template>
  <div class="container">
   <v-card>
-        <div class="pa-4 text-center">
-          <h3 class="text-h6 font-weight-normal mb-2 text-secondary">
-            Make Payment
-          </h3>
-          <hr/>
-          <span class="text-caption grey--text">Make payment through paystack for your order to be complete!</span>
- <p></p>
+   <div class="pa-4 text-center">
+     <h3 
+      class="text-h6 font-weight-normal mb-2 text-secondary">
+        Make Payment
+     </h3>
+<hr/>
+     <span class="text-caption grey--text">Make payment through paystack for your order to be complete!</span>
+<p></p>
      <paystack
         :amount="amount"
         :email="user.email"
         :paystackkey="paystackkey"
-        :reference="ref_id"
+        :reference="new_ref"
         :callback="callback"
         :close="close"
         :embed="false" ><v-btn color="success">
         <i class="fas fa-money-bill-alt mr-2"></i>
        Pay With Paystack</v-btn>
     </paystack>
-   <hr/>
+<hr/>
     <div class="pa-4 text-center">
-          
-      <span class="text-caption grey--text">Make payment through Bank payment for your order to be complete!</span>
- <p></p>
+      <span class="text-caption grey--text">
+         Make payment through Bank payment for your order to be complete!
+      </span>
+<p></p>
      <v-btn color="info">
         <i class="fas fa-money-bill-alt mr-2"></i>
-       Bank Payment</v-btn>
-    
-        </div>
-        </div>
-  </v-card>
-  
- </div>
+       Bank Payment
+     </v-btn>
+     </div>
+   </div>
+ </v-card>
+</div>
 </template>
 
 <script>
@@ -54,6 +55,9 @@ import paystack from 'vue-paystack';
      paystackkey:cons.PAYSTACK_KEY,
      ref_id:this.$route.params.ref_id,}},
    computed:{
+     new_ref(){
+           return uniqid(Date().now)
+       },
      user(){
        return JSON.parse(localStorage.getItem('user')); },},
      amountNew(){
@@ -66,7 +70,9 @@ import paystack from 'vue-paystack';
      close: function(){
           alert("Payment closed")},
      callback:function(response){
-          this.COM_ORDER(this.ref_id).
+         let form=new FormData();
+         form.append('new_ref',response.reference);
+          this.COM_ORDER(this.ref_id,form).
           then(r=>{
           this.$swal.fire({
           icon: 'success',

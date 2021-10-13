@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\message;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -13,7 +15,11 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+      $outbox=$this->outbox();
+      $inbox=message::
+      where('reciever_username','=',Auth::user()
+      ->username)->latest('id')->get();
+      return response()->json(['outbox'=>$outbox,'inbox'=>$inbox]);
     }
 
     /**
@@ -34,7 +40,19 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     $file="";
+     if($request->file){
+      $file=time().'-'.$request->file->getClientOriginalName();
+      $request->file->storeAs('public/message',$file);
+     }
+      $store=message::create([
+        'user_id'=>$request->user_id,
+        'reciever_username'=>$request->reciever_username,
+        'username'=>$request->username,
+        'file'=>$file,
+        'subject'=>$request->subject,
+        'body'=>$request->body,
+       ]);
     }
 
     /**
@@ -80,5 +98,12 @@ class MessageController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    //In
+    public function outbox()
+    {
+        $outbox=User::find(Auth::user()->id)->message()->latest('id')->get();
+        return $outbox;
     }
 }

@@ -15,7 +15,7 @@ class Reply extends Model
             'reciever_username',
             'username',
             'subject',
-            'content',
+            'body',
             'file' ];
             
 public function user(){

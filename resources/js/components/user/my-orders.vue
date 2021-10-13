@@ -84,7 +84,7 @@
   
   </tbody>
 </table>
- <div class="alert-success p-2" v-if="orders==''">
+ <div class="alert alert-info" v-if="orders==''">
   Sorry! No Order Available.
  </div>
 
@@ -95,7 +95,7 @@
  color="error"
  class="mt-3 mb-3"
  tile
-@click="$router.go(-1)"
+ @click="$router.go(-1)"
  outlined
  background="text-danger"
  ><v-icon class="mr-1" >mdi-arrow-left</v-icon>
@@ -129,8 +129,8 @@ import getApi from '../apis/getApi.js';
        loading:true
              } },
   computed:{
-     user(){  return JSON.parse(localStorage.getItem('user'))  },
-     token(){ return localStorage.getItem('token') },
+     user(){return JSON.parse(localStorage.getItem('user'))  },
+     token(){return localStorage.getItem('token') },
            },
   watch: {
       searchValue(before, after){

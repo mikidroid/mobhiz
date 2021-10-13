@@ -47,7 +47,7 @@ export const routes = [
             component: Dashboard},
             {name: 'messages',
             path: 'messages',
-            component: Guest,
+            component: messages,
             beforeEnter:(to,from,next)=>{
             !localStorage.getItem('admin')?next():next('/admin/messages')},
             children:[{

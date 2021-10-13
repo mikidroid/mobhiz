@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\registerProductController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\productOrders;
 use App\Http\Controllers\registerBusiness;
 use App\Http\Controllers\replaceCert;
@@ -38,8 +39,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [Authcontroller::class,'login']);
 Route::middleware('auth:sanctum')->get('/logout', [Authcontroller::class,'logout']);
 Route::middleware('auth:sanctum')->get('/update-user', [Authcontroller::class,'updateUser']);
-Route::middleware('auth:sanctum')->get('/product-order/{value}', [ordersController::class,'productOrder']);
+Route::middleware('auth:sanctum')->post('/product-order/{value}', [ordersController::class,'productOrder']);
 Route::middleware('auth:sanctum')->get('/trademark-order/{value}', [ordersController::class,'trademarkOrder']);
 Route::middleware('auth:sanctum')->get('/business-order/{value}', [ordersController::class,'businessNameOrder']);
 Route::middleware('auth:sanctum')->resource('/orders', ordersController::class);
 Route::middleware('auth:sanctum')->get('/orders/search/{val}',[ ordersController::class,'search']);
+Route::middleware('auth:sanctum')->resource('/message', MessageController::class);

@@ -26,10 +26,12 @@
 
     <v-tabs-items v-model="tab">
       <v-tab-item>
-        one
+       
+        <inbox :inbox="inbox"></inbox>
       </v-tab-item>
 <v-tab-item>
-        two
+       <div v-if="!inbox">No messages yet!</div>
+        <outbox :outbox="outbox"></outbox>
       </v-tab-item>
 <v-tab-item>
         <createMessage></createMessage>
@@ -41,6 +43,8 @@
 </template>
 
 <script>
+import outbox from './outbox.vue';
+import inbox from './inbox.vue';
 import uniqid from 'uniqid';
 import config from '../config/config-header.js';
 import cons from '../config/const.js';
@@ -51,20 +55,30 @@ import deleteApi from '../apis/deleteApi.js';
 import paystack from 'vue-paystack';
 import createMessage from './create-message.vue';
  export default{
-   components:{createMessage},
+   components:{createMessage,outbox,inbox},
    data(){ return{
-tab: null,
+        tab: null,
         items: [
-          'Inbox', 'Outbox', 'Send Message' 
-        ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+          'Inbox', 'Outbox', 'Send Message'],
+        inbox:"",
+        outbox:"",
+        GET_MSG:getApi.MESSAGES,
+
    } },
    computed:{
      user(){
        return JSON.parse(localStorage.getItem('user')); },
    },
    methods:{},
-   created(){},
+   created(){
+       this.GET_MSG()
+       .then(r=>{
+           this.inbox=r.data.inbox;
+           this.outbox=r.data.outbox;
+       }).catch(e=>{
+           alert(e.response.data.message)
+       })
+   },
    updated(){},
    mounted(){},
  }

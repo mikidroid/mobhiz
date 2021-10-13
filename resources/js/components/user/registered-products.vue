@@ -83,7 +83,7 @@
   
   </tbody>
 </table>
- <div class="alert-success p-2" v-if="products==''">
+ <div class="alert alert-info" v-if="products==''">
   Sorry! No Registered products Available.
  </div>
 

@@ -99,17 +99,19 @@
         </div>
       </v-window-item>
     <v-window-item :value="4">
+        <v-card>
         <div class="pa-4 text-center">
-          <h3 class="text-h6 font-weight-light mb-2">
+          <h3 class="text-h6 font-weight-normal mb-2 text-secondary">
             Make Payment
           </h3>
+          <hr/>
           <span class="text-caption grey--text">Make payment through paystack for your order to be complete!</span>
  <p></p>
      <paystack
         :amount="amountNew"
         :email="user.email"
         :paystackkey="paystackkey"
-        :reference="ref_id"
+        :reference="new_ref"
         :callback="callback"
         :close="close"
         :embed="false" ><v-btn color="success">
@@ -117,7 +119,19 @@
        Make Payment</v-btn>
     </paystack>
    
+  <hr/>
+    <div class="pa-4 text-center">
+          
+      <span class="text-caption grey--text">Make payment through Bank payment for your order to be complete!</span>
+ <p></p>
+     <v-btn color="info">
+        <i class="fas fa-money-bill-alt mr-2"></i>
+       Bank Payment</v-btn>
+    
         </div>
+        </div>
+  </v-card>
+        
       </v-window-item>
      
     </v-window>
@@ -181,12 +195,12 @@ import paystack from 'vue-paystack';
     
   computed:{
      user(){
-       return JSON.parse(localStorage.getItem('user'));
-      },
+       return JSON.parse(localStorage.getItem('user'));},
+     new_ref(){
+           return uniqid(Date().now)},
      amountNew(){
        let amount=String(this.amount)+"00";
-       return parseInt(amount);
-      },
+       return parseInt(amount);},
      token(){
        return localStorage.getItem('token');
       }},
@@ -237,7 +251,9 @@ import paystack from 'vue-paystack';
           alert("Payment closed")
       },
     callback:function(response){
-          this.COM_ORDER(this.ref_id).
+         let form=new FormData();
+         form.append('new_ref',response.reference);
+          this.COM_ORDER(this.ref_id,form).
           then(r=>{
           this.$swal.fire({
           icon: 'success',

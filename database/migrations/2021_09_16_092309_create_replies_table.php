@@ -19,8 +19,7 @@ class CreateRepliesTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('message_id');
             $table->string('username');
-            $table->string('subject');
-            $table->text('content');
+            $table->text('body');
             $table->string('file')->nullable();
         });
     }

@@ -26,7 +26,13 @@ import paystack from 'vue-paystack';
        return JSON.parse(localStorage.getItem('user')); },
    },
    methods:{},
-   created(){},
+   created(){
+     this.GET_MSG()
+       .then(r=>{
+           this.inbox=r.data.inbox;
+           this.outbox=r.data.outbox;
+       })
+   },
    updated(){},
    mounted(){},
  }

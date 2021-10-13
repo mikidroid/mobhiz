@@ -1,9 +1,9 @@
 import config from '../config/config-header.js';
 
 export default {
-  PRODUCT_ORDER:function(ref_id){
+  PRODUCT_ORDER:function(ref_id,form){
     let CONFIG=new config(localStorage.getItem('token')).getT()
-    return this.axios.get('/api/product-order/'+ref_id,CONFIG)},
+    return this.axios.post('/api/product-order/'+ref_id,form,CONFIG)},
     
   BUSINESS_ORDER:function(ref_id){
     let CONFIG=new config(localStorage.getItem('token')).getT()

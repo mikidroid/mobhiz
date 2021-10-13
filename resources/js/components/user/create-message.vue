@@ -2,13 +2,15 @@
  <div class="container mt-0">
  
  <v-text-field
-            label="Enter Subject"
+            label="Enter Subject *"
             type="text"
+            required
             v-model="subject"
           ></v-text-field>
 <v-textarea
           v-model="body"
-          label="Message body"
+          required
+          label="Message body *"
           hint="Send message to Admin"
         ></v-textarea>
    <v-file-input
@@ -17,7 +19,7 @@
     @change="onChange"
     label="Upload Attachment"
   ></v-file-input>
-<v-btn v-bind:class="{'info':subject && body}">Send Message to Admin</v-btn>
+<v-btn @click="submit" v-bind:class="{'info':subject && body}">Send Message to Admin</v-btn>
  </div>
 </template>
 
@@ -34,10 +36,13 @@ import paystack from 'vue-paystack';
  export default{
    components:{},
    data(){ return{
-     SEND_ADMIN_MSG:postApi.SEND_ADMIN_MESSAGE,
+     SEND_MSG:postApi.SEND_MESSAGE,
+     GET_MSG:getApi.MESSAGES,
      subject:"",
      body:"",
      file:"",
+     inbox:"",
+     outbox:"",
      reciever_username:'admin'
    } },
    computed:{
@@ -53,24 +58,35 @@ import paystack from 'vue-paystack';
       form.append('reciever_username',this.reciever_username);
       form.append('user_id',this.user.id);
       form.append('file',this.file);
-      this.SEND_ADMIN_MSG(form).then(r=>{
+      this.SEND_MSG(form).then(r=>{
        this.$swal.fire({
         icon:'success',
         showConfirmButton:false,
         toast:true,
         title:'Message Sent To Admin!',
-        timer:3000
+        timer:4000
        });
        this.body="";
        this.subject="";
        this.file="";
+      }).catch(e=>{
+        this.$swal.fire({
+        icon:'error',
+        showConfirmButton:true,
+        toast:true,
+        title:'Please fill required fields!',
+        timer:4000
+       });
+       
       })
     },
     onChange(){
      this.file=event.target.files[0];
     }
    },
-   created(){},
+   created(){
+  
+   },
    updated(){},
    mounted(){},
  }
