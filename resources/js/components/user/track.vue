@@ -144,7 +144,6 @@
             </v-col>
           </v-row>
         </v-timeline-item>
-
         <v-timeline-item
           color="teal lighten-3"
           small

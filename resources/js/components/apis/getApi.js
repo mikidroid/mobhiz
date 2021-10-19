@@ -5,13 +5,13 @@ export default {
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.post('/api/product-order/'+ref_id,form,CONFIG)},
     
-  BUSINESS_ORDER:function(ref_id){
+  BUSINESS_ORDER:function(ref_id,form){
     let CONFIG=new config(localStorage.getItem('token')).getT()
-    return this.axios.get('/api/business-order/'+ref_id,CONFIG)},
+    return this.axios.get('/api/business-order/'+ref_id,form,CONFIG)},
     
-  TRADEMARK_ORDER:function(ref_id){
+  TRADEMARK_ORDER:function(ref_id,form){
     let CONFIG=new config(localStorage.getItem('token')).getT()
-    return this.axios.get('/api/trademark-order/'+ref_id,CONFIG)},
+    return this.axios.get('/api/trademark-order/'+ref_id,form,CONFIG)},
     
   ORDERS:function(){
     let CONFIG=new config(localStorage.getItem('token')).getT()
