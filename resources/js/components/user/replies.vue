@@ -8,7 +8,7 @@
       </h4>
     </v-card-title>
    <v-list >
-       <v-card v-for="reply in replies">
+       <v-card v-for="reply in replies" :key="reply.id">
       
      
        <v-card-actions>

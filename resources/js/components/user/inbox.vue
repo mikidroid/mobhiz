@@ -2,23 +2,35 @@
  <div class="container mt-0">
    <div class="alert alert-info" v-if="inbox==''">No messages yet!</div>
      <div v-if="inbox!=''">
-         <v-list >
-           <v-list-item  v-for="message in inbox" @click="viewMessage(message.id)" key="message.id" >
-             <v-list-item-content v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
-             <v-list-item-title>
-               {{message.username}}
-             </v-list-item-title>
-             <v-list-item-subtitle v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
-               {{message.subject}}
-             </v-list-item-subtitle>
-             </v-list-item-content>
-             <v-list-item-action-text v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
-               {{message.created_at}}
-             </v-list-item-action-text>
-           </v-list-item>          
-         </v-list>
-     </div>
- 
+      <v-list three-line>
+      <template v-for="(item, index) in inbox">
+        <v-list-item
+          :key="item.id"
+           @click="viewMessage(item.id)">
+          <v-list-item-avatar>
+          <v-avatar
+              color="primary"
+              size="62"  >
+          <span class="white--text text-h5">{{item.username.slice(0,1)}}</span>
+          </v-avatar>
+          </v-list-item-avatar>
+          <v-list-item-content v-bind:class="{'text-secondary':item.read==1,'text-dark':item.read==0}">
+          <v-list-item-title class="font-weight-bold" v-text="item.subject"></v-list-item-title>
+          <v-list-item-subtitle class="font-weight-light" v-bind:class="{'text-secondary':item.read==1,'text-dark':item.read==0}" v-html="'<b>'+item.username+'</b>'+' - '+item.body"></v-list-item-subtitle>
+          <v-spacer></v-spacer>
+          <v-list-item-subtitle >
+          <v-icon small class="ml-auto">mdi-clock-outline</v-icon>
+            <i>{{date(item.created_at)}}</i>
+          </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+         <v-divider
+          v-if="index < outbox.length - 1"
+          :key="index">
+         </v-divider>
+      </template>
+    </v-list>
+  </div>
  
  </div>
 </template>
