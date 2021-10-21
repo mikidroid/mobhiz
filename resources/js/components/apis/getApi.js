@@ -20,10 +20,18 @@ export default {
   SEARCH_ORDERS:function(data,val){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get("/api/"+data+"/search/"+val,CONFIG)},
+
+  SEARCH_MESSAGES:function(data,val){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.get("/api/"+data+"/search/"+val,CONFIG)},
     
   MESSAGES:function(){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/message',CONFIG)},
+
+  MESSAGE_READ:function(val){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.get('/api/message/'+val+'/edit',CONFIG)},
     
   REGISTERED_PRODUCTS:function(){
     let CONFIG=new config(localStorage.getItem('token')).getT()
@@ -51,6 +59,10 @@ export default {
     
   VIEW_MESSAGE:function(val){
     let CONFIG=new config(localStorage.getItem('token')).getT()
-    return this.axios.get('/api/message'+val,CONFIG)},
+    return this.axios.get('/api/message/'+val,CONFIG)},
+
+  REPLIES:function(val){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.get('/api/reply/'+val,CONFIG)},
     
 }

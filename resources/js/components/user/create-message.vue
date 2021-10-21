@@ -41,8 +41,6 @@ import paystack from 'vue-paystack';
      subject:"",
      body:"",
      file:"",
-     inbox:"",
-     outbox:"",
      reciever_username:'admin'
    } },
    computed:{

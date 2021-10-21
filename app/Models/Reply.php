@@ -12,9 +12,7 @@ class Reply extends Model
   protected $fillable=[
             'user_id',
             'message_id',
-            'reciever_username',
             'username',
-            'subject',
             'body',
             'file' ];
             

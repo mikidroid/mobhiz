@@ -9,7 +9,7 @@ export default {
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.post('/api/message',doc,CONFIG)},
     
-  REPLY_MESSAGE:function(doc){
+  SEND_REPLY:function(doc){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.post('/api/reply',doc,CONFIG)},
     

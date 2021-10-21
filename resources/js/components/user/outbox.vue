@@ -2,7 +2,21 @@
  <div class="container mt-0">
  <div v-if="outbox==''">No messages yet!</div>
      <div v-if="outbox!=''">
-         {{outbox}}
+         <v-list >
+           <v-list-item  v-for="message in outbox" @click="viewMessage(message.id)" key="message.id" >
+             <v-list-item-content v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
+             <v-list-item-title>
+               {{message.username}}
+             </v-list-item-title>
+             <v-list-item-subtitle v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
+               {{message.subject}}
+             </v-list-item-subtitle>
+             </v-list-item-content>
+             <v-list-item-action-text v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
+               {{message.created_at}}
+             </v-list-item-action-text>
+           </v-list-item>          
+         </v-list>
      </div>
  
  </div>
@@ -27,13 +41,25 @@ import paystack from 'vue-paystack';
        
    },
    data(){ return{
+     MSG_RD:getApi.MESSAGE_READ,
      
    } },
    computed:{
      user(){
        return JSON.parse(localStorage.getItem('user')); },
+     date(val){
+       return Date.now() },
    },
-   methods:{},
+   methods:{
+     viewMessage(id){
+       this.MSG_RD(id)
+       .then((r) => {
+         this.$router.push('/user/messages/view-message/'+id)
+       }).catch((r) => {
+         alert(e.response.data.message)
+       });
+     }
+   },
    created(){
      
    },
