@@ -63,7 +63,8 @@ class MessageController extends Controller
      */
     public function show($id)
     {
-        //
+        $message=message::find($id);
+        return response()->json($message);
     }
 
     /**
@@ -74,7 +75,10 @@ class MessageController extends Controller
      */
     public function edit($id)
     {
-        //
+        //mark as read
+        $markRead=message::find($id);
+        $markRead->read=1;
+        $markRead->save();
     }
 
     /**
@@ -105,5 +109,15 @@ class MessageController extends Controller
     {
         $outbox=User::find(Auth::user()->id)->message()->latest('id')->get();
         return $outbox;
+    }
+
+    public function search(Request $request,$val)
+    {
+        $outbox=User::find(Auth::user()->id)->message()->where('body','LIKE',"%$val%")->latest('id')->get();
+        $inbox=message::
+        where('reciever_username','=',Auth::user()
+        ->username)->where('body','LIKE',"%$val%")->latest('id')->get();
+        return response()->json(['outbox'=>$outbox,'inbox'=>$inbox]);
+        
     }
 }

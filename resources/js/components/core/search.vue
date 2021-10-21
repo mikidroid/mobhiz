@@ -1,22 +1,24 @@
  <template>
   <div>
-   
+
  <v-text-field
             v-model="searchValue"
-            :append-icon="searchValue ? 'mdi-account' : ''"
+            :append-icon="searchValue ? 'mdi-arrow-right' : ''"
             filled
             clear-icon="mdi-close-circle"
             clearable
-            label="Search Orders"
+            label="Search"
             type="text"
             @change="search"
             @click:append="search"
             @click:clear="clearSearchValue"
           ></v-text-field>
   </div>
+
   </template>
-  
+
   <script>
+     
 import vue from 'vue';
 import cons from '../config/const.js';
 import postApi from '../apis/postApi.js';
@@ -32,6 +34,7 @@ import deleteApi from '../apis/deleteApi.js';
      return{
       SH_REG_PROD:getApi.SEARCH_REGISTERED_PRODUCTS,
       SH_ORDERS:getApi.SEARCH_ORDERS,
+      SH_MESSAGES:getApi.SEARCH_MESSAGES,
       searchValue:"",
      }
     },
@@ -50,11 +53,20 @@ import deleteApi from '../apis/deleteApi.js';
         break;
        case 'orders':
         this.searchOrder();
+        break;
+        case 'message':
+        this.searchMessage();
         break;}
              },
      //Product search function
      searchProduct(){
         this.SH_REG_PROD(this.data,this.searchValue).
+        then(r=>{
+         this.$emit('search',r.data)
+        })   },
+     //Message search function
+     searchMessage(){
+        this.SH_MESSAGES(this.data,this.searchValue).
         then(r=>{
          this.$emit('search',r.data)
         })   },

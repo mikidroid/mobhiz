@@ -21,6 +21,6 @@ class message extends Model
       return $this->belongsTo(User::class);
      }
 public function reply(){
-      return $this->hasMany(Reply::class,'message_id');
+      return $this->hasMany(Reply::class);
      }
 }

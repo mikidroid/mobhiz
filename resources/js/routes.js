@@ -47,7 +47,7 @@ export const routes = [
             component: Dashboard},
             {name: 'messages',
             path: 'messages',
-            component: messages,
+            component: Guest,
             beforeEnter:(to,from,next)=>{
             !localStorage.getItem('admin')?next():next('/admin/messages')},
             children:[{
@@ -55,7 +55,7 @@ export const routes = [
                path: '/',
                component: messages},{
                name: 'view-message',
-               path: 'view-message',
+               path: 'view-message/:id',
                component: viewMessage},{
                name: 'create-message',
                path: 'create-message',

@@ -56,7 +56,8 @@ class message extends Controller
      */
     public function edit($id)
     {
-        //
+        //mark message read
+
     }
 
     /**

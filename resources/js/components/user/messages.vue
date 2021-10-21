@@ -23,20 +23,22 @@
         {{ item }}
       </v-tab>
     </v-tabs>
+      
+      <search class="mt-4" v-bind:data="'message'" v-on:search="search($event)"></search>
 
     <v-tabs-items v-model="tab">
+ 
       <v-tab-item>
        
         <inbox :inbox="inbox"></inbox>
       </v-tab-item>
 <v-tab-item>
-       <div v-if="!inbox">No messages yet!</div>
         <outbox :outbox="outbox"></outbox>
-      </v-tab-item>
+</v-tab-item>
 <v-tab-item>
         <createMessage></createMessage>
       </v-tab-item>
-    </v-tabs-items>
+</v-tabs-items>
   
 </template>
  </div>
@@ -69,7 +71,12 @@ import createMessage from './create-message.vue';
      user(){
        return JSON.parse(localStorage.getItem('user')); },
    },
-   methods:{},
+   methods:{
+     search(val){
+       this.outbox=val.outbox;
+       this.inbox=val.inbox;
+     }
+   },
    created(){
        this.GET_MSG()
        .then(r=>{

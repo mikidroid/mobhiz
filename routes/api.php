@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\registerProductController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\replyController;
 use App\Http\Controllers\productOrders;
 use App\Http\Controllers\registerBusiness;
 use App\Http\Controllers\replaceCert;
@@ -45,3 +46,5 @@ Route::middleware('auth:sanctum')->get('/business-order/{value}', [ordersControl
 Route::middleware('auth:sanctum')->resource('/orders', ordersController::class);
 Route::middleware('auth:sanctum')->get('/orders/search/{val}',[ ordersController::class,'search']);
 Route::middleware('auth:sanctum')->resource('/message', MessageController::class);
+Route::middleware('auth:sanctum')->get('/message/search/{val}',[ messageController::class,'search']);
+Route::middleware('auth:sanctum')->resource('/reply', replyController::class);

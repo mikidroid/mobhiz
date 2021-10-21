@@ -2,6 +2,7 @@
  <div>
  <div v-if="outbox==''">No messages yet!</div>
      <div v-if="outbox!=''">
+<<<<<<< HEAD
          
          
 
@@ -54,6 +55,23 @@
     </v-list>
   
          
+=======
+         <v-list >
+           <v-list-item  v-for="message in outbox" @click="viewMessage(message.id)" key="message.id" >
+             <v-list-item-content v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
+             <v-list-item-title>
+               {{message.username}}
+             </v-list-item-title>
+             <v-list-item-subtitle v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
+               {{message.subject}}
+             </v-list-item-subtitle>
+             </v-list-item-content>
+             <v-list-item-action-text v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
+               {{date(message.created_at)}}
+             </v-list-item-action-text>
+           </v-list-item>          
+         </v-list>
+>>>>>>> 17814f8e9ebc02ab6484929421d4313b951912b7
      </div>
  
  </div>
@@ -68,6 +86,7 @@ import updateApi from '../apis/updateApi.js';
 import getApi from '../apis/getApi.js';
 import deleteApi from '../apis/deleteApi.js';
 import paystack from 'vue-paystack';
+import moment from 'moment';
 
  export default{
     props:{
@@ -78,13 +97,30 @@ import paystack from 'vue-paystack';
        
    },
    data(){ return{
+<<<<<<< HEAD
      active:true,
+=======
+     MSG_RD:getApi.MESSAGE_READ,
+     
+>>>>>>> 17814f8e9ebc02ab6484929421d4313b951912b7
    } },
    computed:{
      user(){
        return JSON.parse(localStorage.getItem('user')); },
+  
    },
-   methods:{},
+   methods:{
+    date(val){
+       return moment(val).format('MMMM Do YYYY, h:mm a'); },
+     viewMessage(id){
+       this.MSG_RD(id)
+       .then((r) => {
+         this.$router.push('/user/messages/view-message/'+id)
+       }).catch((r) => {
+         alert(e.response.data.message)
+       });
+     }
+   },
    created(){
      
    },
