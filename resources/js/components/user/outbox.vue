@@ -2,9 +2,7 @@
  <div>
  <div v-if="outbox==''">No messages yet!</div>
      <div v-if="outbox!=''">
-<<<<<<< HEAD
-         
-         
+
 
     <v-list two-line>
       <v-list-item-group
@@ -55,7 +53,6 @@
     </v-list>
   
          
-=======
          <v-list >
            <v-list-item  v-for="message in outbox" @click="viewMessage(message.id)" key="message.id" >
              <v-list-item-content v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
@@ -71,7 +68,7 @@
              </v-list-item-action-text>
            </v-list-item>          
          </v-list>
->>>>>>> 17814f8e9ebc02ab6484929421d4313b951912b7
+
      </div>
  
  </div>
@@ -97,12 +94,11 @@ import moment from 'moment';
        
    },
    data(){ return{
-<<<<<<< HEAD
+
      active:true,
-=======
+
      MSG_RD:getApi.MESSAGE_READ,
      
->>>>>>> 17814f8e9ebc02ab6484929421d4313b951912b7
    } },
    computed:{
      user(){
