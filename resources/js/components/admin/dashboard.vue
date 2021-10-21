@@ -2,23 +2,23 @@
  <div class="container">
 <h3>Admin Dashboard</h3>
 <hr>
-<v-btn to="/user/profile">
+<v-btn to="/admin/profile">
  <v-icon>mdi-account</v-icon>
  Profile
 </v-btn>
-<v-btn to="/user/client">
+<v-btn to="/admin/client">
  <v-icon>mdi-product</v-icon>
  Users
  
 </v-btn>
-<v-btn to="/user/my-orders">
+<v-btn to="/admin/my-orders">
  
  <v-icon>mdi-product</v-icon>
  My Orders
  
 </v-btn>
 
-<v-btn to="/user/registered-products">
+<v-btn to="/admin/registered-products">
  
  <v-icon>mdi-product</v-icon>
  Registered Products
