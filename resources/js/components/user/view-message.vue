@@ -1,5 +1,10 @@
 <template>
  <div class="mt-0">
+     <v-card-title class=" justify-center py-6">
+      <h3 class="font-weight-normal text-h3 basil--text">
+        Message
+      </h3>
+    </v-card-title>
    <v-card>
      <v-card-title class="blue lighten-5" >
       {{data.subject}}
@@ -20,8 +25,9 @@
        <v-card-text>
       <v-btn :href="'/storage/message/'+data.file"  v-bind:class="{'green lighten-4':data.file!=''}" v-bind:disabled="data.file==''" small tile >View attachment </v-btn>
          </v-card-text>
-          <v-card-text>
-         {{data.created_at}}
+          <v-card-text class="font-italic text-caption">
+            <v-icon class="" small>mdi-calendar-month-outline </v-icon>
+         {{date(data.created_at)}}
          </v-card-text>      
      </v-card-actions>
 
@@ -49,6 +55,7 @@ import CreateReply from './create-reply.vue';
 import replies from './replies.vue';
 import deleteApi from '../apis/deleteApi.js';
 import paystack from 'vue-paystack';
+import moment from 'moment';
 
 
  export default{
@@ -64,7 +71,10 @@ import paystack from 'vue-paystack';
     dataId(){
     return this.data.id },
    },
-   methods:{},
+   methods:{
+     date(val){
+       return moment(val).format('MMM Do YYYY, h:mm a'); },
+   },
    created(){
      this.VIEW_MSG(this.$route.params.id)
      .then((result) => {

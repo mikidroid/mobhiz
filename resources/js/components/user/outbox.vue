@@ -13,7 +13,7 @@
              </v-list-item-subtitle>
              </v-list-item-content>
              <v-list-item-action-text v-bind:class="{'text-secondary':message.read==1,'text-dark':message.read==0}">
-               {{message.created_at}}
+               {{date(message.created_at)}}
              </v-list-item-action-text>
            </v-list-item>          
          </v-list>
@@ -31,6 +31,7 @@ import updateApi from '../apis/updateApi.js';
 import getApi from '../apis/getApi.js';
 import deleteApi from '../apis/deleteApi.js';
 import paystack from 'vue-paystack';
+import moment from 'moment';
 
  export default{
     props:{
@@ -47,10 +48,11 @@ import paystack from 'vue-paystack';
    computed:{
      user(){
        return JSON.parse(localStorage.getItem('user')); },
-     date(val){
-       return Date.now() },
+  
    },
    methods:{
+    date(val){
+       return moment(val).format('MMMM Do YYYY, h:mm a'); },
      viewMessage(id){
        this.MSG_RD(id)
        .then((r) => {

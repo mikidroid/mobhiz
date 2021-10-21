@@ -2,7 +2,11 @@
  <div v-show="replies!=''" class="mt-3">
    <v-spacer></v-spacer>
    <br/>
-   <h3>Replies </h3>
+   <v-card-title class=" justify-center py-6">
+      <h4 class="font-weight-normal text-h4 basil--text">
+        Replies
+      </h4>
+    </v-card-title>
    <v-list >
        <v-card v-for="reply in replies">
       
@@ -25,8 +29,9 @@
        <v-card-text>
       <v-btn :href="'/storage/reply/'+reply.file"  v-bind:class="{'green lighten-4':reply.file!=''}" v-bind:disabled="reply.file==''" small tile >View attachment </v-btn>
          </v-card-text>
-          <v-card-text>
-         {{reply.created_at}}
+          <v-card-text class="ml-auto text-caption font-weight-bold font-italic">
+            <v-icon small class="ml-auto">mdi-clock-outline</v-icon>
+         {{date(reply.created_at)}}
          </v-card-text>      
      </v-card-actions>
      <hr>
@@ -47,6 +52,7 @@ import createReply from './create-reply.vue';
 import deleteApi from '../apis/deleteApi.js';
 import paystack from 'vue-paystack';
 import CreateReply from './create-reply.vue';
+import moment from 'moment';
 
  export default{
    props:{
@@ -64,7 +70,10 @@ import CreateReply from './create-reply.vue';
        return  1 },
    },
   
-   methods:{},
+   methods:{
+     date(val){
+       return moment(val).fromNow(); },
+   },
    created(){
      
    },

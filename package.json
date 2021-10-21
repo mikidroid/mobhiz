@@ -33,6 +33,7 @@
         "jw-vue-pagination": "^1.0.3",
         "uniqid": "^5.4.0",
         "vue-axios": "^3.2.5",
+        "vue-moment": "^4.1.0",
         "vue-pagination-2": "^3.0.91",
         "vue-paystack": "^2.0.4",
         "vue-router": "^3.5.2",
