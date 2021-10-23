@@ -6,14 +6,17 @@
  <router-view>
  </router-view>
  </v-container>
+ <br>
+ <adminBottomNav></adminBottomNav>
  </v-app>
  </div>
 </template>
 
 <script>
 
-import Vue from 'vue'
-Vue.component('adminDrawerNav',require('./nav/adminDrawerNav.vue').default)
+import Vue from 'vue';
+Vue.component('adminDrawerNav',require('./nav/adminDrawerNav.vue').default);
+Vue.component('adminBottomNav', require('./nav/adminBottomNav.vue').default);
 
  export default {
      data(){

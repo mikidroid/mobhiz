@@ -28,6 +28,7 @@ import adminViewRegisteredProduct from './components/admin/view-registered-produ
 import adminMessages from './components/admin/messages.vue' ;
 import adminViewMessage from './components/admin/view-message.vue' ;
 import adminCreateMessage from './components/admin/create-message.vue' ;
+import Users from './components/admin/users.vue' ;
 
 export const routes = [
      //User routes
@@ -132,7 +133,7 @@ export const routes = [
               path: '/',
               component: adminMessages},
               {name: 'view-message',
-              path: 'view-message',
+              path: 'view-message/:id',
               component: adminViewMessage},
               {name: 'create-message',
               path: 'create-message',
@@ -148,6 +149,10 @@ export const routes = [
            component:adminProfile},
            {name: 'orders',
            path: 'orders',
-           component:adminOrders},]},
+           component:adminOrders},
+           {name: 'adminUsers',
+           path: 'users',
+           component:Users},
+           ]},
 
 ]

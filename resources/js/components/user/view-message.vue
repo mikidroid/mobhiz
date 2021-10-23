@@ -5,8 +5,10 @@
         Message
       </h3>
     </v-card-title>
-   <v-card>
-     <v-card-title class="blue lighten-5" >
+    <v-card
+      class="mt-4 mx-auto">
+     
+     <v-card-title class="font-weight-light blue lighten-5" >
       {{data.subject}}
      </v-card-title>
      <v-card-subtitle v-show="data.username==user.username" class="blue lighten-5" >
@@ -15,20 +17,20 @@
       <v-card-subtitle v-show="data.username!=user.username" class="blue lighten-5" >
        <span style="font-style:italic">Message from:</span>  <b >{{data.username}}</b>
      </v-card-subtitle>
+     </v-sheet>
      <v-spacer></v-spacer>
      <v-card-text>
        {{data.body}}
      </v-card-text>
 
-     <hr>
      <v-card-actions>
-       <v-card-text>
-      <v-btn :href="'/storage/message/'+data.file"  v-bind:class="{'green lighten-4':data.file!=''}" v-bind:disabled="data.file==''" small tile >View attachment </v-btn>
-         </v-card-text>
-          <v-card-text class="font-italic text-caption">
+       
+      <v-btn class="ml-2" :href="'/storage/message/'+data.file"  v-bind:class="{'green lighten-4':data.file!=''}" v-bind:disabled="data.file==''" small tile >View attachment </v-btn>
+         
+          <div class="ml-auto mr-2 font-weight-light text-caption font-italic text-caption">
             <v-icon class="" small>mdi-calendar-month-outline </v-icon>
          {{date(data.created_at)}}
-         </v-card-text>      
+         </div>      
      </v-card-actions>
 
    </v-card>

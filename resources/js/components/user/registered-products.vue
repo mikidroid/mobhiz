@@ -3,11 +3,7 @@
  <div class="row">
   <div class="col-8">
  <h2>My Registered Products</h2></div>
- <div class="col-4 d-flex flex-row-reverse">
- <v-btn
- color="indigo"
- outlined
- ><v-icon class="mr-1">mdi-pencil</v-icon>Edit</v-btn></div>
+ 
  </div>
   <hr/>
   

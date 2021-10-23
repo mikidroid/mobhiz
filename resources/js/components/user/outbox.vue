@@ -15,11 +15,11 @@
           </v-avatar>
           </v-list-item-avatar>
           <v-list-item-content>
-          <v-list-item-title class="font-weight-bold text-dark" v-text="item.subject"></v-list-item-title>
+          <v-list-item-title class="font-weight-normal text-dark" v-text="item.subject"></v-list-item-title>
           <v-list-item-subtitle class="font-weight-light" v-html="'<b>'+item.username+'</b>'+' - '+item.body"></v-list-item-subtitle>
           <v-spacer></v-spacer>
-          <v-list-item-subtitle >
-          <v-icon small class="ml-auto">mdi-clock-outline</v-icon>
+          <v-list-item-subtitle class="text-caption" >
+          <v-icon small class="ml-auto">mdi-clock</v-icon>
             <i>{{date(item.created_at)}}</i>
           </v-list-item-subtitle>
           </v-list-item-content>

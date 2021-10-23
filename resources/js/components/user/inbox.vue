@@ -15,17 +15,17 @@
           </v-avatar>
           </v-list-item-avatar>
           <v-list-item-content v-bind:class="{'text-secondary':item.read==1,'text-dark':item.read==0}">
-          <v-list-item-title class="font-weight-bold" v-text="item.subject"></v-list-item-title>
+          <v-list-item-title class="font-weight-normal" v-text="item.subject"></v-list-item-title>
           <v-list-item-subtitle class="font-weight-light" v-bind:class="{'text-secondary':item.read==1,'text-dark':item.read==0}" v-html="'<b>'+item.username+'</b>'+' - '+item.body"></v-list-item-subtitle>
           <v-spacer></v-spacer>
-          <v-list-item-subtitle >
-          <v-icon small class="ml-auto">mdi-clock-outline</v-icon>
+          <v-list-item-subtitle class="text-caption">
+          <v-icon small class="ml-auto">mdi-clock</v-icon>
             <i>{{date(item.created_at)}}</i>
           </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
          <v-divider
-          v-if="index < outbox.length - 1"
+          v-if="index < inbox.length - 1"
           :key="index">
          </v-divider>
       </template>
@@ -44,6 +44,7 @@ import updateApi from '../apis/updateApi.js';
 import getApi from '../apis/getApi.js';
 import deleteApi from '../apis/deleteApi.js';
 import paystack from 'vue-paystack';
+import moment from 'moment';
 
  export default{
     props:{
@@ -61,6 +62,8 @@ import paystack from 'vue-paystack';
        return JSON.parse(localStorage.getItem('user')); },
    },
    methods:{
+     date(val){
+       return moment(val).format('MMM Do YYYY, h:mm a'); },
       viewMessage(id){
        this.MSG_RD(id)
        .then((r) => {

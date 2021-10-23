@@ -6,12 +6,12 @@
  <v-icon>mdi-account</v-icon>
  Profile
 </v-btn>
-<v-btn to="/admin/client">
+<v-btn to="/admin/users">
  <v-icon>mdi-product</v-icon>
- Users
+ Clients
  
 </v-btn>
-<v-btn to="/admin/my-orders">
+<v-btn to="/admin/orders">
  
  <v-icon>mdi-product</v-icon>
  My Orders

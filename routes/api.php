@@ -12,6 +12,7 @@ use App\Http\Controllers\registerBusiness;
 use App\Http\Controllers\replaceCert;
 use App\Http\Controllers\registerTrademark;
 use App\Http\Controllers\ordersController;
+use App\Http\Controllers\userController;
 use App\Http\Controllers\search;
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +49,4 @@ Route::middleware('auth:sanctum')->get('/orders/search/{val}',[ ordersController
 Route::middleware('auth:sanctum')->resource('/message', MessageController::class);
 Route::middleware('auth:sanctum')->get('/message/search/{val}',[ messageController::class,'search']);
 Route::middleware('auth:sanctum')->resource('/reply', replyController::class);
+Route::middleware('auth:sanctum')->resource('/users', userController::class);

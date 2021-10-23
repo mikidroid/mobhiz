@@ -57,7 +57,7 @@ class replyController extends Controller
      */
     public function show($id)
     {
-        $reply=message::find($id)->reply()->latest('id')->get();
+        $reply=message::find($id)->reply;
         return response()->json($reply);
     }
 

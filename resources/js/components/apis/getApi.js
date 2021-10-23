@@ -13,6 +13,10 @@ export default {
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/trademark-order/'+ref_id,form,CONFIG)},
     
+  USERS:function(){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.get('/api/users',CONFIG)},
+    
   ORDERS:function(){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/orders',CONFIG)},

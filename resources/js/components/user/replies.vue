@@ -7,16 +7,14 @@
         Replies
       </h4>
     </v-card-title>
-   <v-list >
-       <v-card v-for="reply in replies" :key="reply.id">
-      
-     
-       <v-card-actions>
-         <v-card-subtitle class="mr-auto text-success" >
+    <div v-for="(reply,index) in replies" :key="reply.id" >
+       <v-card elevation="0" >
+       <v-card-actions class="alert-success">
+         <div class="mr-auto text-success" >
        <v-icon class="text-success">mdi-account</v-icon> {{reply.username}}
-       </v-card-subtitle>
+       </div>
        <v-card-subtitle class="ml-auto">
-        #{{reply.id}}
+        #{{index+1}}
        </v-card-subtitle>
        </v-card-actions>
  
@@ -24,20 +22,17 @@
        {{reply.body}}
      </v-card-text>
 
-     <hr>
      <v-card-actions>
-       <v-card-text>
-      <v-btn :href="'/storage/reply/'+reply.file"  v-bind:class="{'green lighten-4':reply.file!=''}" v-bind:disabled="reply.file==''" small tile >View attachment </v-btn>
-         </v-card-text>
-          <v-card-text class="ml-auto text-caption font-weight-bold font-italic">
-            <v-icon small class="ml-auto">mdi-clock-outline</v-icon>
+       
+  <v-btn class="ml-2" :href="'/storage/reply/'+reply.file"  v-bind:class="{'green lighten-4':reply.file!=''}" v-bind:disabled="reply.file==''" small tile >View attachment </v-btn>
+         
+          <div class="mr-2 ml-auto text-caption font-weight-light font-italic">
+            <v-icon small class="ml-auto">mdi-clock</v-icon>
          {{date(reply.created_at)}}
-         </v-card-text>      
+         </div>      
      </v-card-actions>
-     <hr>
-       </v-card>
-   </v-list>
-
+       </v-card> <hr v-if="index < replies.length-1">
+</div>
  </div>
 </template>
 
