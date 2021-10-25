@@ -50,3 +50,4 @@ Route::middleware('auth:sanctum')->resource('/message', MessageController::class
 Route::middleware('auth:sanctum')->get('/message/search/{val}',[ messageController::class,'search']);
 Route::middleware('auth:sanctum')->resource('/reply', replyController::class);
 Route::middleware('auth:sanctum')->resource('/users', userController::class);
+Route::middleware('auth:sanctum')->get('/users/search/{val}',[ userController::class,'search']);

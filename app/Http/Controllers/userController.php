@@ -82,4 +82,11 @@ class userController extends Controller
     {
         //
     }
+    
+public function search($val)
+    {
+      
+        $myUser=User::where('firstname','LIKE',"%$val%")->latest()->get();
+        return response()->json($myUser);
+    }
 }

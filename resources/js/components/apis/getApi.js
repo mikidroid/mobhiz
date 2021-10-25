@@ -17,6 +17,10 @@ export default {
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/users',CONFIG)},
     
+  SEARCH_USERS:function(data,val){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.get("/api/"+data+"/search/"+val,CONFIG)},
+    
   ORDERS:function(){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/orders',CONFIG)},

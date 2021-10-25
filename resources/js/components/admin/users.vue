@@ -2,6 +2,9 @@
  <div class="container">
  <h3>Users</h3>
  <hr>
+ 
+  <search v-bind:data="'users'" v-on:search="search($event)"></search>
+  
   <div  class="table-responsive">
 <table class="table">
  <thead>
@@ -117,7 +120,10 @@ import paystack from 'vue-paystack';
      },
      deleteUser(){
        
-     }
+     },
+     search(value){
+       this.users=value;
+     },
    },
    created(){
      this.USERS()

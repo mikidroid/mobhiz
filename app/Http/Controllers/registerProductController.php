@@ -176,10 +176,9 @@ public function search($val)
     {
       if(Auth::user()->username!="admin"){
         $myProduct=User::find(Auth::user()->id)->registerProduct()->where('fullname','LIKE',"%$val%")->latest()->get();
-      
         return response()->json($myProduct);
         }
-        $myProduct=RegisterProduct::where('fullname','LIKE',"%$val%")->latest()->get();
+        $myProduct=RegisterProduct::where('payment','=','completed')->where('fullname','LIKE',"%$val%")->latest()->get();
         return response()->json($myProduct);
     }
 }

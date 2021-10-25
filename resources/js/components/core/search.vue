@@ -35,6 +35,7 @@ import deleteApi from '../apis/deleteApi.js';
       SH_REG_PROD:getApi.SEARCH_REGISTERED_PRODUCTS,
       SH_ORDERS:getApi.SEARCH_ORDERS,
       SH_MESSAGES:getApi.SEARCH_MESSAGES,
+      SEARCH_USERS:getApi.SEARCH_USERS,
       searchValue:"",
      }
     },
@@ -54,13 +55,22 @@ import deleteApi from '../apis/deleteApi.js';
        case 'orders':
         this.searchOrder();
         break;
-        case 'message':
+       case 'users':
+        this.searchUser();
+        break;
+       case 'message':
         this.searchMessage();
         break;}
              },
      //Product search function
      searchProduct(){
         this.SH_REG_PROD(this.data,this.searchValue).
+        then(r=>{
+        this.$emit('search',r.data)
+        })   },
+     //User search function
+     searchUser(){
+        this.SEARCH_USERS(this.data,this.searchValue).
         then(r=>{
          this.$emit('search',r.data)
         })   },
