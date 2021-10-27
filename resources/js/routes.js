@@ -29,6 +29,7 @@ import adminMessages from './components/admin/messages.vue' ;
 import adminViewMessage from './components/admin/view-message.vue' ;
 import adminCreateMessage from './components/admin/create-message.vue' ;
 import Users from './components/admin/users.vue' ;
+import viewClient from './components/admin/view-client.vue' ;
 
 export const routes = [
      //User routes
@@ -153,6 +154,9 @@ export const routes = [
            {name: 'adminUsers',
            path: 'users',
            component:Users},
+           {name: 'viewClient',
+           path: 'view-client/:id',
+           component:viewClient}
            ]},
 
 ]

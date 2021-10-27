@@ -1,125 +1,120 @@
 <template>
  <div>
-    <v-app-bar
+ <!-- white app bar -->
+ <!-- <v-app-bar
+      color="#fff"
+      fixed
+      light
+      height="70px"> -->
+      
+     <v-app-bar
       color="#7a4988"
       fixed
       dark
-      height="70px"
-      
-    >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
+      height="70px">
       <v-toolbar-title><img class="mr-2" src="/storage/core/logo.png" height="45px"></v-toolbar-title>
 
       <v-spacer></v-spacer>
+    <div v-show="screen != 'small'" >
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+    <v-btn icon to="/admin" v-show="auth" class="mr-7 ml-5">
+      <span>Dashboard</span>
+    </v-btn>
+    
+    <v-btn icon to="/admin/messages" v-show="auth" class="mr-5 ml-5">
+      <span>Inbox <v-icon>mdi-email</v-icon> </span>
+    </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-filter</v-icon>
+    <v-btn icon class="mr-5 ml-5">
+      <span class="">Contact</span>
+    </v-btn>
+    
+   <v-menu
+      top
+      right
+      offset-y
+:nudge-width="250"
+   >
+    <template v-slot:activator="{on,attr}">
+  <v-btn
+     icon
+     class="ml-7 mr-7"
+     v-on="on"
+     v-bind="attr"  >    
+     <span class="">Account  <v-icon>mdi-account</v-icon> </span>
+    </v-btn>
+    </template>
+   <v-card>
+    <v-list>
+     <v-list-item v-show="!auth" to="/login">
+      <v-list-item-title>
+       Login
+      </v-list-item-title>
+     </v-list-item>
+ <v-list-item v-show="!auth" to="/register">
+      <v-list-item-title>
+       Register
+      </v-list-item-title>
+     </v-list-item>
+ <v-list-item v-show="auth">
+      <v-list-item-avatar>
+       <img src="/storage/core/logo.png" >
+      </v-list-item-avatar>
+      <v-list-item-title>
+       Profile
+      </v-list-item-title>
+     </v-list-item>
+ <v-list-item v-show="auth" @click="logout">
+  <v-list-item-action>
+   <v-icon>mdi-logout</v-icon>
+  </v-list-item-action>
+   
+      <v-list-item-title>
+       Logout
+      </v-list-item-title>
+     </v-list-item>
+    </v-list>
+   </v-card>
+    </v-menu>
+  
+</div>
+      
+<div class="mt-2" v-show="screen == 'small'">
+<v-btn icon class="mr-1">
+       <v-icon large>mdi-alert-circle</v-icon>
       </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+</div>
     </v-app-bar>
 <br/>
 <br/>
 <br/>
-    <v-navigation-drawer
-      v-model="drawer"
-      floating
-      app
-      temporary
-    >
-<v-list-item>
- 
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            Application
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            subtext
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-<v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
-        </v-list-item-avatar>
-
-        <v-list-item-content>
-          <v-list-item-title>John Leider</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="group"
-          active-class="deep-purple--text text--accent-4"
-        >
-          <v-list-item>
-<v-list-item-icon>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-icon>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
-          
-<v-list-item>
-<v-list-item-icon>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-icon>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
-<v-list-item>
-<v-list-item-icon>
-            <v-icon>mdi-view-dashboard</v-icon>
-          </v-list-item-icon>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-     </div>
-     
+  </div>
 </template>
-
-
 
 <script>
 
  export default {
      data(){
       return{
-drawer: false,
-      group: null,
+
          }
      } ,
     
      computed:{
       auth(){
        return localStorage.getItem('token')
-      }
+      },
+      screen(){ 
+        switch(true){
+        case window.innerWidth < 550: 
+         return 'small';
+        break;
+        case window.innerWidth > 549 && window.innerWidth < 1200: 
+         return 'medium';
+        break;
+        case window.innerWidth > 1199:
+         return 'large';
+        break;}}
      },
      
 watch: {
@@ -128,7 +123,28 @@ watch: {
       },
     },
      methods:{
-      
+      logout(){
+         const Config=new config(this.token)
+         .getT();
+         this.axios.get('/api/logout',Config)
+         .then(r=>{
+         let data=['token','adminNav','admin','user'];
+         for (let single in data){
+         localStorage.removeItem(data[single]);}
+         this.$swal.fire({
+           position: 'top-end',
+           icon: 'success',
+           title: 'You have been logged out!',
+           showConfirmButton: false,
+           timer: 5000});
+          this.$router.go('/');})
+          .catch(e=>{
+            this.$swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Unable to logout!'+''+e.response.data.message,
+           showConfirmButton: false,
+           timer: 5000});})}, 
      },
      created(){
 

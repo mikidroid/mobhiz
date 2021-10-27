@@ -1,13 +1,17 @@
 <template>
  <div>
   <v-app app>
-<adminDrawerNav></adminDrawerNav>
- <v-container>
+<adminDrawerNav 
+  >
+</adminDrawerNav>
+ <v-container class="col-md-9 col-lg-9">
  <router-view>
  </router-view>
  </v-container>
  <br>
- <adminBottomNav></adminBottomNav>
+ <adminBottomNav 
+   >
+ </adminBottomNav>
  </v-app>
  </div>
 </template>
@@ -26,7 +30,7 @@ Vue.component('adminBottomNav', require('./nav/adminBottomNav.vue').default);
      } ,
      
      computed:{
-   
+
      },
      methods:{
       

@@ -44,7 +44,6 @@ Vue.component('vue-editor', VueEditor);
 Vue.component('tags-input', VoerroTagsInput);
 Vue.component('pagination', Pagination);
 Vue.component('sidenav1', require('./components/nav/sidenav1.vue').default);
-Vue.component('adminNav', require('./components/nav/adminNav.vue').default);
 Vue.component('nav-modal', require('./components/core/modals/nav-modal.vue').default);
 Vue.component('loader', require('./components/core/loader.vue').default);
 Vue.component('search', require('./components/core/search.vue').default);

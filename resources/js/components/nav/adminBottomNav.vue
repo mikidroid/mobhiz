@@ -1,11 +1,11 @@
-<template >
+<template>
   <v-bottom-navigation
     v-model="value"
     :background-color="color"
     class="gradient-custom4 text-danger"
     fixed
     grow
-    
+    v-show="screen == 'small'"
   >
     <v-btn to="/" >
       <span>Home</span>
@@ -85,54 +85,56 @@
 <script>
 import config from '../config/config-header.js';
  export default {
-     data(){
+    data(){
       return{
-drawer: false,
-      group: null,
-         }
-     } ,
+        drawer: false,
+        group: null,}},
     
-     computed:{
+    computed:{
       auth(){
-       return localStorage.getItem('token')
-      },
+       return localStorage.getItem('token')},
       token(){
-       return localStorage.getItem('token')
-      }
-     },
+       return localStorage.getItem('token')},
+      screen(){ 
+        switch(true){
+        case window.innerWidth < 550: 
+         return 'small';
+        break;
+        case window.innerWidth > 549 && window.innerWidth < 1200: 
+         return 'medium';
+        break;
+        case window.innerWidth > 1199:
+         return 'large';
+        break;}}  },
      
-watch: {
-      group () {
-        this.drawer = false
-      },
-    },
-     methods:{
-logout(){
-   const Config=new config(this.token).getT();
-      this.axios.get('/api/logout',Config).then(r=>{
-       let data=['token','adminNav','admin','user'];
+    watch: {
+      group(){
+        this.drawer = false},  },
+        
+    methods:{
+      logout(){
+         const Config=new config(this.token)
+         .getT();
+         this.axios.get('/api/logout',Config)
+         .then(r=>{
+         let data=['token','adminNav','admin','user'];
          for (let single in data){
-         localStorage.removeItem(data[single]);
-         }
+         localStorage.removeItem(data[single]);}
          this.$swal.fire({
            position: 'top-end',
            icon: 'success',
            title: 'You have been logged out!',
            showConfirmButton: false,
-           timer: 5000
-         });
-          this.$router.go('/');
-      }).catch(e=>{
-this.$swal.fire({
-           position: 'top-end',
-           icon: 'error',
-           title: 'Unable to logout!'+''+e.response.data.message,
+           timer: 5000});
+          this.$router.go('/');})
+          .catch(e=>{
+            this.$swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Unable to logout!'+''+e.response.data.message,
            showConfirmButton: false,
-           timer: 5000
-         });
-      })
-   },
-     },
+           timer: 5000});})},  },
+           
      created(){
 
      },
@@ -140,5 +142,4 @@ this.$swal.fire({
 
            }
      }
-     
 </script>

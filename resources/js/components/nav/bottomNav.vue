@@ -1,34 +1,25 @@
 <template >
   <v-bottom-navigation
     v-model="value"
+    v-show="screen == 'small'"
     :background-color="color"
     class="gradient-custom4 text-danger"
     fixed
-    grow
-    
-  >
+    grow >
     <v-btn to="/" >
       <span>Home</span>
-
       <v-icon>mdi-home</v-icon>
     </v-btn>
-
     <v-btn to="/user" v-show="auth">
       <span>Dashboard</span>
-
       <v-icon>mdi-post</v-icon>
     </v-btn>
-    
-
     <v-btn to="/user/messages" v-show="auth">
       <span>Inbox</span>
-
       <v-icon>mdi-email</v-icon>
     </v-btn>
-
     <v-btn>
       <span>Contact</span>
-
       <v-icon>mdi-phone</v-icon>
     </v-btn>
     
@@ -36,10 +27,9 @@
       top
       right
       offset-y
-:nudge-width="200"
-   >
+      :nudge-width="200">
     <template v-slot:activator="{on,attr}">
-  <v-btn
+   <v-btn
      v-on="on"
      v-bind="attr"  >    
      <span>Account</span>
@@ -98,20 +88,31 @@ drawer: false,
       },
       token(){
        return localStorage.getItem('token')
-      }
+      },
+      screen(){ 
+        switch(true){
+        case window.innerWidth < 550: 
+         return 'small';
+        break;
+        case window.innerWidth > 549 && window.innerWidth < 1200: 
+         return 'medium';
+        break;
+        case window.innerWidth > 1199:
+         return 'large';
+        break;}} 
      },
      
-watch: {
+   watch: {
       group () {
         this.drawer = false
       },
     },
-     methods:{
-logout(){
-   const Config=new config(this.token).getT();
-      this.axios.get('/api/logout',Config).then(r=>{
-       let data=['token','adminNav','admin','user'];
-         for (let single in data){
+   methods:{
+      logout(){
+        const Config=new config(this.token).getT();
+        this.axios.get('/api/logout',Config).then(r=>{
+        let data=['token','adminNav','admin','user'];
+        for (let single in data){
          localStorage.removeItem(data[single]);
          }
          this.$swal.fire({
@@ -121,17 +122,14 @@ logout(){
            showConfirmButton: false,
            timer: 5000
          });
-          this.$router.go('/');
-      }).catch(e=>{
-this.$swal.fire({
+          this.$router.go('/');})
+          .catch(e=>{
+           this.$swal.fire({
            position: 'top-end',
            icon: 'error',
            title: 'Unable to logout!'+''+e.response.data.message,
            showConfirmButton: false,
-           timer: 5000
-         });
-      })
-   },
+           timer: 5000});}) },
      },
      created(){
 

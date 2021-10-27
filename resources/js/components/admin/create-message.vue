@@ -37,8 +37,10 @@ import updateApi from '../apis/updateApi.js';
 import getApi from '../apis/getApi.js';
 import deleteApi from '../apis/deleteApi.js';
 import paystack from 'vue-paystack';
+import sendE from '../config/send-email.js'
 
  export default{
+   props:{reciever_username:String,email:String},
    components:{},
    data(){ return{
      SEND_MSG:postApi.SEND_MESSAGE,
@@ -46,13 +48,17 @@ import paystack from 'vue-paystack';
      subject:"",
      body:"",
      file:"",
-     reciever_username:""
+     reciever_userame:""
    } },
    computed:{
      user(){
        return JSON.parse(localStorage.getItem('user')); },
    },
    methods:{
+    sendEmail(){ 
+      let email=new sendE(this.email,this.subject,this.body).sendEmail();
+      return 1
+    },
     submit(){
       let form=new FormData();
       form.append('body',this.body);
@@ -61,17 +67,18 @@ import paystack from 'vue-paystack';
       form.append('reciever_username',this.reciever_username);
       form.append('user_id',this.user.id);
       form.append('file',this.file);
+      if(this.sendEmail()){
       this.SEND_MSG(form).then(r=>{
        this.$swal.fire({
         icon:'success',
         showConfirmButton:false,
         toast:true,
         title:'Message Sent!',
-        timer:4000
-       });
+        timer:4000});
        this.body="";
        this.subject="";
        this.file="";
+       
       }).catch(e=>{
         this.$swal.fire({
         icon:'error',
@@ -80,8 +87,16 @@ import paystack from 'vue-paystack';
         title:'Please fill required fields!',
         timer:4000
        });
-       
-      })
+      })}
+      else{
+       this.$swal.fire({
+        icon:'error',
+        showConfirmButton:true,
+        toast:true,
+        title:'Message not sent. check working email!',
+        timer:4000
+       });
+      }
     },
     onChange(){
      this.file=event.target.files[0];

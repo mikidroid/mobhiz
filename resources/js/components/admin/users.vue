@@ -43,7 +43,7 @@
    <v-card>
     <v-list>
   
-   <v-list-item :to="{name:'edit-registered-product',params:{id:user.id}}">
+   <v-list-item :to="{name:'viewClient',params:{id:user.id}}">
     
       <v-list-item-title>
        View Client
@@ -53,12 +53,29 @@
    <v-list-item  >
     
       <v-list-item-title>
-       Message Client
+        
+   <v-menu
+      top
+      right
+      offset-y
+      :close-on-content-click="false"
+      :nudge-width="200">
+    <template v-slot:activator="{on,attr}">
+   <v-btn
+     v-on="on"
+     v-bind="attr"  >    
+     <span>Message Client</span>
+    </v-btn>
+    </template>
+   <v-card>
+    <create-message :email="user.email" :reciever_username="user.username"></create-message>
+   </v-card>
+    </v-menu>
       </v-list-item-title>
       
      </v-list-item>
      
-   <v-list-item @click="deleteUser(user.id)" >
+   <v-list-item v-show="user.username!='admin'" @click="deleteUser(user.id)" >
       <v-list-item-title>
        Delete
       </v-list-item-title>
@@ -102,12 +119,14 @@ import updateApi from '../apis/updateApi.js';
 import getApi from '../apis/getApi.js';
 import deleteApi from '../apis/deleteApi.js';
 import paystack from 'vue-paystack';
+import createMessage from './create-message.vue';
 
  export default{
-   components:{},
+   components:{createMessage},
    data(){ return{
      users:[],
      USERS:getApi.USERS,
+     DELETE_USER:deleteApi.DELETE_USER,
      pageOfItems:[],
    } },
    computed:{
@@ -115,21 +134,34 @@ import paystack from 'vue-paystack';
        return JSON.parse(localStorage.getItem('user')); },
    },
    methods:{
+     fetchUsers(){
+      this.USERS()
+       .then(r=>{
+        this.users=r.data;
+        }).catch(e=>{alert(e.response.data.message)})
+     },
      onChangePage(pageOfItems){
        this.pageOfItems=pageOfItems;
      },
-     deleteUser(){
-       
+     deleteUser(id){
+       this.DELETE_USER(id)
+       .then(r=>{
+         this.$swal.fire({
+           title:"User deleted!",
+           icon:"success",
+           toast:true,
+           timer:3000,
+           showConfirmButton:false
+         });
+         this.fetchUsers()
+       })
      },
      search(value){
        this.users=value;
      },
    },
    created(){
-     this.USERS()
-     .then(r=>{
-       this.users=r.data;
-     }).catch(e=>{alert(e.response.data.message)})
+     this.fetchUsers()
    },
    updated(){},
    mounted(){},

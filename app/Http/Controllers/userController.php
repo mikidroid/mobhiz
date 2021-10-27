@@ -46,7 +46,8 @@ class userController extends Controller
      */
     public function show($id)
     {
-        //
+        $user=User::find($id);
+        return response()->json($user);
     }
 
     /**
@@ -80,13 +81,14 @@ class userController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::find($id);
+        $user->delete();
     }
     
 public function search($val)
     {
       
-        $myUser=User::where('firstname','LIKE',"%$val%")->latest()->get();
+        $myUser=User::where('firstname','LIKE',"%$val%")->orWhere('lastname','LIKE',"%$val%")->orWhere('username','LIKE',"%$val%")->orWhere('email','LIKE',"%$val%")->latest()->get();
         return response()->json($myUser);
     }
 }

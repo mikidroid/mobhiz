@@ -32,10 +32,12 @@ import updateApi from '../apis/updateApi.js';
 import getApi from '../apis/getApi.js';
 import deleteApi from '../apis/deleteApi.js';
 import paystack from 'vue-paystack';
+import sendE from '../config/send-email.js';
 
  export default{
    components:{},
    data(){ return{
+     ADMIN_EMAIL:cons.ADMIN_EMAIL,
      SEND_MSG:postApi.SEND_MESSAGE,
      GET_MSG:getApi.MESSAGES,
      subject:"",
@@ -48,6 +50,10 @@ import paystack from 'vue-paystack';
        return JSON.parse(localStorage.getItem('user')); },
    },
    methods:{
+    sendEmail(){ 
+      let email=new sendE(this.ADMIN_EMAIL,this.user.username+" - "+this.ADMIN_EMAIL,"<b>"+this.subject+"</b><br><p>"+this.body+"</p>").sendEmail();
+      return 1
+    },
     submit(){
       let form=new FormData();
       form.append('body',this.body);
@@ -56,27 +62,27 @@ import paystack from 'vue-paystack';
       form.append('reciever_username',this.reciever_username);
       form.append('user_id',this.user.id);
       form.append('file',this.file);
-      this.SEND_MSG(form).then(r=>{
-       this.$swal.fire({
-        icon:'success',
-        showConfirmButton:false,
-        toast:true,
-        title:'Message Sent To Admin!',
-        timer:4000
-       });
-       this.body="";
-       this.subject="";
-       this.file="";
-      }).catch(e=>{
-        this.$swal.fire({
-        icon:'error',
-        showConfirmButton:true,
-        toast:true,
-        title:'Please fill required fields!',
-        timer:4000
-       });
-       
-      })
+      
+      if(this.sendEmail()){
+        this.SEND_MSG(form)
+        .then(r=>{
+         this.$swal.fire({
+          icon:'success',
+          showConfirmButton:false,
+          toast:true,
+          title:'Message Sent To Admin!',
+          timer:4000 });
+         this.body="";
+         this.subject="";
+         this.file="";})
+        .catch(e=>{
+          this.$swal.fire({
+          icon:'error',
+          showConfirmButton:true,
+          toast:true,
+          title:'Please fill required fields!',
+          timer:4000});}) }
+      else{alert('Error sending message!')}
     },
     onChange(){
      this.file=event.target.files[0];

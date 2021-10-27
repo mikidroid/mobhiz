@@ -1,13 +1,9 @@
 <template>
  
   <v-app app>
-   
-<!--<sidenav1></sidenav1> -->
-
 <drawerNav></drawerNav>
-
 <v-content>
- <v-container fliud>
+ <v-container class="col-md-9 col-lg-9">
 <transition name="fade">
  <router-view>
  </router-view>

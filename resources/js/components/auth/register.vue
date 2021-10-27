@@ -30,57 +30,54 @@
 <script>
 import {mapMutations} from 'vuex';
 import { mapActions } from 'vuex';
+import sendE from '../config/send-email.js';
+import cons from '../config/const.js';
 
  export default{
-  
   data(){
-   return{
-    errors:{},
-    form:{
-     firstname:"",
-    }
-   }
-  },
+    return{
+     SITE_NAME:cons.SITE_NAME,
+     errors:{},
+     form:{firstname:"",}}},
   
   computed:{
     error(){
-     return this.$store.state.errors;
-    },
-   success(){
-     return this.$store.state.success;
-    },
-   ...mapMutations([
-    'SET_ERROR','SET_LOADING','SET_SUCCESS','SET_AUTHENTICATED'
-   ]),
-   
-  },
+     return this.$store.state.errors;},
+    success(){
+     return this.$store.state.success;},
+    emailSubject(){
+     let subject=`Welcome to ${this.SITE_NAME}!`;
+     return subject;},
+    emailBody(){
+     let body=`
+      <div>
+      <p>Welcome ${this.form.firstname}, we will strive to give you the best service possible as you are important to us.</p>
+      <p>Feel free to contact us via your inbox or our direct email.</p>
+      <hr>
+      <p><b>Cheers!</b></p>
+      <p><b>Yours truely, ${this.SITE_NAME}</b></p>
+      <div>`;
+     return body;},},
   
-  created(){
-   
-  },
+  created(){},
   methods:{
-
    register(){
-    this.axios.post('/api/register',this.form).
-          then(r=>{
-           this.$swal.fire({
+      this.axios.post('/api/register',this.form)
+      .then(r=>{
+          this.$swal.fire({
             title:"Registered Successfully!",
             icon:"success",
             toast:true,
             position:"top-end",
             showConfirmButton:false,
             timer:3000, });
-            this.errors="";
-            this.form={};
-            this.$router.push('/login')
-           
-          })
-              .catch(err=>{
-               this.errors=err.response.data.errors;
-              }); 
-   }
-  }
-  
+          let send_email = new sendE(this.form.email,this.emailSubject,this.emailBody).sendEmail();
+          this.errors="";
+          this.form={};
+          this.$router.push('/login') })
+      .catch(err=>{
+          this.errors=err.response.data.errors;});}
+           }
  }
  
 </script>
