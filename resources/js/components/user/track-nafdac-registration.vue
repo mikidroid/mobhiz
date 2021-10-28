@@ -185,11 +185,11 @@ import deleteApi from '../apis/deleteApi.js';
  export default {
 
      props:{
-       id:Object,
+       id:Number,
+       
      },
      data(){
       return{
-       data:this.$route.params.id,
        error:"",
        number:0,
        orders:"",
@@ -215,87 +215,12 @@ import deleteApi from '../apis/deleteApi.js';
       
     },
      methods:{
-    onChangePage(pageOfItems) {
-            // update page of items
-            this.pageOfItems = pageOfItems;
-        }
-      ,
-      row(){
-       return this.orders.length;
-      },
-      nafdac_status(val){ 
-       switch (val){
-        case 0:
-         return ' ';
-         break;
-        case 1:
-         return 'Getting all documents in the required order';
-         break;
-case 1:
-         return 'level 2';
-         break;
-case 1:
-         return 'level 2';
-         break;
-case 1:
-         return 'level 2';
-         break;
-case 1:
-         return 'level 2';
-         break;
-case 1:
-         return 'level 2';
-         break;
-case 1:
-         return 'level 2';
-         break;
-case 1:
-         return 'level 2';
-         break;
-       }
-       return `hey ${val}`},
-      deleteOrder(val){
-       // let c=new config(this.token).getT();
-     /*  this.axios.delete(`/api/orders/${val}`,c).then(r=>{
-         this.orders=r.data;
-         this.$swal.fire({
-            icon:'success',
-            toast:'true',
-            title:'Deleted successfully!',
-            position:'top-end',
-            showConfirmation:false
-         })
-       })*/
-      let der= new deleteApi(this.token,val).order();
-         der.
-         then(r=>{
-         this.orders=r.data;
-         this.$swal.fire({
-            icon:'success',
-            toast:'true',
-            title:'Deleted successfully!',
-            position:'top-end',
-            showConfirmation:false
-         })
-       }).catch(e=>{
-        this.error=e.response.data
-       })
-      },
-      d2:function(val){
-       if(val=='Kalu'){
-     
-        return "paid";
-       }else{
-        return "not paid";
-       }
-      }
      },
      created(){
       let c=new config(this.token).getT();
       this.axios.get(`/api/orders/${this.id}`,c).then(r=>{
        this.orders=r.data;
        this.loading=false;
-       
       }).catch(e=>{this.error=e.response.data.message})
       
       

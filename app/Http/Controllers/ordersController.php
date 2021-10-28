@@ -143,9 +143,9 @@ public function trademarkOrder(Request $request,$value)
 public function search(Request $request,$val)
     {
       if(Auth::user()->username!="admin"){
-        $myOrder=User::find(Auth::user()->id)->order()->where('fullname','LIKE',"%$val%")->latest()->get();
+        $myOrder=User::find(Auth::user()->id)->order()->where('fullname','LIKE',"%$val%")->orWhere('ref_id','LIKE',"%$val%")->orWhere('email','LIKE',"%$val%")->latest()->get();
         //Return ($val);
         return response()->json($myOrder);}
-        $myOrder=order::where('fullname','like',"%$val%")->latest()->get();
+        $myOrder=order::where('fullname','like',"%$val%")->orWhere('ref_id','LIKE',"%$val%")->orWhere('email','LIKE',"%$val%") ->latest()->get();
         return response()->json($myOrder);}
 }

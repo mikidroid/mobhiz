@@ -62,7 +62,7 @@
        Delete Order
       </v-list-item-title>
      </v-list-item>
-   <v-list-item :to="{name:'track',params:{id:order.id}}">
+   <v-list-item :to="{name:'track',params:{id:order.id,type:order.type}}">
     
       <v-list-item-title>
        Track Progress

@@ -81,7 +81,7 @@ export const routes = [
             path: 'payment/:ref_id/:type',
             component:payment},
             {name: 'track',
-            path: 'orders/track/:id',
+            path: 'orders/track/:id/:type',
             component:track}]},
      //Guest routes
      {name: 'guest',
