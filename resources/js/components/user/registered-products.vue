@@ -18,7 +18,6 @@
   <th>Type</th>
   <th>Email</th>
   <th>Phone</th>
-  <th>Mode</th>
   <th>Payment</th>
   <th>Actions</th>
   </tr>
@@ -31,7 +30,6 @@
  <td>{{product.type}}</td>
  <td>{{product.email}}</td>
  <td>{{product.phone}}</td>
- <td>{{product.mode}}</td>
  <td><div>{{product.payment}}</div></td>
  <td>   <v-menu
       top

@@ -105,8 +105,8 @@ public function productOrder(Request $request)
     {
         $myOrder=order::where('ref_id','=',$request->ref_id)->first();
         $myOrder->payment='completed';
-        $myOrder->status='payment complete';
-        $myOrder->nafdac_status='1';
+        $myOrder->status=2; //means payment conplete
+        $myOrder->nafdac_status=1;
         //Load RegisterProduct model for relationships
         $regProd=$myOrder->registerProduct;
         $regProd->payment='completed';
@@ -119,7 +119,7 @@ public function businessNameOrder(Request $request,$value)
         $myOrder=order::where('ref_id','=',$value)->first();
         $myOrder->payment='completed';
         $myOrder->ref_id=$request->new_ref;
-        $myOrder->status='payment complete';
+        $myOrder->status=2;
         //Load RegisterProduct model for relationships
         $regBis=$myOrder->businessName;
         $regBis->payment='completed';
@@ -132,7 +132,7 @@ public function trademarkOrder(Request $request,$value)
         $myOrder=order::where('ref_id','=',$value)->first();
         $myOrder->payment='completed';
         $myOrder->ref_id=$request->new_ref;
-        $myOrder->status='payment complete';
+        $myOrder->status=2;
         //Load RegisterProduct model for relationships
         $regTrad=$myOrder->trademark;
         $regTrad->payment='completed';

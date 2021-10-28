@@ -79,7 +79,7 @@ class registerProductController extends Controller
       ,'payment'=>'pending'
       ,'mode'=>'not running'
       ,'product_names'=>$request->product_names
-      ,'status'=>'Order created'
+      ,'status'=>1 //Order created is = 1
       ,'type'=>'product registration'
       ,'ref_id'=>$request->ref_id
       ,'register_product_id'=>$newProd->id

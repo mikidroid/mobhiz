@@ -1,7 +1,7 @@
 <template>
 <div class="">
  
-<track-product v-show="option=='product registration'" :id="id"></track-product>
+<track-product v-show="type=='product registration'" :id="id"></track-product>
   
  </div>
 </template>
@@ -18,7 +18,6 @@ Vue.component('track-product',require('./track-nafdac-registration.vue').default
       return{
        id:this.$route.params.id,
        type:this.$route.params.type,
-       option:"",
        error:"",
        number:0,
        orders:"",
@@ -46,12 +45,7 @@ Vue.component('track-product',require('./track-nafdac-registration.vue').default
      methods:{
      },
      created(){
-       switch(this.$route.params.type){
-         case 'product registration':
-           this.option=this.type;
-           break;
-       }
-      
+    
      },
      updated(){
 

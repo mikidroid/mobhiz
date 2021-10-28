@@ -22,8 +22,6 @@
   <th>Email</th>
   <th>Phone</th>
 <th>Ref Id</th>
-  <th>Nafdac status</th>
-  <th>Mode</th>
   <th>Payment</th>
   <th>Actions</th>
   </tr>
@@ -38,8 +36,6 @@
  <td>{{order.email}}</td>
  <td>{{order.phone}}</td>
  <td>{{order.ref_id}}</td>
- <td>{{nafdac_status(order.nafdac_status)}}</td>
- <td>{{order.mode}}</td>
  <td><div>{{order.payment}}</div></td>
  <td>   <v-menu
       top

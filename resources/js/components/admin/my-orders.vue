@@ -4,7 +4,6 @@
   <div class="col-8">
  <h2>My Orders</h2></div>
  <div class="col-4 d-flex flex-row-reverse">
-
  </div>
   <hr/>
   
@@ -21,9 +20,8 @@
   <th>Type</th>
   <th>Email</th>
   <th>Phone</th>
-<th>Ref Id</th>
-  <th>Nafdac status</th>
-  <th>Mode</th>
+  <th>Ref Id</th>
+  <th>Status</th>
   <th>Payment</th>
   <th>Actions</th>
   </tr>
@@ -38,14 +36,14 @@
  <td>{{order.email}}</td>
  <td>{{order.phone}}</td>
  <td>{{order.ref_id}}</td>
- <td>{{nafdac_status(order.nafdac_status)}}</td>
- <td>{{order.mode}}</td>
+ <td v-show="order.type!='product registration'">Select status</td>
+ <td v-show="order.type=='product registration'">Select Nafdac status</td>
  <td><div>{{order.payment}}</div></td>
- <td>   <v-menu
+ <td><v-menu
       top
       right
       offset-y
-:nudge-width="200"
+      :nudge-width="200"
    >
     <template v-slot:activator="{on,attr}">
   <v-btn
@@ -62,13 +60,7 @@
        Delete Order
       </v-list-item-title>
      </v-list-item>
-   <v-list-item :to="{name:'track',params:{id:order.id}}">
-    
-      <v-list-item-title>
-       Track Progress
-      </v-list-item-title>
-      
-     </v-list-item>
+   
  <v-list-item v-if="order.payment==='pending'" >
       <v-list-item-title>
         <v-btn @click="confirmPayment(order)" color="success">
@@ -186,7 +178,6 @@ import sendE from '../config/send-email.js';
           form.append('ref_id',val.ref_id);
           this.PRODUCT_ORDER(form)
           .then(r=>{
-            alert(r.data)
             this.$swal.fire({
             icon:'success',
             toast:'true',
