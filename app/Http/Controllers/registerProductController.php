@@ -47,11 +47,11 @@ class registerProductController extends Controller
     {
     // ini_set('upload_max_filesize', '5M');
 
-$documents= $request->documents->getClientOriginalName();
+    $documents= $request->documents->getClientOriginalName();
      $this->path=time().'-'.$documents;
      $store=$request->documents
        ->storeAs('public/register-product',$this->path);
-$phones=[$request->company_phone1,$request->company_phone2];
+    $phones=[$request->company_phone1,$request->company_phone2];
 
      $Product=RegisterProduct::create(
        [

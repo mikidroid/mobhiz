@@ -71,9 +71,9 @@
      </v-list-item>
  <v-list-item v-if="order.payment==='pending'" >
       <v-list-item-title>
-        <v-btn :href="'payment/'+order.ref_id+'/'+order.type" color="success">
+        <v-btn @click="confirmPayment(order)" color="success">
         <i class="fas fa-money-bill-alt mr-2"></i>
-       Make Payment</v-btn>
+       Confirm Payment</v-btn>
       </v-list-item-title>
      </v-list-item>
  
@@ -112,6 +112,9 @@ import Vue from 'vue';
 import config from '../config/config-header.js';
 import deleteApi from '../apis/deleteApi.js';
 import getApi from '../apis/getApi.js';
+import postApi from '../apis/postApi.js';
+import cons from '../config/const.js';
+import sendE from '../config/send-email.js';
 
  export default {
   data(){
@@ -119,6 +122,8 @@ import getApi from '../apis/getApi.js';
        DEL_ORDER:deleteApi.DELETE_ORDER,
        SH_ORDERS:getApi.SEARCH_ORDERS,
        ORDERS:getApi.ORDERS,
+       SITE_NAME:cons.SITE_NAME,
+       PRODUCT_ORDER:postApi.PRODUCT_ORDER,
        page:1,
        error:"",
        number:0,
@@ -129,23 +134,79 @@ import getApi from '../apis/getApi.js';
        loading:true
              } },
   computed:{
-     user(){return JSON.parse(localStorage.getItem('user'))  },
-     token(){return localStorage.getItem('token') },
-           },
-  watch: {
-      searchValue(before, after){
-        this.search()
-      }
-          },
+     user(){return JSON.parse(localStorage.getItem('user'))},
+     token(){return localStorage.getItem('token')},     },
+  watch:{
+     searchValue(before, after){
+        this.search()}
+        },
   methods:{
-        onChangePage(pageOfItems) {
+    sendEmail(val){
+     let subject=`Order Completed!`;
+     let body=`
+      <div>
+      <p>Dear ${val.fullname}, we are pleased to inform you that your order has been completed and payment confirmed.</p>
+      <p></p>
+      <p><b>Details as follows:</b></p>
+      <table class="p-2">
+      <tr>
+      <td>Fullname:</td>
+      <td><b>${val.fullname}</b></td>
+      </tr>
+      <tr>
+      <td>Company name:</td>
+      <td><b>${val.company_name}</b></td>
+      </tr>
+      <tr>
+      <td>Product names:</td>
+      <td><b>${val.product_names}</b></td>
+      </tr>
+      <tr>
+      <td>Order type:</td>
+      <td><b>${val.type}</b></td>
+      </tr>
+      </table>
+      <p></p>
+      <p>You can always track your registration progress through your dashboard on <span class="alert-success p-1">"Orders >> Edit >> Track"</span>. </p>
+      <p></p>
+      <p>Feel free to contact us via your inbox or our direct email.</p>
+      <hr>
+      <p><b>Cheers!</b></p>
+      <p><b>Yours truely, ${this.SITE_NAME}</b></p>
+      <div>`;
+      let send_email=new sendE(val.email,subject,body).sendEmail();
+      if(send_email){
+       return 1}},
+       
+    confirmPayment(val){
+      switch(val.type){
+        case 'product registration':
+          if(this.sendEmail(val)){
+          let form=new FormData();
+          form.append('ref_id',val.ref_id);
+          this.PRODUCT_ORDER(form)
+          .then(r=>{
+            alert(r.data)
+            this.$swal.fire({
+            icon:'success',
+            toast:'true',
+            title:'Order Confirmed!',
+            position:'top-end',
+            showConfirmButton:false,
+            timer:2500})})
+            .catch(e=>{
+              alert(e.response.data)})};
+            break;}},
+            
+    onChangePage(pageOfItems) {
           // update page of items
           this.pageOfItems = pageOfItems;},
-     row(){
-       return this.orders.length;},
-     clearSearchValue(){
-        this.searchValue="";},
-     nafdac_status(val){ 
+          
+    row(){return this.orders.length;},
+    
+    clearSearchValue(){this.searchValue="";},
+    
+    nafdac_status(val){ 
        switch (val){
         case 0:
          return 'level 1';
@@ -154,8 +215,10 @@ import getApi from '../apis/getApi.js';
          return 'level 2';
          break;}
        return `hey ${val}`},
-     deleteOrder(val){
-       this.DEL_ORDER(val).then(r=>{
+       
+    deleteOrder(val){
+       this.DEL_ORDER(val)
+       .then(r=>{
          this.orders=r.data;
          this.$swal.fire({
             icon:'success',
@@ -163,26 +226,23 @@ import getApi from '../apis/getApi.js';
             title:'Deleted successfully!',
             position:'top-end',
             showConfirmButton:false,
-            timer:2500
-         })
-       }).catch(e=>{
-        this.error=e.response.data
-       })
-      },
+            timer:2500})})
+       .catch(e=>{
+        this.error=e.response.data})},
+        
     search(value){
-       this.orders=value;
-      }
-     },
+       this.orders=value;}},
+       
   created(){
      let c=new config(this.token).getT();
-      this.ORDERS().then(r=>{
+     this.ORDERS().then(r=>{
        this.orders=r.data;
-       this.loading=false;
-      }).catch(e=>{this.error=e.response.data.message}) 
-
-     },
-  updated(){
-           }
+       this.loading=false;})
+       .catch(e=>{
+         this.error=e.response.data.message}) 
+          },
+          
+  updated(){}
      }
      
 </script>

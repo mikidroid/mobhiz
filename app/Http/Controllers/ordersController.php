@@ -101,26 +101,25 @@ public function sea($val)
          }
     }
     
-public function productOrder(Request $request,$value)
+public function productOrder(Request $request)
     {
-        $myOrder=order::where('ref_id','=',$value)->first();
+        $myOrder=order::where('ref_id','=',$request->ref_id)->first();
         $myOrder->payment='completed';
-        $myOrder->status='Payment complete';
-        $myOrder->ref_id=$request->new_ref;
+        $myOrder->status='payment complete';
         $myOrder->nafdac_status='1';
         //Load RegisterProduct model for relationships
         $regProd=$myOrder->registerProduct;
         $regProd->payment='completed';
         //Save both models
-        $myOrder->save();
-        $regProd->save();
+        if($myOrder->save()){
+        $regProd->save();}
     }
 public function businessNameOrder(Request $request,$value)
     {
         $myOrder=order::where('ref_id','=',$value)->first();
         $myOrder->payment='completed';
         $myOrder->ref_id=$request->new_ref;
-        $myOrder->status='Payment complete';
+        $myOrder->status='payment complete';
         //Load RegisterProduct model for relationships
         $regBis=$myOrder->businessName;
         $regBis->payment='completed';
@@ -133,7 +132,7 @@ public function trademarkOrder(Request $request,$value)
         $myOrder=order::where('ref_id','=',$value)->first();
         $myOrder->payment='completed';
         $myOrder->ref_id=$request->new_ref;
-        $myOrder->status='Payment complete';
+        $myOrder->status='payment complete';
         //Load RegisterProduct model for relationships
         $regTrad=$myOrder->trademark;
         $regTrad->payment='completed';
@@ -145,10 +144,8 @@ public function search(Request $request,$val)
     {
       if(Auth::user()->username!="admin"){
         $myOrder=User::find(Auth::user()->id)->order()->where('fullname','LIKE',"%$val%")->latest()->get();
-       // return ($val);
-        return response()->json($myOrder);
-        }
+        //Return ($val);
+        return response()->json($myOrder);}
         $myOrder=order::where('fullname','like',"%$val%")->latest()->get();
-        return response()->json($myOrder);
-    }
+        return response()->json($myOrder);}
 }

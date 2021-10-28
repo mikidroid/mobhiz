@@ -6,31 +6,24 @@
       class="text-h6 font-weight-normal mb-2 text-secondary">
         Make Payment
      </h3>
-<hr/>
-     <span class="text-caption grey--text">Make payment through paystack for your order to be complete!</span>
-<p></p>
-     <paystack
-        :amount="amount"
-        :email="user.email"
-        :paystackkey="paystackkey"
-        :reference="new_ref"
-        :callback="callback"
-        :close="close"
-        :embed="false" ><v-btn color="success">
-        <i class="fas fa-money-bill-alt mr-2"></i>
-       Pay With Paystack</v-btn>
-    </paystack>
-<hr/>
-    <div class="pa-4 text-center">
-      <span class="text-caption grey--text">
-         Make payment through Bank payment for your order to be complete!
-      </span>
-<p></p>
+    <hr/>
+    <v-card-content>
+      <v-card-subtitle>
+        Your Transaction Id is: 
+      <span>{{ref_id}}</span>
+      </v-card-subtitle>
+      <v-card-text>
+        You will be required to submit this code to our agent after negotiation and payment has been completed. Only then will your payment be confirmed.
+      </v-card-text>
+      <v-card-text>
+        
+      </v-card-text>
+    </v-card-content>
+    <p></p>
      <v-btn color="info">
-        <i class="fas fa-money-bill-alt mr-2"></i>
-       Bank Payment
+      <i class="fas fa-money-bill-alt mr-2"></i>
+       Complete Negotiation with our Agent
      </v-btn>
-     </div>
    </div>
  </v-card>
 </div>
@@ -56,55 +49,16 @@ import paystack from 'vue-paystack';
      ref_id:this.$route.params.ref_id,}},
    computed:{
      new_ref(){
-           return uniqid(Date().now)
+           return uniqid()
        },
      user(){
        return JSON.parse(localStorage.getItem('user')); },},
-     amountNew(){
-       let amount=String(this.amount)+"00";
-       return parseInt(amount);},
+    
    methods:{
-     amountCal(val){
-       let amount=String(val)+"00";
-       return parseInt(amount);},
-     close: function(){
-          alert("Payment closed")},
-     callback:function(response){
-         let form=new FormData();
-         form.append('new_ref',response.reference);
-          this.COM_ORDER(this.ref_id,form).
-          then(r=>{
-          this.$swal.fire({
-          icon: 'success',
-          toast:true,
-          position:'top-end',
-          title: 'Payment Successful!',
-          showConfirmButton:false,
-          timer: 3500});
-         this.$router.push('/user');})
-      .catch(e=>{
-       this.$swal.fire({
-          icon: 'error',
-          toast:true,
-          position:'top-end',
-          title:e.response.data.message,
-          showConfirmButton:false,
-          timer: 3500})})},
+          
           },
    created(){
-     switch(this.$route.params.type){
-       case 'product registration':
-        this.COM_ORDER=getApi.PRODUCT_ORDER;
-        this.amount=this.amountCal(cons.REGISTER_PRODUCT_PRICE);
-        break;
-       case 'trademark registration':
-        this.COM_ORDER=getApi.TRADEMARK_ORDER;
-        this.amount=cons.REGISTER_TRADEMARK_PRICE;
-        break;
-       case 'business registration':
-        this.COM_ORDER=getApi.BUSINESS_ORDER;
-        this.amount=cons.REGISTER_BUSINESS_PRICE;
-        break; }
+     
    },
    updated(){},
    mounted(){},

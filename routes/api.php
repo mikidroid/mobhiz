@@ -41,7 +41,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [Authcontroller::class,'login']);
 Route::middleware('auth:sanctum')->get('/logout', [Authcontroller::class,'logout']);
 Route::middleware('auth:sanctum')->get('/update-user', [Authcontroller::class,'updateUser']);
-Route::middleware('auth:sanctum')->post('/product-order/{value}', [ordersController::class,'productOrder']);
+Route::middleware('auth:sanctum')->post('/product-order', [ordersController::class,'productOrder']);
 Route::middleware('auth:sanctum')->get('/trademark-order/{value}', [ordersController::class,'trademarkOrder']);
 Route::middleware('auth:sanctum')->get('/business-order/{value}', [ordersController::class,'businessNameOrder']);
 Route::middleware('auth:sanctum')->resource('/orders', ordersController::class);

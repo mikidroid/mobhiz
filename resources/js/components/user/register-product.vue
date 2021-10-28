@@ -105,35 +105,30 @@
             Make Payment
           </h3>
           <hr/>
-          <span class="text-caption grey--text">Make payment through paystack for your order to be complete!</span>
- <p></p>
-     <paystack
-        :amount="amountNew"
-        :email="user.email"
-        :paystackkey="paystackkey"
-        :reference="new_ref"
-        :callback="callback"
-        :close="close"
-        :embed="false" ><v-btn color="success">
-        <i class="fas fa-money-bill-alt mr-2"></i>
-       Make Payment</v-btn>
-    </paystack>
-   
-  <hr/>
-    <div class="pa-4 text-center">
-          
-      <span class="text-caption grey--text">Make payment through Bank payment for your order to be complete!</span>
- <p></p>
-     <v-btn color="info">
-        <i class="fas fa-money-bill-alt mr-2"></i>
-       Bank Payment</v-btn>
-    
+     <v-card-content>
+      <v-card-subtitle>
+        Your Transaction Id is: 
+      <span class="p-2 alert-success">
+        {{ref_id}}
+      </span>
+      </v-card-subtitle>
+      <v-card-text>
+        You will be required to submit this code to our agent after negotiation and payment has been completed. Only then will your payment be confirmed.
+      </v-card-text>
+      <v-divider></v-divider>
+      <v-card-text>
+        Please connect with our agent below to begin negotiation and complete payment.
+      </v-card-text>
+      <v-card-text>
+      <v-btn color="info">
+      <i class="fas fa-money-bill-alt mr-2"></i>
+       Connect with our Agent
+     </v-btn>
+      </v-card-text>
+     </v-card-content>
         </div>
-        </div>
-  </v-card>
-        
+    </v-card>
       </v-window-item>
-     
     </v-window>
     <v-divider></v-divider>
     <v-card-actions>
@@ -205,11 +200,48 @@ import paystack from 'vue-paystack';
        return localStorage.getItem('token');
       }},
   methods:{
+    
+    sendEmail(val){
+     let subject=`Order Completed!`;
+     let body=`
+      <div>
+      <p>Dear ${val.fullname}, we are pleased to inform you that your order has been completed and payment confirmed.</p>
+      <p></p>
+      <p><b>Details as follows:</b></p>
+      <table class="p-2">
+      <tr>
+      <td>Fullname:</td>
+      <td><b>${val.fullname}</b></td>
+      </tr>
+      <tr>
+      <td>Company name:</td>
+      <td><b>${val.company_name}</b></td>
+      </tr>
+      <tr>
+      <td>Product names:</td>
+      <td><b>${val.product_names}</b></td>
+      </tr>
+      <tr>
+      <td>Order type:</td>
+      <td><b>${val.type}</b></td>
+      </tr>
+      </table>
+      <p></p>
+      <p>You can always track your registration progress through your dashboard on <span class="alert-success p-1">"Orders >> Edit >> Track"</span>. </p>
+      <p></p>
+      <p>Feel free to contact us via your inbox or our direct email.</p>
+      <hr>
+      <p><b>Cheers!</b></p>
+      <p><b>Yours truely, ${this.SITE_NAME}</b></p>
+      <div>`;
+      let send_email=new sendE(val.email,subject,body).sendEmail();
+      if(send_email){
+       return 1}},
    
-  onChange(){
-        this.doc=event.target.files[0];
-      },
-      submitDetails(){
+    onChange(){
+        this.doc=event.target.files[0];},
+      
+    submitDetails(){
        let Config=new config(this.token).getT();
        let form=new FormData();
        
@@ -277,7 +309,7 @@ import paystack from 'vue-paystack';
        this.size+=1;}
      },
      created(){
-      this.ref_id=uniqid(Date.now());
+      this.ref_id=uniqid();
      },
      updated(){
            }

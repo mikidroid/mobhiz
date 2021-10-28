@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->timestamps();
 $table->foreignId('user_id');
-$table->enum('type',['product registration','certificate replacement','trademark','cac registration']);
+$table->enum('type',['product registration','certificate replacement','trademark registration','cac registration']);
 $table->string('fullname');
 $table->string('email');
 $table->string('phone');
@@ -27,7 +27,7 @@ $table->text('product_names')->nullable();
 $table->string('ref_id');
 $table->enum('mode',['not running','running','expired'])->nullable();
 $table->bigInteger('nafdac_status')->default(0);
-$table->enum('status',['Order created','Payment complete','Processing','Process complete'])->default('Order created');
+$table->enum('status',['order created','payment complete','processing','process complete'])->default('Order created');
 $table->enum('payment',['completed','pending'])->default('pending');
 $table->foreignId('register_product_id')->nullable();
 $table->foreignId('replace_cert_id')->nullable();

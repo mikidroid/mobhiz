@@ -5,6 +5,10 @@ export default {
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.post('/api/register-product',doc,CONFIG)},
  
+  PRODUCT_ORDER:function(val){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.post('/api/product-order',val,CONFIG)},
+ 
   SEND_MESSAGE:function(doc){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.post('/api/message',doc,CONFIG)},
