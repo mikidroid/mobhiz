@@ -70,16 +70,15 @@
             type="text"
             v-model="product_names"
           ></v-text-field>
+<span class="text-caption grey--text text--darken-1">
+            Ensure that you put all required documents in a folder and ZIP it using softwares like "WinRar" before you upload it below.
+          </span>
    <v-file-input
     show-size
     counter
     @change="onChange"
     label="Upload required document(s)"
   ></v-file-input>
-        
-          <span class="text-caption grey--text text--darken-1">
-            This is the email you will use to login to your Vuetify account
-          </span>
         </v-card-text>
       </v-window-item>
 
@@ -120,7 +119,7 @@
         Please connect with our agent below to begin negotiation and complete payment.
       </v-card-text>
       <v-card-text>
-      <v-btn color="info">
+      <v-btn :href="WHATSAPP_LINK" color="info">
       <i class="fas fa-money-bill-alt mr-2"></i>
        Connect with our Agent
      </v-btn>
@@ -161,6 +160,7 @@ import getApi from '../apis/getApi.js';
 import c from '../apis/deleteApi.js';
 import {mapActions} from 'vuex';
 import paystack from 'vue-paystack';
+import sendE from '../config/send-email.js';
 
  export default {
   components:{paystack},
@@ -168,12 +168,12 @@ import paystack from 'vue-paystack';
       return{
          COM_ORDER:getApi.PRODUCT_ORDER,
          REG_PRODUCT:postApi.REGISTER_PRODUCT,
+         SITE_NAME:cons.SITE_NAME,
+         WHATSAPP_LINK:cons.WHATSAPP_LINK,
          step:1,
          type_items:['new','renewal'],
          type:"",
          doc:"",
-         paystackkey:cons.PAYSTACK_KEY,
-         amount:cons.REGISTER_PRODUCT_PRICE,
          phone:null,
          company_phone1:"",
          company_phone2:"",
@@ -182,8 +182,6 @@ import paystack from 'vue-paystack';
          company_name:null,
          company_email:null,
          size:1,
-         statu:null,
-         statu2:null,
          ref_id:null,
       }
      } ,
@@ -202,39 +200,25 @@ import paystack from 'vue-paystack';
   methods:{
     
     sendEmail(val){
-     let subject=`Order Completed!`;
+     let subject=`Order Placed!`;
      let body=`
       <div>
-      <p>Dear ${val.fullname}, we are pleased to inform you that your order has been completed and payment confirmed.</p>
+      <p>Dear ${this.user.firstname}, we are pleased to inform you that your PRODUCT REGISTRATION order has been placed.</p>
       <p></p>
-      <p><b>Details as follows:</b></p>
-      <table class="p-2">
-      <tr>
-      <td>Fullname:</td>
-      <td><b>${val.fullname}</b></td>
-      </tr>
-      <tr>
-      <td>Company name:</td>
-      <td><b>${val.company_name}</b></td>
-      </tr>
-      <tr>
-      <td>Product names:</td>
-      <td><b>${val.product_names}</b></td>
-      </tr>
-      <tr>
-      <td>Order type:</td>
-      <td><b>${val.type}</b></td>
-      </tr>
-      </table>
+      <p>Your Transaction Id is: 
+       <b style="margin-left:3px;font-size:16px;color:#ed4786">${this.ref_id}</b></p>
+      <p>You will be required to submit your Transaction Id before completing payment. So keep it safe!</b></p>
+      <p><b>Click the link below to complete your order:</b></p>
+      <div><b><a href="${this.WHATSAPP_LINK}">${this.WHATSAPP_LINK}</a></b></div>
       <p></p>
-      <p>You can always track your registration progress through your dashboard on <span class="alert-success p-1">"Orders >> Edit >> Track"</span>. </p>
+      <p>Once order is successful, you will be able to track your registration progress through your dashboard on <span class="alert-success p-1">"Orders >> Edit >> Track"</span>. </p>
       <p></p>
       <p>Feel free to contact us via your inbox or our direct email.</p>
       <hr>
       <p><b>Cheers!</b></p>
       <p><b>Yours truely, ${this.SITE_NAME}</b></p>
       <div>`;
-      let send_email=new sendE(val.email,subject,body).sendEmail();
+      let send_email=new sendE(this.user.email,subject,body).sendEmail();
       if(send_email){
        return 1}},
    
@@ -256,28 +240,29 @@ import paystack from 'vue-paystack';
          form.append('ref_id',this.ref_id);
          form.append('type',this.type);
        //this.axios.post('/api/register-product',doc,Config).
-       this.REG_PRODUCT(form).
-       then(r=>{
-        this.$swal.fire({
-           position: 'top-end',
-          icon: 'success',
-        title:'Data Registered!',
-        toast:true,
-       showConfirmButton: false,
-       timer: 3500
-         });
-         this.step=4;
-       }).
-       catch(e=>{
-         this.statu=e.response.data.message;
-         this.statu2=e.response.data.line;
-         this.$swal.fire({
-           position: 'top-end',
-           icon: 'error',
-           toast:true,
-           title:e.response.data.message,
+       if(this.sendEmail(form)){
+           this.REG_PRODUCT(form)
+           .then(r=>{
+            this.$swal.fire({
+               position: 'top-end',
+              icon: 'success',
+            title:'Data Registered!',
+            toast:true,
            showConfirmButton: false,
-           timer: 3500  })})
+           timer: 3500
+             });
+             this.step=4;
+           })
+           .catch(e=>{
+             this.statu=e.response.data.message;
+             this.statu2=e.response.data.line;
+             this.$swal.fire({
+               position: 'top-end',
+               icon: 'error',
+               toast:true,
+               title:e.response.data.message,
+               showConfirmButton: false,
+               timer: 3500  })})}
       },
     close: function(){
           alert("Payment closed")

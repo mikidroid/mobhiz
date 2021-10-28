@@ -8,6 +8,7 @@ PAYSTACK_KEY:
 ADMIN_EMAIL:"info@mikidroid.com",
 EMAIL_HOST:"mikidroid.com",
 EMAIL_PASSWORD:"Cronaldo--007",
+WHATSAPP_LINK:"https://whatsapp.com",
 
 //Site details
 SITE_NAME:"MOBHIZ",

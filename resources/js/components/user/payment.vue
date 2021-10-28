@@ -1,31 +1,34 @@
 <template>
  <div class="container">
-  <v-card>
-   <div class="pa-4 text-center">
-     <h3 
-      class="text-h6 font-weight-normal mb-2 text-secondary">
-        Make Payment
-     </h3>
-    <hr/>
-    <v-card-content>
+<v-card>
+        <div class="pa-4 text-center">
+          <h3 class="text-h6 font-weight-normal mb-2 text-secondary">
+            Make Payment
+          </h3>
+          <hr/>
+     <v-card-content>
       <v-card-subtitle>
         Your Transaction Id is: 
-      <span>{{ref_id}}</span>
+      <span class="p-2 alert-success">
+        {{ref_id}}
+      </span>
       </v-card-subtitle>
       <v-card-text>
         You will be required to submit this code to our agent after negotiation and payment has been completed. Only then will your payment be confirmed.
       </v-card-text>
+      <v-divider></v-divider>
       <v-card-text>
-        
+        Please connect with our agent below to begin negotiation and complete payment.
       </v-card-text>
-    </v-card-content>
-    <p></p>
-     <v-btn color="info">
+      <v-card-text>
+      <v-btn :href="WHATSAPP_LINK" color="info">
       <i class="fas fa-money-bill-alt mr-2"></i>
-       Complete Negotiation with our Agent
+       Connect with our Agent
      </v-btn>
-   </div>
- </v-card>
+      </v-card-text>
+     </v-card-content>
+        </div>
+    </v-card>
 </div>
 </template>
 
@@ -45,6 +48,7 @@ import paystack from 'vue-paystack';
      COM_ORDER:"",
      data:{},
      amount:"",
+     WHATSAPP_LINK:cons.WHATSAPP_LINK,
      paystackkey:cons.PAYSTACK_KEY,
      ref_id:this.$route.params.ref_id,}},
    computed:{

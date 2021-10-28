@@ -193,7 +193,7 @@ import paystack from 'vue-paystack';
         this.$swal.fire({
            position: 'top-end',
           icon: 'success',
-        title:'Data Registered!',
+        title:'Data updated!',
         toast:true,
        showConfirmButton: false,
        timer: 3500
