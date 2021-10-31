@@ -36,8 +36,34 @@
  <td>{{order.email}}</td>
  <td>{{order.phone}}</td>
  <td>{{order.ref_id}}</td>
- <td v-show="order.type!='product registration'">Select status</td>
- <td v-show="order.type=='product registration'">Select Nafdac status</td>
+ <td v-show="order.type!='product registration'">
+   {{status_select(order.status)}}
+   <v-select v-if=""
+          v-model="status"
+          :items="status_items"
+          item-text="status"
+          item-value="value"
+          label="Update status"
+          persistent-hint
+          return-object
+          single-line
+          @change="changeReg(status.value,order)"
+        > </v-select>
+   </td>
+ <td v-show="order.type=='product registration'">
+   {{nafdac_status_select(order.nafdac_status)}}
+   <v-select v-if=""
+          v-model="nafdac_status"
+          :items="nafdac_items"
+          item-text="status"
+          item-value="value"
+          label="Update status"
+          persistent-hint
+          return-object
+          single-line
+          @change="changeReg(nafdac_status.value,order)"
+        > </v-select>
+ </td>
  <td><div>{{order.payment}}</div></td>
  <td><v-menu
       top
@@ -55,6 +81,11 @@
     </template>
    <v-card>
     <v-list>
+     <v-list-item @click="viewItem(order)" >
+      <v-list-item-title>
+       View & download item
+      </v-list-item-title>
+     </v-list-item>
      <v-list-item @click="deleteOrder(order.id)" >
       <v-list-item-title>
        Delete Order
@@ -105,6 +136,7 @@ import config from '../config/config-header.js';
 import deleteApi from '../apis/deleteApi.js';
 import getApi from '../apis/getApi.js';
 import postApi from '../apis/postApi.js';
+import updateApi from '../apis/updateApi.js';
 import cons from '../config/const.js';
 import sendE from '../config/send-email.js';
 
@@ -114,11 +146,14 @@ import sendE from '../config/send-email.js';
        DEL_ORDER:deleteApi.DELETE_ORDER,
        SH_ORDERS:getApi.SEARCH_ORDERS,
        ORDERS:getApi.ORDERS,
+       UPDATE_ORDER_STATUS:updateApi.UPDATE_ORDER_STATUS,
        SITE_NAME:cons.SITE_NAME,
+       SITE_LINK:cons.SITE_LINK,
        PRODUCT_ORDER:postApi.PRODUCT_ORDER,
        page:1,
-       error:"",
        number:0,
+       nafdac_status:"",
+       status:"",
        orders:[],
        ord:"",
        searchValue:"",
@@ -126,13 +161,112 @@ import sendE from '../config/send-email.js';
        loading:true
              } },
   computed:{
+
      user(){return JSON.parse(localStorage.getItem('user'))},
-     token(){return localStorage.getItem('token')},     },
+     
+     token(){return localStorage.getItem('token')},
+     status_items(){
+       let array=[{status:'Order created',value:1 },{status:'Payment complete',value:2 },{status:'Reviewing documents',value:3 },{status:'Processing',value:4 },{status:'Complete',value:5 }]
+       return array
+     },
+     nafdac_items(){
+       let array=[{status:'Payment complete & Getting documents',value:1 },{status:'Creating company profile',value:2 },{status:'Registration online',value:3 },{status:'Submission of documents',value:4 },{status:'Vetting of documents',value:5 },{status:'inspection',value:6 },{status:'Process complete!',value:7 },]
+       return array
+     },},
+     
   watch:{
      searchValue(before, after){
         this.search()}
         },
+        
   methods:{
+     viewItem(val){
+       switch(val.type){
+         case 'product registration':
+           this.$router.push('/admin/view-registered-product/'+val.register_product_id)
+           break;
+       }
+     },
+     status_select:function(val){
+           switch(val){
+             case 1:
+               return 'Order created';
+               break;
+             case 2:
+               return 'Payment complete';
+               break;
+            case 3:
+               return 'Reviewing documents';
+               break;
+            case 4:
+               return 'Processing documents';
+               break;
+            case 5:
+               return 'Complete';
+               break;}},
+     nafdac_status_select:function(val){
+           switch(val){
+             case 1:
+               return 'Payment complete & Getting documents';
+               break;
+             case 2:
+               return 'Creating company profile';
+               break;
+            case 3:
+               return 'Registration online';
+               break;
+            case 4:
+               return 'Submission of documents';
+               break;
+            case 5:
+               return 'Vetting of documents';
+               break;
+            case 6:
+               return 'inspection';
+               break;
+            case 7:
+               return 'Process complete!';
+               break;}},
+
+    changeReg(val,order){
+       let form=new FormData()
+       form.append('value',val)
+       form.append('type',order.type)
+       form.append('_method','put')
+       if(this.send_StatusEmail(order)){
+           this.UPDATE_ORDER_STATUS(order.id,form)
+           .then(r=>{
+             this.fetchOrders()
+             this.$swal.fire({
+               icon:'success',
+               showConfirmButton:false,
+               title:'Order status changed!',
+               timer:3500,
+               position:'top-end',
+               toast:true
+             });
+             this.fetchOrders()
+           })
+           .catch(e=>{
+             alert(e.response.data.message)
+           })}
+    },
+    send_StatusEmail(val){
+     let subject=`Order Update!`;
+     let body=`
+      <div>
+      <p>Dear ${val.fullname}, we are pleased to inform you that your order has made progress to the next phase.</p>
+      <p></p>
+      <p>You can always track your registration progress through your dashboard on <span style="padding-left:4px;padding-right:4px;background-color:#25ab12;color:#fff">Orders >> Edit >> Track</span>. </p>
+       <p>Visit your dashboard frequently: <a href="${this.SITE_LINK}">${this.SITE_LINK}</a></p>
+      <p>Feel free to contact us via your inbox or our direct email.</p>
+      <hr>
+      <p><b>Cheers!</b></p>
+      <p><b>Yours truely, ${this.SITE_NAME}</b></p>
+      <div>`;
+      let send_email=new sendE(val.email,subject,body).sendEmail();
+      if(send_email){
+       return 1}},
     sendEmail(val){
      let subject=`Order Completed!`;
      let body=`
@@ -159,7 +293,8 @@ import sendE from '../config/send-email.js';
       </tr>
       </table>
       <p></p>
-      <p>You can always track your registration progress through your dashboard on <span class="alert-success p-1">"Orders >> Edit >> Track"</span>. </p>
+      <p>You can always track your registration progress through your dashboard on <span style="padding:4px;background-color:#25ab12;color:#fff">Orders >> Edit >> Track</span>. </p>
+      <p></p>
       <p></p>
       <p>Feel free to contact us via your inbox or our direct email.</p>
       <hr>
@@ -169,7 +304,14 @@ import sendE from '../config/send-email.js';
       let send_email=new sendE(val.email,subject,body).sendEmail();
       if(send_email){
        return 1}},
-       
+    fetchOrders(){
+     let c=new config(this.token).getT();
+     this.ORDERS().then(r=>{
+       this.orders=r.data;
+       this.loading=false;})
+       .catch(e=>{
+         this.error=e.response.data.message})
+    },
     confirmPayment(val){
       switch(val.type){
         case 'product registration':
@@ -179,14 +321,16 @@ import sendE from '../config/send-email.js';
           this.PRODUCT_ORDER(form)
           .then(r=>{
             this.$swal.fire({
-            icon:'success',
-            toast:'true',
-            title:'Order Confirmed!',
-            position:'top-end',
-            showConfirmButton:false,
-            timer:2500})})
+              icon:'success',
+              toast:'true',
+              title:'Order Confirmed!',
+              position:'top-end',
+              showConfirmButton:false,
+              timer:2500})
+            this.fetchOrders()
+          })
             .catch(e=>{
-              alert(e.response.data)})};
+              alert(e.response.data.message)})};
             break;}},
             
     onChangePage(pageOfItems) {
@@ -197,16 +341,6 @@ import sendE from '../config/send-email.js';
     
     clearSearchValue(){this.searchValue="";},
     
-    nafdac_status(val){ 
-       switch (val){
-        case 0:
-         return 'level 1';
-         break;
-        case 1:
-         return 'level 2';
-         break;}
-       return `hey ${val}`},
-       
     deleteOrder(val){
        this.DEL_ORDER(val)
        .then(r=>{
@@ -225,12 +359,7 @@ import sendE from '../config/send-email.js';
        this.orders=value;}},
        
   created(){
-     let c=new config(this.token).getT();
-     this.ORDERS().then(r=>{
-       this.orders=r.data;
-       this.loading=false;})
-       .catch(e=>{
-         this.error=e.response.data.message}) 
+       this.fetchOrders() 
           },
           
   updated(){}

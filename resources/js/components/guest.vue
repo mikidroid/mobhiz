@@ -1,19 +1,23 @@
 <template>
- 
-  <v-app app>
+ <div >
+  <v-app app style="background-image:url('/img/home-top-background.png');object-fit:cover;background-repeat:no-repeat" >
 <drawerNav></drawerNav>
-<v-content>
+<v-content >
  <v-container class="col-md-9 col-lg-9">
 <transition name="fade">
  <router-view>
  </router-view>
  </transition>
+<div class="text-center font-weight-light text-caption">Developed by <b>•Mikidroid</b></div>
+<br>
+<br>
+<br>
  </v-container>
  </v-content>
-<br/>
+
 <bottomNav></bottomNav>
  </v-app>
- 
+ </div>
 </template>
 
 <script>

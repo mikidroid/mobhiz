@@ -11,6 +11,7 @@
       color="#7a4988"
       fixed
       dark
+      elevation="0"
       height="70px">
       <v-toolbar-title><img class="mr-2" src="/storage/core/logo.png" height="45px"></v-toolbar-title>
 
@@ -80,8 +81,11 @@
 </div>
       
 <div class="mt-2" v-show="screen == 'small'">
-<v-btn icon class="mr-1">
-       <v-icon large>mdi-alert-circle</v-icon>
+<v-btn v-show="!auth" :to="'/login'" icon class="mr-2 ml-5">
+      Login
+      </v-btn>
+<v-btn v-show="!auth" :to="'/register'" icon class="mr-2 ml-5">
+      Register
       </v-btn>
 </div>
     </v-app-bar>

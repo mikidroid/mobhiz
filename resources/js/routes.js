@@ -7,6 +7,7 @@ import guest from './components/guest.vue' ;
 import CreateNotice from './components/admin/create-notice.vue';
 import Clients from './components/admin/clients.vue';
 import Guest from './components/guest.vue';
+import UserEntry from './components/Users.vue';
 import AdminDashboard from './components/admin/dashboard.vue' ;
 import registerProduct from './components/user/register-product.vue' ;
 import registeredProducts from './components/user/registered-products.vue' ;
@@ -41,7 +42,7 @@ export const routes = [
           {next('/admin');}
            next()}
           else{next('/login')}},
-     component: Guest,
+     component: UserEntry,
      //Children routes for users
      children:[
             {name:'dashboard',
@@ -49,7 +50,7 @@ export const routes = [
             component: Dashboard},
             {name: 'messages',
             path: 'messages',
-            component: Guest,
+            component: UserEntry,
             beforeEnter:(to,from,next)=>{
             !localStorage.getItem('admin')?next():next('/admin/messages')},
             children:[{

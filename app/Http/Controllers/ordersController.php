@@ -83,7 +83,13 @@ public function sea($val)
      */
     public function update(Request $request, $id)
     {
-        //
+        $myOrder=order::find($id);
+        if($request->type!='product registration'){
+          $myOrder->status=$request->value;
+          $myOrder->save();
+        }
+         $myOrder->nafdac_status=$request->value;
+         $myOrder->save();
     }
 
     /**
@@ -93,8 +99,46 @@ public function sea($val)
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
+        $path="";
         $myOrder=order::find($id);
+        //Try to delete the order type first
+        if($myOrder->type=='product registration'){
+        $orderProduct=$myOrder->registerProduct;
+        $path=$orderProduct->documents;
+        if(file_exists('storage/register-product/'.$path)){
+          unlink('storage/register-product/'.$path);
+        }
+        $orderProduct->delete();
+        }
+        //Delete cert replacement
+        if($myOrder->type=='certificate replacement'){
+        $orderCertReplace=$myOrder->replaceCert;
+        $path=$orderCertReplace->documents;
+        if(file_exists('storage/replace-cert/'.$path)){
+          unlink('storage/replace-cert/'.$path);
+        }
+        $orderCertReplace->delete();
+        }
+        //Delete trademark registration
+        if($myOrder->type=='trademark registration'){
+        $orderTrademark=$myOrder->trademark;
+        $path=$orderTrademark->documents;
+        if(file_exists('storage/register-trademark/'.$path)){
+          unlink('storage/register-trademark/'.$path);
+        }
+        $orderTrademark->delete();
+        }
+        //Delete businessName
+        if($myOrder->type=='cac registration'){
+        $orderCac=$myOrder->businessName;
+        $path=$orderCac->documents;
+        if(file_exists('storage/register-business/'.$path)){
+          unlink('storage/register-business/'.$path);
+        }
+        $orderCac->delete();
+        } 
+        //Delete order finally
         $myOrder->delete();
          if($newOrder=order::orderBy('id','desc')->get()){
           return response()->json($newOrder);
@@ -105,7 +149,7 @@ public function productOrder(Request $request)
     {
         $myOrder=order::where('ref_id','=',$request->ref_id)->first();
         $myOrder->payment='completed';
-        $myOrder->status=2; //means payment conplete
+        $myOrder->status=2; //means payment complete
         $myOrder->nafdac_status=1;
         //Load RegisterProduct model for relationships
         $regProd=$myOrder->registerProduct;

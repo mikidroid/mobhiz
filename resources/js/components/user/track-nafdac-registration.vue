@@ -76,9 +76,9 @@
           <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<3,'text-dark':orders.nafdac_status>=3}">
     
             <v-col>
-              <strong>Payment Complete & Getting all documents in required order</strong>
+              <strong>Registration online</strong>
               <div class="text-caption">
-                You have made payment. We are making sure all the documents sent meets the requirements.
+                Online registration of this process is ongoing
               </div>
             </v-col>
         <v-col cols="3">
@@ -95,9 +95,9 @@
           <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<4,'text-dark':orders.nafdac_status>=4}">
 
             <v-col>
-              <strong>Payment Complete & Getting all documents in required order</strong>
+              <strong> Submission of documents </strong>
               <div class="text-caption">
-                You have made payment. We are making sure all the documents sent meets the requirements.
+                Documents are being submitted to NAFDAC.
               </div>
             </v-col>
             <v-col cols="3">
@@ -114,9 +114,9 @@
           <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<5,'text-dark':orders.nafdac_status>=5}">
 
             <v-col>
-              <strong>Payment Complete & Getting all documents in required order</strong>
+              <strong>Vetting of documents</strong>
               <div class="text-caption">
-                You have made payment. We are making sure all the documents sent meets the requirements.
+                Documents are being vet by the agency.
               </div>
             </v-col>
             <v-col cols="3">
@@ -133,9 +133,9 @@
           <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<6,'text-dark':orders.nafdac_status>=6}">
 
             <v-col>
-              <strong>Payment Complete & Getting all documents in required order</strong>
+              <strong>Booking of inspection/ Inspection conducted proper</strong>
               <div class="text-caption">
-                You have made payment. We are making sure all the documents sent meets the requirements.
+                Inspection being booked/conducted
               </div>
             </v-col>
             <v-col cols="3">

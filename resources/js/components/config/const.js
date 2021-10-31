@@ -12,4 +12,5 @@ WHATSAPP_LINK:"https://whatsapp.com",
 
 //Site details
 SITE_NAME:"MOBHIZ",
+SITE_LINK:"https://mobhiz.com.ng",
 }

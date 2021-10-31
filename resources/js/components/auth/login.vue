@@ -1,8 +1,8 @@
 <template >
-<div>
+<div class="text-white">
   
   <div v-text="success"></div>
-  <h2 class="text-center">Login</h2>
+  <h2 class="mt-7">Login</h2>
   <hr/>
  <div class="alert-danger" 
   v-text="errors.incorrect"></div>
@@ -18,7 +18,7 @@
   <div class="alert-danger" 
   v-text="errors.password"></div>
    <input type="password" class="form-control" name="password" v-model="form.password">
-   <button type="submit" class="alert-info btn mt-3">Login</button>
+   <button type="submit" class="btn-dark btn mt-3">Login</button>
   </form>
  </div>
 </template>

@@ -294,7 +294,7 @@ import sendE from '../config/send-email.js';
        this.size+=1;}
      },
      created(){
-      this.ref_id=uniqid();
+      this.ref_id=uniqid(Date.now());
      },
      updated(){
            }

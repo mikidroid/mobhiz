@@ -1,7 +1,7 @@
 <template >
- <div class="container ">
+ <div class="container text-white">
 
-  <h2 class="text-center" >Register</h2>
+  <h2 class="" >Register</h2>
   <hr/>
 
   <div class="alert-danger" v-text="errors.firstname"></div>
@@ -22,7 +22,7 @@
    <input type="text" class="form-control" name="username" v-model="form.username">
    <label for="password" class="mt-3">Password:</label>
    <input type="password" class="form-control" name="password" v-model="form.password">
- <button type="submit" class="alert-info btn mt-3">Register</button>
+ <button type="submit" class="btn-dark btn mt-3">Register</button>
   </form>
  </div>
 </template>
