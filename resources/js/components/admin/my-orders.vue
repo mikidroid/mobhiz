@@ -150,6 +150,7 @@ import sendE from '../config/send-email.js';
        SITE_NAME:cons.SITE_NAME,
        SITE_LINK:cons.SITE_LINK,
        PRODUCT_ORDER:postApi.PRODUCT_ORDER,
+       BUSINESS_ORDER:postApi.BUSINESS_ORDER,
        page:1,
        number:0,
        nafdac_status:"",
@@ -184,6 +185,9 @@ import sendE from '../config/send-email.js';
        switch(val.type){
          case 'product registration':
            this.$router.push('/admin/view-registered-product/'+val.register_product_id)
+           break;
+         case 'cac registration':
+           this.$router.push('/admin/view-registered-business/'+val.business_name_id)
            break;
        }
      },
@@ -233,9 +237,9 @@ import sendE from '../config/send-email.js';
        form.append('value',val)
        form.append('type',order.type)
        form.append('_method','put')
-       if(this.send_StatusEmail(order)){
            this.UPDATE_ORDER_STATUS(order.id,form)
            .then(r=>{
+            if(this.send_StatusEmail(order)){
              this.fetchOrders()
              this.$swal.fire({
                icon:'success',
@@ -245,11 +249,11 @@ import sendE from '../config/send-email.js';
                position:'top-end',
                toast:true
              });
-             this.fetchOrders()
+            }
            })
            .catch(e=>{
              alert(e.response.data.message)
-           })}
+           })
     },
     send_StatusEmail(val){
      let subject=`Order Update!`;
@@ -293,7 +297,7 @@ import sendE from '../config/send-email.js';
       </tr>
       </table>
       <p></p>
-      <p>You can always track your registration progress through your dashboard on <span style="padding:4px;background-color:#25ab12;color:#fff">Orders >> Edit >> Track</span>. </p>
+      <p>You can always track your registration progress through your dashboard on <span style="padding-right:4px;padding-left:4px;background-color:#25ab12;color:#fff">Orders >> Edit >> Track</span>. </p>
       <p></p>
       <p></p>
       <p>Feel free to contact us via your inbox or our direct email.</p>
@@ -315,11 +319,11 @@ import sendE from '../config/send-email.js';
     confirmPayment(val){
       switch(val.type){
         case 'product registration':
-          if(this.sendEmail(val)){
           let form=new FormData();
           form.append('ref_id',val.ref_id);
           this.PRODUCT_ORDER(form)
           .then(r=>{
+          if(this.sendEmail(val)){
             this.$swal.fire({
               icon:'success',
               toast:'true',
@@ -327,11 +331,29 @@ import sendE from '../config/send-email.js';
               position:'top-end',
               showConfirmButton:false,
               timer:2500})
-            this.fetchOrders()
-          })
+            this.fetchOrders()}})
             .catch(e=>{
-              alert(e.response.data.message)})};
-            break;}},
+              alert(e.response.data.message)});
+            break;
+        case 'cac registration':
+         form=new FormData();
+          form.append('ref_id',val.ref_id);
+          this.BUSINESS_ORDER(form)
+          .then(r=>{
+          if(this.sendEmail(val)){
+            this.$swal.fire({
+              icon:'success',
+              toast:'true',
+              title:'Order Confirmed!',
+              position:'top-end',
+              showConfirmButton:false,
+              timer:2500})
+            this.fetchOrders()}})
+            .catch(e=>{
+              alert(e.response.data.message)});
+            break;
+        
+      }},
             
     onChangePage(pageOfItems) {
           // update page of items

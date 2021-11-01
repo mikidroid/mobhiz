@@ -9,10 +9,15 @@ import Clients from './components/admin/clients.vue';
 import Guest from './components/guest.vue';
 import UserEntry from './components/Users.vue';
 import AdminDashboard from './components/admin/dashboard.vue' ;
+//Register product for users
 import registerProduct from './components/user/register-product.vue' ;
 import registeredProducts from './components/user/registered-products.vue' ;
 import viewRegisteredProduct from './components/user/view-registered-product.vue' ;
 import editRegisteredProduct from './components/user/edit-register-product.vue' ;
+//Register business for user
+import registerBusiness from './components/user/register-business.vue' ;
+import viewRegisteredBusiness from './components/user/view-registered-business.vue' ;
+import editRegisteredBusiness from './components/user/edit-registered-business.vue' ;
 import Dashboard from './components/user/dashboard.vue' ;
 import Profile from './components/user/profile.vue' ;
 import myOrders from './components/user/my-orders.vue' ;
@@ -27,6 +32,7 @@ import adminEditProfile from './components/admin/edit-profile.vue';
 import adminOrders from './components/admin/my-orders.vue' ;
 import adminRegisteredProducts from './components/admin/registered-products.vue' ;
 import adminViewRegisteredProduct from './components/admin/view-registered-product.vue' ;
+import adminViewRegisteredBusiness from './components/admin/view-registered-business.vue' ;
 import adminMessages from './components/admin/messages.vue' ;
 import adminViewMessage from './components/admin/view-message.vue' ;
 import adminCreateMessage from './components/admin/create-message.vue' ;
@@ -67,6 +73,15 @@ export const routes = [
             {name: 'register-product',
             path: 'register-product',
             component:registerProduct},
+            {name: 'register-business',
+            path: 'register-business',
+            component:registerBusiness},
+            {name: 'edit-registered-business',
+            path: 'edit-registered-business/:id',
+            component:editRegisteredBusiness},
+            {name: 'view-registered-business',
+            path: 'view-registered-business/:id',
+            component:viewRegisteredBusiness},
             {name: 'registered-products',
             path: 'registered-products',
             component:registeredProducts},
@@ -150,6 +165,9 @@ export const routes = [
            {name: 'view-registered-product',
            path: 'view-registered-product/:id',
            component:adminViewRegisteredProduct},
+           {name: 'view-registered-business',
+           path: 'view-registered-business/:id',
+           component:adminViewRegisteredBusiness},
            {name: 'profile',
            path: 'profile',
            component:adminProfile},

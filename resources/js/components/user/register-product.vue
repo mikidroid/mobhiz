@@ -240,9 +240,9 @@ import sendE from '../config/send-email.js';
          form.append('ref_id',this.ref_id);
          form.append('type',this.type);
        //this.axios.post('/api/register-product',doc,Config).
-       if(this.sendEmail(form)){
            this.REG_PRODUCT(form)
            .then(r=>{
+           if(this.sendEmail(form)){
             this.$swal.fire({
                position: 'top-end',
               icon: 'success',
@@ -251,7 +251,7 @@ import sendE from '../config/send-email.js';
            showConfirmButton: false,
            timer: 3500
              });
-             this.step=4;
+             this.step=4;}
            })
            .catch(e=>{
              this.statu=e.response.data.message;
@@ -262,7 +262,7 @@ import sendE from '../config/send-email.js';
                toast:true,
                title:e.response.data.message,
                showConfirmButton: false,
-               timer: 3500  })})}
+               timer: 3500  })})
       },
     close: function(){
           alert("Payment closed")

@@ -49,6 +49,10 @@ export default {
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/register-product',CONFIG)},
     
+  REGISTERED_BUSINESS:function(){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.get('/api/register-business',CONFIG)},
+    
  SEARCH_REGISTERED_PRODUCTS:function(data,val){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/'+data+'/search/'+val,CONFIG)},

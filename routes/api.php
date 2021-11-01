@@ -31,7 +31,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function(){
 Route::middleware('auth:sanctum')->resource('/register-product', registerProductController::class);
 Route::middleware('auth:sanctum')->get('/register-product/search/{val}', [registerProductController::class,'search']);
 Route::resource('/replace-cert', replaceCert::class);
-Route::resource('/register-business', registerBusiness::class);
+Route::middleware('auth:sanctum')->resource('/register-business', registerBusiness::class);
+Route::middleware('auth:sanctum')->get('/register-business/search/{val}', [registerBusiness::class,'search']);
 Route::resource('/register-trademark', registerTrademark::class);
 Route::resource('/chat', ChatController::class);
 Route::post('/register', [Authcontroller::class,'register']);
@@ -40,10 +41,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/login', [Authcontroller::class,'login']);
 Route::middleware('auth:sanctum')->get('/logout', [Authcontroller::class,'logout']);
-Route::middleware('auth:sanctum')->get('/update-user', [Authcontroller::class,'updateUser']);
+Route::middleware('auth:sanctum')->post('/update-user', [Authcontroller::class,'updateUser']);
 Route::middleware('auth:sanctum')->post('/product-order', [ordersController::class,'productOrder']);
-Route::middleware('auth:sanctum')->get('/trademark-order/{value}', [ordersController::class,'trademarkOrder']);
-Route::middleware('auth:sanctum')->get('/business-order/{value}', [ordersController::class,'businessNameOrder']);
+Route::middleware('auth:sanctum')->post('/trademark-order/{value}', [ordersController::class,'trademarkOrder']);
+Route::middleware('auth:sanctum')->post('/business-order', [ordersController::class,'businessNameOrder']);
 Route::middleware('auth:sanctum')->resource('/orders', ordersController::class);
 Route::middleware('auth:sanctum')->get('/orders/search/{val}',[ ordersController::class,'search']);
 Route::middleware('auth:sanctum')->resource('/message', MessageController::class);

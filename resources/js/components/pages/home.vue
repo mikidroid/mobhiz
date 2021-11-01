@@ -34,9 +34,6 @@
      </p>
 </router-link>
      <hr>
-     
-   
-   
    <p class="card-text" >
 <i class="fa fa-certificate" aria-hidden="true"></i>
       NAFDAC Certificate Replacement
@@ -56,13 +53,19 @@
     </h5>
 <div style="" class="card alert-light shadow m-1" >
       <div class="card-body">
-     <p class="card-text" >
+ <router-link to="/user/register-business" class="text-decoration-none text-secondary">
+  <p class="card-text" >
+<i class="far fa-edit"></i>
       CAC Registration
      </p>
+</router-link>
      <hr>
-   <p class="card-text" >
+ <router-link to="/user/register-product" class="text-decoration-none text-secondary">
+  <p class="card-text" >
+<i class="far fa-edit"></i>
       Trademark Registration
      </p>
+</router-link>
   
      <hr>
     </div>

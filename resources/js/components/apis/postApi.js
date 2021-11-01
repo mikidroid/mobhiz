@@ -24,4 +24,9 @@ export default {
   REGISTER_BUSINESS:function(doc){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.post('/api/register-business',doc,CONFIG)},
+    
+  BUSINESS_ORDER:function(val){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.post('/api/business-order',val,CONFIG)},
+ 
 }

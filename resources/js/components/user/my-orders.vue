@@ -141,6 +141,9 @@ import getApi from '../apis/getApi.js';
          case 'product registration':
            this.$router.push('/user/view-registered-product/'+val.register_product_id)
            break;
+         case 'cac registration':
+           this.$router.push('/user/view-registered-business/'+val.business_name_id)
+           break;
        }
      },
         onChangePage(pageOfItems) {

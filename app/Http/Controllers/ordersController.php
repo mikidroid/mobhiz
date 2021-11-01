@@ -87,6 +87,7 @@ public function sea($val)
         if($request->type!='product registration'){
           $myOrder->status=$request->value;
           $myOrder->save();
+          return response("done");
         }
          $myOrder->nafdac_status=$request->value;
          $myOrder->save();
@@ -158,18 +159,17 @@ public function productOrder(Request $request)
         if($myOrder->save()){
         $regProd->save();}
     }
-public function businessNameOrder(Request $request,$value)
+public function businessNameOrder(Request $request)
     {
-        $myOrder=order::where('ref_id','=',$value)->first();
+        $myOrder=order::where('ref_id','=',$request->ref_id)->first();
         $myOrder->payment='completed';
-        $myOrder->ref_id=$request->new_ref;
         $myOrder->status=2;
         //Load RegisterProduct model for relationships
         $regBis=$myOrder->businessName;
         $regBis->payment='completed';
         //Save both models
-        $myOrder->save();
-        $regBis->save();
+        if($myOrder->save()){
+        $regBis->save();}
     }
 public function trademarkOrder(Request $request,$value)
     {
