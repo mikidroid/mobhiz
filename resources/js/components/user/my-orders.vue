@@ -53,17 +53,15 @@
     </template>
    <v-card>
     <v-list>
-     <v-list-item @click="deleteOrder(order.id)" >
+     <v-list-item @click="viewItem(order)" >
       <v-list-item-title>
-       Delete Order
+       View & download item
       </v-list-item-title>
      </v-list-item>
    <v-list-item :to="{name:'track',params:{id:order.id,type:order.type}}">
-    
       <v-list-item-title>
        Track Progress
       </v-list-item-title>
-      
      </v-list-item>
  <v-list-item v-if="order.payment==='pending'" >
       <v-list-item-title>
@@ -72,7 +70,11 @@
        Make Payment</v-btn>
       </v-list-item-title>
      </v-list-item>
- 
+    <v-list-item @click="deleteOrder(order.id)" >
+      <v-list-item-title>
+       Delete Order
+      </v-list-item-title>
+     </v-list-item>
     </v-list>
    </v-card>
     </v-menu></td>
@@ -134,6 +136,13 @@ import getApi from '../apis/getApi.js';
       }
           },
   methods:{
+     viewItem(val){
+       switch(val.type){
+         case 'product registration':
+           this.$router.push('/user/view-registered-product/'+val.register_product_id)
+           break;
+       }
+     },
         onChangePage(pageOfItems) {
           // update page of items
           this.pageOfItems = pageOfItems;},

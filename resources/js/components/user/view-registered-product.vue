@@ -6,6 +6,14 @@
  <div class="col-4 d-flex flex-row-reverse">
  <v-btn
    small
+   :to="'/user/edit-registered-product/'+data.id"
+   color="blue"
+   outlined>
+   <v-icon class="mr-1">mdi-pencil</v-icon>
+   Edit
+   </v-btn>
+ <v-btn
+   small
    color="blue"
    :href="'/storage/register-product/'+data.documents"
     class="mr-3 text-white">

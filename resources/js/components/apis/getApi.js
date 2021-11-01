@@ -55,7 +55,7 @@ export default {
     
   VIEW_REGISTERED_BUSINESS:function(val){
     let CONFIG=new config(localStorage.getItem('token')).getT()
-    return this.axios.get('/api/register-business'+val,CONFIG)},
+    return this.axios.get('/api/register-business/'+val,CONFIG)},
     
   REGISTERED_TRADEMARKS:function(){
     let CONFIG=new config(localStorage.getItem('token')).getT()

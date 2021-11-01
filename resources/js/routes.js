@@ -11,6 +11,7 @@ import UserEntry from './components/Users.vue';
 import AdminDashboard from './components/admin/dashboard.vue' ;
 import registerProduct from './components/user/register-product.vue' ;
 import registeredProducts from './components/user/registered-products.vue' ;
+import viewRegisteredProduct from './components/user/view-registered-product.vue' ;
 import editRegisteredProduct from './components/user/edit-register-product.vue' ;
 import Dashboard from './components/user/dashboard.vue' ;
 import Profile from './components/user/profile.vue' ;
@@ -72,6 +73,9 @@ export const routes = [
             {name: 'edit-registered-product',
             path: 'edit-registered-product/:id',
             component:editRegisteredProduct},
+            {name: 'view-registered-product',
+            path: 'view-registered-product/:id',
+            component:viewRegisteredProduct},
             {name: 'profile',
             path: 'profile',
             component:Profile},
