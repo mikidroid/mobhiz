@@ -1,6 +1,7 @@
 <template>
  <div class="container">
   
+
   <v-card
     class="mx-auto"
     max-width="500"
@@ -118,6 +119,7 @@ import sendE from '../config/send-email.js';
          SITE_NAME:cons.SITE_NAME,
          WHATSAPP_LINK:cons.WHATSAPP_LINK,
          step:1,
+         showGuide:false,
          doc:"",
          data:{
          documents:"",

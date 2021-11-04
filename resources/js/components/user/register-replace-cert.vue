@@ -1,5 +1,23 @@
 <template>
  <div class="container">
+   <br>
+   <br>
+<v-btn class="mb-2" elevation="1" color="text-danger" tile small @click="!showGuide?showGuide=true:showGuide=false" >{{showGuide?'Registration requirements':'Registration requirements'}} <v-icon>{{showGuide?'mdi-chevron-down':'mdi-chevron-right'}}</v-icon></v-btn>
+   <div class="my-2" v-show="showGuide">
+   <div class="alert alert-danger p-2">
+   <b>NOTE:</b> You are required to put all required PDF or JPG documents in a folder and zip it before you upload it.
+   </div>
+  <div class="alert alert-success p-1 font-weight-normal">
+   <ul>
+<li>Phone number</li>
+<li>Company name </li>
+<li>Product name(s)</li>
+<li>Company address</li>
+<li>Police report</li>
+<li>Labels</li>
+   </ul>
+   </div>
+ </div>
   
   <v-card
     class="mx-auto"
@@ -147,6 +165,7 @@ import sendE from '../config/send-email.js';
     data(){
       return{
          REPLACE_CERT:postApi.REGISTER_REPLACE_CERT,
+         showGuide:false,
          SITE_NAME:cons.SITE_NAME,
          WHATSAPP_LINK:cons.WHATSAPP_LINK,
          step:1,

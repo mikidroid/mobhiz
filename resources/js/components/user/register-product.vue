@@ -1,8 +1,38 @@
 <template>
  <div class="container">
-  
+   <br>
+   <br>
+ <v-btn class="mb-2" elevation="1" color="text-danger" tile small @click="!showGuide?showGuide=true:showGuide=false" >{{showGuide?'Registration requirements':'Registration requirements'}} <v-icon>{{showGuide?'mdi-chevron-down':'mdi-chevron-right'}}</v-icon></v-btn>
+   <div class="my-2" v-show="showGuide">
+   <div class="alert alert-danger p-2">
+  <b>NOTE:</b> You are required to put all required PDF or JPG documents in a folder and zip it before you upload it.
+   </div>
+  <div class="alert alert-success p-1 font-weight-normal">
+   <ul>
+<li> CAC certificate</li>
+<li> Trademark for products</li>
+<li> Tin number if available </li>
+<li> Company name and address </li>
+<li> Product name(s) </li>
+<li> Phone number(s) </li>
+<li> Colored artworks/labels </li>
+<li> Certificate of Analysis </li>
+<li> Power of Attorney for (imported products)</li>
+<li> Freesale for (imported products)</li>
+<li> Notarized declaration for (imported products)</li>
+<li> S. O. Ps (Standard Operation Procedure)</li>
+<li> Medical fitness test for staffs </li>
+<li> Water treatment certificate</li>
+<li> Fumigation certificate  </li>
+<li> Copy of Expired license(for renewal purpose only)</li>
+
+
+   </ul>
+   </div>
+ </div>
+
   <v-card
-    class="mx-auto"
+    class="mt-2 mx-auto"
     max-width="500"
   >
     <v-card-title class="text-h6 font-weight-regular justify-space-between">
@@ -150,7 +180,7 @@
       </v-btn>
     </v-card-actions>
   </v-card>
- 
+ <br>
  </div>
 </template>
 
@@ -174,6 +204,7 @@ import sendE from '../config/send-email.js';
          SITE_NAME:cons.SITE_NAME,
          WHATSAPP_LINK:cons.WHATSAPP_LINK,
          step:1,
+         showGuide:false,
          type_items:['new','renewal'],
          type:"",
          doc:"",
