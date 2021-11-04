@@ -5,6 +5,8 @@ use App\Models\RegisterProduct;
 use App\Models\message;
 use App\Models\reply;
 use App\Models\order;
+use App\Models\replaceCert;
+use App\Models\project;
 use App\Models\businessName;
 use App\Models\trademark;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -69,5 +71,11 @@ public function businessName(){
   }
 public function trademark(){
     return $this->hasMany(trademark::class);
+  }
+public function replaceCert(){
+    return $this->hasMany(replaceCert::class);
+  }
+public function project(){
+    return $this->hasMany(project::class);
   }
 }

@@ -16,7 +16,7 @@
           color="pink"
           small
         >
-          <v-row class="pt-1" v-bind:class="{'text-dark':orders.nafdac_status>=0}" >
+          <v-row class="pt-1" v-bind:class="{'text-dark':orders.status>=1}" >
 
             <v-col>
               <strong>Order Made</strong>
@@ -26,26 +26,25 @@
             </v-col>
             <v-col cols="3">
                 <p>
-        <v-icon v-bind:class="{'text-info':orders.nafdac_status>=0}" >fas fa-check</v-icon></p>
+        <v-icon v-bind:class="{'text-info':orders.status>=1}" >fas fa-check</v-icon></p>
             </v-col>
           </v-row>
         </v-timeline-item>
         
    <v-timeline-item
           color="pink"
-          small
-        >
-          <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<1,'text-dark':orders.nafdac_status>=1}">
+          small>
+          <v-row class="pt-1" v-bind:class="{'text-grey':orders.status<2,'text-dark':orders.status>=2}">
 
             <v-col>
-              <strong>Payment Complete & Getting all documents in required order</strong>
+              <strong>Payment Complete</strong>
               <div class="text-caption">
-                You have made payment. We are making sure all the documents sent meets the requirements.
+                Your payment has been confirmed! 
               </div>
             </v-col>
             <v-col cols="3">
               <p  >
-               <v-icon color="#ededed" v-bind:class="{'text-grey':orders.nafdac_status<1,'text-info':orders.nafdac_status>=1}">fas fa-check</v-icon></p>
+               <v-icon color="#ededed" v-bind:class="{'text-grey':orders.status<2,'text-info':orders.status>=2}">fas fa-check</v-icon></p>
             </v-col>
           </v-row>
         </v-timeline-item>
@@ -54,17 +53,17 @@
           color="pink"
           small
         >
-          <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<2,'text-dark':orders.nafdac_status>=2}">
+          <v-row class="pt-1" v-bind:class="{'text-grey':orders.status<3,'text-dark':orders.status>=3}">
 
             <v-col>
-              <strong>Creating Company profile</strong>
+              <strong>Reviewing documents</strong>
               <div class="text-caption">
-                Company profile is being created.
+                Your documents are being checked for quality assurance
               </div>
             </v-col>
             <v-col cols="3">
                 <p>
-        <v-icon color="#ededed" v-bind:class="{'text-grey':orders.nafdac_status<2,'text-info':orders.nafdac_status>=2}" >fas fa-check</v-icon></p>
+        <v-icon color="#ededed" v-bind:class="{'text-grey':orders.status<3,'text-info':orders.status>=3}" >fas fa-check</v-icon></p>
             </v-col>
           </v-row>
         </v-timeline-item>
@@ -73,17 +72,17 @@
           color="pink"
           small
         >
-          <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<3,'text-dark':orders.nafdac_status>=3}">
+          <v-row class="pt-1" v-bind:class="{'text-grey':orders.status<4,'text-dark':orders.status>=4}">
     
             <v-col>
-              <strong>Payment Complete & Getting all documents in required order</strong>
+              <strong>Processing</strong>
               <div class="text-caption">
-                You have made payment. We are making sure all the documents sent meets the requirements.
+          We are processing your order
               </div>
             </v-col>
         <v-col cols="3">
                       <p>
-        <v-icon color="#ededed" v-bind:class="{'text-grey':orders.nafdac_status<3,'text-info':orders.nafdac_status>=3}" >fas fa-check</v-icon></p>
+        <v-icon color="#ededed" v-bind:class="{'text-grey':orders.status<4,'text-info':orders.status>=4}" >fas fa-check</v-icon></p>
             </v-col>
           </v-row>
         </v-timeline-item>
@@ -92,76 +91,21 @@
           color="pink"
           small
         >
-          <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<4,'text-dark':orders.nafdac_status>=4}">
+          <v-row class="pt-1" v-bind:class="{'text-grey':orders.status<5,'text-success':orders.status>=5}">
 
             <v-col>
-              <strong>Payment Complete & Getting all documents in required order</strong>
+              <strong>Complete</strong>
               <div class="text-caption">
-                You have made payment. We are making sure all the documents sent meets the requirements.
+                Congrats! Order is complete and delivered
               </div>
             </v-col>
             <v-col cols="3">
                   <p>
-        <v-icon color="#ededed" v-bind:class="{'text-grey':orders.nafdac_status<4,'text-info':orders.nafdac_status>=4}" >fas fa-check</v-icon></p>
+        <v-icon color="#ededed" v-bind:class="{'text-grey':orders.status<5,'text-info':orders.status>=5}" >fas fa-check</v-icon></p>
             </v-col>
           </v-row>
         </v-timeline-item>
         
-  <v-timeline-item
-          color="pink"
-          small
-        >
-          <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<5,'text-dark':orders.nafdac_status>=5}">
-
-            <v-col>
-              <strong>Payment Complete & Getting all documents in required order</strong>
-              <div class="text-caption">
-                You have made payment. We are making sure all the documents sent meets the requirements.
-              </div>
-            </v-col>
-            <v-col cols="3">
-                   <p>
-        <v-icon color="#ededed" v-bind:class="{'text-grey':orders.nafdac_status<5,'text-info':orders.nafdac_status>=5}" >fas fa-check</v-icon></p>
-            </v-col>
-          </v-row>
-        </v-timeline-item>
-
-  <v-timeline-item
-          color="pink"
-          small
-        >
-          <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<6,'text-dark':orders.nafdac_status>=6}">
-
-            <v-col>
-              <strong>Payment Complete & Getting all documents in required order</strong>
-              <div class="text-caption">
-                You have made payment. We are making sure all the documents sent meets the requirements.
-              </div>
-            </v-col>
-            <v-col cols="3">
-                  <p>
-        <v-icon color="#ededed" v-bind:class="{'text-grey':orders.nafdac_status<6,'text-info':orders.nafdac_status>=6}" >fas fa-check</v-icon></p>
-            </v-col>
-          </v-row>
-        </v-timeline-item>
-        <v-timeline-item
-          color="teal lighten-3"
-          small
-        >
-          <v-row class="pt-1" v-bind:class="{'text-grey':orders.nafdac_status<7,'text-success':orders.nafdac_status==7}">
-
-            <v-col>
-              <strong>Completed!</strong>
-              <div class="text-caption">
-                Congrats! the entire process is done.
-              </div>
-            </v-col>
-            <v-col cols="3">
-                    <p>
-        <v-icon color="#ededed" v-bind:class="{'text-grey':orders.nafdac_status<7,'text-info':orders.nafdac_status>=7}" >fas fa-check</v-icon></p>
-            </v-col>
-          </v-row>
-        </v-timeline-item>
       </v-timeline>
   
  <v-btn

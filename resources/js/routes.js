@@ -1,4 +1,6 @@
 import Home from './components/pages/home.vue' ;
+import About from './components/pages/about.vue' ;
+import Contact from './components/pages/contact.vue' ;
 import Chats from './components/chat/chats.vue';
 import Register from './components/auth/register.vue';
 import Login from './components/auth/login.vue';
@@ -18,6 +20,15 @@ import editRegisteredProduct from './components/user/edit-register-product.vue' 
 import registerBusiness from './components/user/register-business.vue' ;
 import viewRegisteredBusiness from './components/user/view-registered-business.vue' ;
 import editRegisteredBusiness from './components/user/edit-registered-business.vue' ;
+//Trademark register
+import registerTrademark from './components/user/register-trademark.vue' ;
+import viewRegisteredTrademark from './components/user/view-registered-trademark.vue' ;
+import editRegisteredTrademark from './components/user/edit-registered-trademark.vue' ;
+//replaceCert register
+import registerReplaceCert from './components/user/register-replace-cert.vue' ;
+import viewRegisteredReplaceCert from './components/user/view-registered-replace-cert.vue' ;
+import editRegisteredReplaceCert from './components/user/edit-registered-replace-cert.vue' ;
+//Others
 import Dashboard from './components/user/dashboard.vue' ;
 import Profile from './components/user/profile.vue' ;
 import myOrders from './components/user/my-orders.vue' ;
@@ -28,11 +39,14 @@ import track from './components/user/track.vue' ;
 import payment from './components/user/payment.vue' ;
 import adminDashboard from './components/admin/dashboard.vue' ;
 import adminProfile from './components/admin/profile.vue' ;
+import Project from './components/admin/project.vue' ;
 import adminEditProfile from './components/admin/edit-profile.vue';
 import adminOrders from './components/admin/my-orders.vue' ;
 import adminRegisteredProducts from './components/admin/registered-products.vue' ;
 import adminViewRegisteredProduct from './components/admin/view-registered-product.vue' ;
 import adminViewRegisteredBusiness from './components/admin/view-registered-business.vue' ;
+import adminViewRegisteredTrademark from './components/admin/view-registered-trademark.vue' ;
+import adminViewRegisteredReplaceCert from './components/admin/view-registered-replace-cert.vue' ;
 import adminMessages from './components/admin/messages.vue' ;
 import adminViewMessage from './components/admin/view-message.vue' ;
 import adminCreateMessage from './components/admin/create-message.vue' ;
@@ -73,15 +87,6 @@ export const routes = [
             {name: 'register-product',
             path: 'register-product',
             component:registerProduct},
-            {name: 'register-business',
-            path: 'register-business',
-            component:registerBusiness},
-            {name: 'edit-registered-business',
-            path: 'edit-registered-business/:id',
-            component:editRegisteredBusiness},
-            {name: 'view-registered-business',
-            path: 'view-registered-business/:id',
-            component:viewRegisteredBusiness},
             {name: 'registered-products',
             path: 'registered-products',
             component:registeredProducts},
@@ -91,6 +96,33 @@ export const routes = [
             {name: 'view-registered-product',
             path: 'view-registered-product/:id',
             component:viewRegisteredProduct},
+            {name: 'register-business',
+            path: 'register-business',
+            component:registerBusiness},
+            {name: 'edit-registered-business',
+            path: 'edit-registered-business/:id',
+            component:editRegisteredBusiness},
+            {name: 'view-registered-business',
+            path: 'view-registered-business/:id',
+            component:viewRegisteredBusiness},
+            {name: 'register-trademark',
+            path: 'register-trademark',
+            component:registerTrademark},
+            {name: 'edit-registered-trademark',
+            path: 'edit-registered-trademark/:id',
+            component:editRegisteredTrademark},
+            {name: 'view-registered-trademark',
+            path: 'view-registered-trademark/:id',
+            component:viewRegisteredTrademark},
+            {name: 'register-replace-cert',
+            path: 'register-replace-cert',
+            component:registerReplaceCert},
+            {name: 'edit-registered-replace-cert',
+            path: 'edit-registered-replace-cert/:id',
+            component:editRegisteredReplaceCert},
+            {name: 'view-registered-replace-cert',
+            path: 'view-registered-replace-cert/:id',
+            component:viewRegisteredReplaceCert},
             {name: 'profile',
             path: 'profile',
             component:Profile},
@@ -112,9 +144,12 @@ export const routes = [
         {name: 'home',
         path: '/',
         component: Home },
-        {name: 'chats',
-        path: '/chats',
-        component: Chats},
+        {name: 'contact',
+        path: '/contact',
+        component: Contact},
+        {name: 'about',
+        path: '/about',
+        component: About},
         {name: 'login',
         path: '/login',
         beforeEnter:(to,from,next)=>
@@ -168,9 +203,18 @@ export const routes = [
            {name: 'view-registered-business',
            path: 'view-registered-business/:id',
            component:adminViewRegisteredBusiness},
+           {name: 'view-registered-trademark',
+           path: 'view-registered-trademark/:id',
+           component:adminViewRegisteredTrademark},
+           {name: 'view-registered-replace-cert',
+           path: 'view-registered-replace-cert/:id',
+           component:adminViewRegisteredReplaceCert},
            {name: 'profile',
            path: 'profile',
            component:adminProfile},
+           {name: 'project',
+           path: 'project',
+           component:Project},
            {name: 'orders',
            path: 'orders',
            component:adminOrders},

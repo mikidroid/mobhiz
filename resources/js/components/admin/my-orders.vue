@@ -151,6 +151,8 @@ import sendE from '../config/send-email.js';
        SITE_LINK:cons.SITE_LINK,
        PRODUCT_ORDER:postApi.PRODUCT_ORDER,
        BUSINESS_ORDER:postApi.BUSINESS_ORDER,
+       TRADEMARK_ORDER:postApi.TRADEMARK_ORDER,
+       REPLACE_CERT_ORDER:postApi.REPLACE_CERT_ORDER,
        page:1,
        number:0,
        nafdac_status:"",
@@ -188,6 +190,12 @@ import sendE from '../config/send-email.js';
            break;
          case 'cac registration':
            this.$router.push('/admin/view-registered-business/'+val.business_name_id)
+           break;
+         case 'trademark registration':
+           this.$router.push('/admin/view-registered-trademark/'+val.trademark_id)
+           break;
+         case 'certificate replacement':
+           this.$router.push('/admin/view-registered-replace-cert/'+val.replace_cert_id)
            break;
        }
      },
@@ -263,7 +271,7 @@ import sendE from '../config/send-email.js';
       <p></p>
       <p>You can always track your registration progress through your dashboard on <span style="padding-left:4px;padding-right:4px;background-color:#25ab12;color:#fff">Orders >> Edit >> Track</span>. </p>
        <p>Visit your dashboard frequently: <a href="${this.SITE_LINK}">${this.SITE_LINK}</a></p>
-      <p>Feel free to contact us via your inbox or our direct email.</p>
+      <p>Feel free to contact us via your dashboard or through our direct email.</p>
       <hr>
       <p><b>Cheers!</b></p>
       <p><b>Yours truely, ${this.SITE_NAME}</b></p>
@@ -339,6 +347,40 @@ import sendE from '../config/send-email.js';
          form=new FormData();
           form.append('ref_id',val.ref_id);
           this.BUSINESS_ORDER(form)
+          .then(r=>{
+          if(this.sendEmail(val)){
+            this.$swal.fire({
+              icon:'success',
+              toast:'true',
+              title:'Order Confirmed!',
+              position:'top-end',
+              showConfirmButton:false,
+              timer:2500})
+            this.fetchOrders()}})
+            .catch(e=>{
+              alert(e.response.data.message)});
+            break;
+        case 'trademark registration':
+         form=new FormData();
+          form.append('ref_id',val.ref_id);
+          this.TRADEMARK_ORDER(form)
+          .then(r=>{
+          if(this.sendEmail(val)){
+            this.$swal.fire({
+              icon:'success',
+              toast:'true',
+              title:'Order Confirmed!',
+              position:'top-end',
+              showConfirmButton:false,
+              timer:2500})
+            this.fetchOrders()}})
+            .catch(e=>{
+              alert(e.response.data.message)});
+            break;
+        case 'certificate replacement':
+         form=new FormData();
+          form.append('ref_id',val.ref_id);
+          this.REPLACE_CERT_ORDER(form)
           .then(r=>{
           if(this.sendEmail(val)){
             this.$swal.fire({

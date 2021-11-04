@@ -24,6 +24,13 @@
  Registered Products
  
 </v-btn>
+
+<v-btn to="/admin/project">
+ 
+ <v-icon>mdi-product</v-icon>
+ New project
+ 
+</v-btn>
  </div>
 </template>
 

@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\RegisterProduct;
 use App\Models\trademark;
+use App\Models\replaceCert;
 use App\Models\businessName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -43,5 +44,8 @@ public function trademark(){
   }
 public function businessName(){
     return $this->belongsTo(businessName::class);
+  }
+public function replaceCert(){
+    return $this->belongsTo(replaceCert::class);
   }
 }

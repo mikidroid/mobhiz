@@ -52,7 +52,8 @@ import cons from '../config/const.js';
      let body=`
       <div>
       <p>Welcome ${this.form.firstname}, we will strive to give you the best service possible as you are important to us.</p>
-      <p>Feel free to contact us via your inbox or our direct email.</p>
+      <p>Feel free to contact us via your dashboard message or our direct email.</p>
+      <p>Visit your dashboard frequently: <a href="${this.SITE_LINK}">${this.SITE_LINK}</a></p>
       <hr>
       <p><b>Cheers!</b></p>
       <p><b>Yours truely, ${this.SITE_NAME}</b></p>

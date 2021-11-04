@@ -119,7 +119,10 @@
         Please connect with our agent below to begin negotiation and complete payment.
       </v-card-text>
       <v-card-text>
-      <v-btn :href="WHATSAPP_LINK" color="info">
+      <v-btn :href="WHATSAPP_LINK+'?text=Hi admin, my name is '+user.firstname+' with transaction id: '+ref_id+'. I will like to complete my registration. Thank you!'" color="info">
+      <i class="fas fa-money-bill-alt mr-2"></i>
+       Connect with our Agent
+     </v-btn>
       <i class="fas fa-money-bill-alt mr-2"></i>
        Connect with our Agent
      </v-btn>
@@ -209,7 +212,7 @@ import sendE from '../config/send-email.js';
        <b style="margin-left:3px;font-size:16px;color:#ed4786">${this.ref_id}</b></p>
       <p>You will be required to submit your Transaction Id before completing payment. So keep it safe!</b></p>
       <p><b>Click the link below to complete your order:</b></p>
-      <div><b><a href="${this.WHATSAPP_LINK}">${this.WHATSAPP_LINK}</a></b></div>
+    <div><b><a href="${this.WHATSAPP_LINK}?text=Hi admin, my name is ${this.user.firstname} with transaction id: ${this.ref_id}. I will like to complete my registration. Thank you!">${this.WHATSAPP_LINK}</a></b></div>
       <p></p>
       <p>Once order is successful, you will be able to track your registration progress through your dashboard on <span class="alert-success p-1">"Orders >> Edit >> Track"</span>. </p>
       <p></p>

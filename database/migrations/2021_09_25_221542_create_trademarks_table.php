@@ -23,7 +23,8 @@ $table->string('email');
 $table->string('phone');
 $table->string('company_name');
 $table->string('company_address');
-$table->json('product_names');
+$table->string('product_names');
+$table->string('payment')->default('pending');
 $table->string('documents');
         });
     }

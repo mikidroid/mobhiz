@@ -116,8 +116,8 @@ public function sea($val)
         if($myOrder->type=='certificate replacement'){
         $orderCertReplace=$myOrder->replaceCert;
         $path=$orderCertReplace->documents;
-        if(file_exists('storage/replace-cert/'.$path)){
-          unlink('storage/replace-cert/'.$path);
+        if(file_exists('storage/register-replaceCert/'.$path)){
+          unlink('storage/register-replaceCert/'.$path);
         }
         $orderCertReplace->delete();
         }
@@ -171,11 +171,10 @@ public function businessNameOrder(Request $request)
         if($myOrder->save()){
         $regBis->save();}
     }
-public function trademarkOrder(Request $request,$value)
+public function trademarkOrder(Request $request)
     {
-        $myOrder=order::where('ref_id','=',$value)->first();
+        $myOrder=order::where('ref_id','=',$request->ref_id)->first();
         $myOrder->payment='completed';
-        $myOrder->ref_id=$request->new_ref;
         $myOrder->status=2;
         //Load RegisterProduct model for relationships
         $regTrad=$myOrder->trademark;
@@ -184,6 +183,20 @@ public function trademarkOrder(Request $request,$value)
         $myOrder->save();
         $regTrad->save();
     }
+    
+public function replaceCertOrder(Request $request)
+    {
+        $myOrder=order::where('ref_id','=',$request->ref_id)->first();
+        $myOrder->payment='completed';
+        $myOrder->status=2;
+        //Load RegisterProduct model for relationships
+        $regRepCert=$myOrder->replaceCert;
+        $regRepCert->payment='completed';
+        //Save both models
+        $myOrder->save();
+        $regRepCert->save();
+    }
+    
 public function search(Request $request,$val)
     {
       if(Auth::user()->username!="admin"){

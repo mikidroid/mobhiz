@@ -7,7 +7,7 @@
    <hr class="my-4">
   <p>Want to Know us better? click button below</p>
   <p class="lead">
-    <v-btn small color="info" :href="'#'" >Learn more</v-btn>
+    <v-btn small color="info" to="/about" >Learn more</v-btn>
   </p>
 </div>
 <br>
@@ -34,10 +34,12 @@
      </p>
 </router-link>
      <hr>
-   <p class="card-text" >
+ <router-link to="/user/register-replace-cert" class="text-decoration-none text-secondary">
+  <p class="card-text" >
 <i class="fa fa-certificate" aria-hidden="true"></i>
       NAFDAC Certificate Replacement
      </p>
+     </router-link>
      <hr>
     </div>
     
@@ -60,7 +62,7 @@
      </p>
 </router-link>
      <hr>
- <router-link to="/user/register-product" class="text-decoration-none text-secondary">
+ <router-link to="/user/register-trademark" class="text-decoration-none text-secondary">
   <p class="card-text" >
 <i class="far fa-edit"></i>
       Trademark Registration
@@ -76,7 +78,7 @@
    
 <br>
 
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="3000">
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="4000">
     <div class="carousel-inner" >
     <div style="background-color:#000;height:250px" v-for="(item,index) in items" class="carousel-item" v-bind:class="{'active':index==0}">
       <img class="d-block w-100" style="opacity:0.6" :src="item.src" alt="First slide">
@@ -84,7 +86,7 @@
         <h1>{{item.title}}</h1>
         <hr>
         <p>{{item.subtitle}}</p>
-        <v-btn :to='item.link' v-show="item.link">{{item.link_text}}</v-btn>
+        <v-btn :href="item.link" v-show="item.link">{{item.link_text}}</v-btn>
       </div>
     </div>
   </div>
@@ -128,7 +130,7 @@
   <div class="mt-4" style="width:100%">
    
    <div style="width:50%;float:left">
- <a class="text-decoration-none" href="mailto:info@mikidroid.com">
+ <a class="text-decoration-none" href="#">
     <div style="height:180px" class="card shadow text-center alert-light m-1 mt-5" >
     <div class="card-body py-7">
       <v-icon class="h5--text p-1" large>mdi-clipboard-text</v-icon>
@@ -140,15 +142,15 @@
    </div>
    
    <div style="width:50%;float:left">
-     <a class="text-decoration-none" href="tel:+2348137344078">
-     <div style="height:180px" class="card text-center alert-light shadow m-1 mt-5" >
+     <router-link class="text-decoration-none" to="/about">
+     <div style="height:180px" to="/about" class="card text-center alert-light shadow m-1 mt-5" >
     <div class="card-body py-7">
       <v-icon class="h5--text p-1" large>mdi-help-circle</v-icon>
      <h3 class="card-title" >
       <div>About</div> us
      </h3>
     </div>
-   </div></a>
+   </div></router-link>
    </div>
    
   </div>
@@ -170,39 +172,43 @@
 <script>
 import {mapMutations} from 'vuex';
 import { mapActions } from 'vuex';
-
+import cons from '../config/const.js';
 
  export default{
+created(){
+  
+},
 data () {
       return {
+        WHATSAPP_LINK:cons.WHATSAPP_LINK,
         items: [
           {
             src: '/storage/home-slide/slide1.jpg',
             title:'Our service is 24/7',
             subtitle:'You can contact us anytime without worries.',
-            link:'/user/messages',
+            link:cons.WHATSAPP_LINK,
             link_text:'Message us'
           },
           {
             src: '/storage/home-slide/slide2.jpg',
-            title:'',
-            subtitle:'',
-            link:'',
-            link_text:''
+            title:'NAFDAC registration',
+            subtitle:'Register your products through us. Leave the stress for us to handle for you.',
+            link:'/user/register-product',
+            link_text:'Register product'
           },
           {
             src: '/storage/home-slide/slide3.jpg',
-            title:'',
-            subtitle:'',
-            link:'',
-            link_text:''
+            title:'Register business name',
+            subtitle:'Business name registration now made easy.',
+            link:'/user/register-business',
+            link_text:'Register business'
           },
           {
             src: '/storage/home-slide/slide4.jpg',
-            title:'',
-            subtitle:'',
-            link:'',
-            link_text:''
+            title:'Register trademark',
+            subtitle:'Trademark registration made easy. Let us handle the work',
+            link:'/user/register-trademark',
+            link_text:'Register trademark'
           },
         ],
       }

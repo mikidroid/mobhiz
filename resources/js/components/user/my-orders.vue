@@ -144,6 +144,12 @@ import getApi from '../apis/getApi.js';
          case 'cac registration':
            this.$router.push('/user/view-registered-business/'+val.business_name_id)
            break;
+        case 'trademark registration':
+           this.$router.push('/user/view-registered-trademark/'+val.trademark_id)
+           break;
+        case 'certificate replacement':
+           this.$router.push('/user/view-registered-replace-cert/'+val.replace_cert_id)
+           break;
        }
      },
         onChangePage(pageOfItems) {

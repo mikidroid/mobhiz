@@ -5,6 +5,10 @@ export default {
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.delete("/api/orders/"+val,CONFIG)},
     
+  DELETE_PROJECT:function(val){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.delete("/api/project/"+val,CONFIG)},
+    
 DELETE_USER:function(val){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.delete("/api/users/"+val,CONFIG)},

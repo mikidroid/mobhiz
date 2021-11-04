@@ -2,7 +2,7 @@
 <div class="">
  
 <track-product v-show="type=='product registration'" :id="id"></track-product>
-  
+<track-order v-show="type!='product registration'" :id="id"></track-order>
  </div>
 </template>
 
@@ -11,6 +11,7 @@ import Vue from 'vue';
 import config from '../config/config-header.js';
 import deleteApi from '../apis/deleteApi.js';
 Vue.component('track-product',require('./track-nafdac-registration.vue').default);
+Vue.component('track-order',require('./track-order.vue').default);
 
  export default {
 
