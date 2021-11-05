@@ -23,6 +23,23 @@
 .dmr-3{
  margin-right: 8px;
 }
+/*Truncate texts*/
+.myTruncate1 {
+  -webkit-line-clamp: 1;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.myTruncate2 {
+  -webkit-line-clamp: 2;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+/*End*/
+
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s

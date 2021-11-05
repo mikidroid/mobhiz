@@ -40,6 +40,8 @@ import payment from './components/user/payment.vue' ;
 import adminDashboard from './components/admin/dashboard.vue' ;
 import adminProfile from './components/admin/profile.vue' ;
 import Project from './components/admin/project.vue' ;
+import viewProject from './components/pages/view-project.vue' ;
+import editProject from './components/admin/edit-project.vue' ;
 import adminEditProfile from './components/admin/edit-profile.vue';
 import adminOrders from './components/admin/my-orders.vue' ;
 import adminRegisteredProducts from './components/admin/registered-products.vue' ;
@@ -147,6 +149,9 @@ export const routes = [
         {name: 'contact',
         path: '/contact',
         component: Contact},
+        {name: 'view-project',
+        path: '/view-project/:id',
+        component: viewProject},
         {name: 'about',
         path: '/about',
         component: About},
@@ -215,6 +220,9 @@ export const routes = [
            {name: 'project',
            path: 'project',
            component:Project},
+           {name: 'edit-project',
+           path: 'edit-project/:id',
+           component: editProject},
            {name: 'orders',
            path: 'orders',
            component:adminOrders},

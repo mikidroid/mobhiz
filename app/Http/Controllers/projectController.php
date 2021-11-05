@@ -19,10 +19,6 @@ class projectController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->username!="admin"){
-        $projectReg=User::find(Auth::user()->id)->project()->orderBy('id','desc')->get();
-        return response()->json($projectReg);
-        }
         $projectReg=project::orderBy('id','desc')->get();
         return response()->json($projectReg);
     }

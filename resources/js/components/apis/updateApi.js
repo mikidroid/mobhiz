@@ -20,4 +20,8 @@ export default {
    UPDATE_REGISTERED_REPLACE_CERT:function(val,doc){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.post('/api/register-replace-cert/'+val,doc,CONFIG)},
+    
+   UPDATE_PROJECT:function(val,doc){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.post('/api/project/'+val,doc,CONFIG)},
 }

@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function(){
 });
 Route::middleware('auth:sanctum')->resource('/register-product', registerProductController::class);
 Route::middleware('auth:sanctum')->resource('/project', projectController::class);
+Route::resource('/project-guest', projectController::class);
 Route::middleware('auth:sanctum')->get('/register-product/search/{val}', [registerProductController::class,'search']);
 Route::middleware('auth:sanctum')->resource('/register-replace-cert', replaceCertController::class);
 Route::middleware('auth:sanctum')->resource('/register-business', registerBusiness::class);

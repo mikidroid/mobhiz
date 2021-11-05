@@ -76,6 +76,14 @@
     </template>
    <v-card>
     <v-list>
+      
+   <v-list-item :to="{name:'view-project',params:{id:project.id}}">
+    
+      <v-list-item-title>
+       View
+      </v-list-item-title>
+      
+     </v-list-item>
   
    <v-list-item :to="{name:'edit-project',params:{id:project.id}}">
     
@@ -193,7 +201,7 @@ import paystack from 'vue-paystack';
            timer:3500
          });
          this.fetchProjects();
-       }).catch(e=>{alert(e.response.data.message)})
+       }).catch(e=>{alert("Project could not be added!")})
      }
    },
    created(){

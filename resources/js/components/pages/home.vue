@@ -100,6 +100,8 @@
   </a>
 </div>
   
+  <!--Projects slide -->
+<project-slide class="mt-6"></project-slide>
   
    <div style="width:50%;float:left">
     <a class="text-decoration-none" href="mailto:info@mikidroid.com">
@@ -173,6 +175,8 @@
 import {mapMutations} from 'vuex';
 import { mapActions } from 'vuex';
 import cons from '../config/const.js';
+import vue from 'vue';
+vue.component('project-slide',require('./project-slide.vue').default);
 
  export default{
 created(){
