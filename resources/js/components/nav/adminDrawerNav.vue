@@ -12,7 +12,7 @@
       fixed
       dark
       height="70px">
-      <v-toolbar-title><img class="mr-2" src="/storage/core/logo.png" height="45px"></v-toolbar-title>
+      <v-toolbar-title><a href="/"><img class="mr-2" src="/storage/core/logo.png" height="45px"></a></v-toolbar-title>
 
       <v-spacer></v-spacer>
     <div v-show="screen != 'small'" >
@@ -80,9 +80,7 @@
 </div>
       
 <div class="mt-2" v-show="screen == 'small'">
-<v-btn icon class="mr-1">
-       <v-icon large>mdi-alert-circle</v-icon>
-      </v-btn>
+
 </div>
     </v-app-bar>
 <br/>

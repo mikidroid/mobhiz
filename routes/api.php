@@ -14,6 +14,7 @@ use App\Http\Controllers\projectController;
 use App\Http\Controllers\registerTrademark;
 use App\Http\Controllers\ordersController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\search;
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ use App\Http\Controllers\search;
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function(){
 });
+Route::middleware('auth:sanctum')->get('/dashboard', [dashboardController::class,'index']);
 Route::middleware('auth:sanctum')->resource('/register-product', registerProductController::class);
 Route::middleware('auth:sanctum')->resource('/project', projectController::class);
 Route::resource('/project-guest', projectController::class);

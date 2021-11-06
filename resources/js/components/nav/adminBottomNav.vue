@@ -25,12 +25,6 @@
 
       <v-icon>mdi-email</v-icon>
     </v-btn>
-
-    <v-btn>
-      <span>Contact</span>
-
-      <v-icon>mdi-phone</v-icon>
-    </v-btn>
     
    <v-menu
       top
@@ -60,16 +54,16 @@
      </v-list-item>
  <v-list-item v-show="auth">
       <v-list-item-avatar>
-       <img src="/storage/core/logo.png" >
+   <v-icon>mdi-account</v-icon>
       </v-list-item-avatar>
       <v-list-item-title>
        Profile
       </v-list-item-title>
      </v-list-item>
  <v-list-item v-show="auth" @click="logout">
-  <v-list-item-action>
+  <v-list-item-avatar>
    <v-icon>mdi-logout</v-icon>
-  </v-list-item-action>
+  </v-list-item-avatar>
    
       <v-list-item-title>
        Logout

@@ -65,7 +65,7 @@
      </v-list-item>
  <v-list-item v-if="order.payment==='pending'" >
       <v-list-item-title>
-        <v-btn :href="'payment/'+order.ref_id+'/'+order.type" color="success">
+        <v-btn :href="'user/payment/'+order.ref_id+'/'+order.type" color="success">
         <i class="fas fa-money-bill-alt mr-2"></i>
        Make Payment</v-btn>
       </v-list-item-title>
@@ -89,15 +89,7 @@
 <jw-pagination :items="orders" :pageSize="5" @changePage="onChangePage"></jw-pagination>
 
 </div>
- <v-btn
- color="error"
- class="mt-3 mb-3"
- tile
- @click="$router.go(-1)"
- outlined
- background="text-danger"
- ><v-icon class="mr-1" >mdi-arrow-left</v-icon>
-  Go back</v-btn>
+
   
  </div>
 

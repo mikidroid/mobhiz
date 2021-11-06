@@ -13,7 +13,7 @@
       dark
       elevation="0"
       height="70px">
-      <v-toolbar-title><img class="mr-2" src="/storage/core/logo.png" height="45px"></v-toolbar-title>
+      <v-toolbar-title><a href="/"><img class="mr-2" src="/storage/core/logo.png" height="45px"></a></v-toolbar-title>
 
       <v-spacer></v-spacer>
     <div v-show="screen != 'small'" >
@@ -26,7 +26,7 @@
       <span>Inbox <v-icon>mdi-email</v-icon> </span>
     </v-btn>
 
-    <v-btn icon class="mr-5 ml-5">
+    <v-btn to="/contact" icon class="mr-5 ml-5">
       <span class="">Contact</span>
     </v-btn>
     

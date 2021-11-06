@@ -5,6 +5,10 @@ export default {
   USERS:function(){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/users',CONFIG)},
+
+  DASHBOARD:function(){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.get('/api/dashboard',CONFIG)},
     
   VIEW_USER:function(val){
     let CONFIG=new config(localStorage.getItem('token')).getT()

@@ -108,13 +108,10 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-card-text>
-        Please connect with our agent below to begin negotiation and complete payment.
+        Please connect with our agent below on WHATSAPP to begin negotiation and complete payment.
       </v-card-text>
       <v-card-text>
       <v-btn :href="WHATSAPP_LINK+'?text=Hi admin, my name is '+user.firstname+' with transaction id: '+ref_id+'. I will like to complete my registration. Thank you!'" color="info">
-      <i class="fas fa-money-bill-alt mr-2"></i>
-       Connect with our Agent
-     </v-btn>
       <i class="fas fa-money-bill-alt mr-2"></i>
        Connect with our Agent
      </v-btn>

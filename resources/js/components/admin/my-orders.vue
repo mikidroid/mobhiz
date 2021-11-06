@@ -2,7 +2,7 @@
 <div class="container">
  <div class="row">
   <div class="col-8">
- <h2>My Orders</h2></div>
+ <h3>All Orders</h3></div>
  <div class="col-4 d-flex flex-row-reverse">
  </div>
   <hr/>
@@ -114,19 +114,7 @@
 <jw-pagination :items="orders" :pageSize="5" @changePage="onChangePage"></jw-pagination>
 
 </div>
- <v-btn
- color="error"
- class="mt-3 mb-3"
- tile
- @click="$router.go(-1)"
- outlined
- background="text-danger"
- ><v-icon class="mr-1" >mdi-arrow-left</v-icon>
-  Go back</v-btn>
-  
  </div>
-
- 
  </div>
 </template>
 
