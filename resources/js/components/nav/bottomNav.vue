@@ -14,10 +14,20 @@
       <span>Dashboard</span>
       <v-icon>mdi-post</v-icon>
     </v-btn>
+    
+
     <v-btn to="/user/messages" v-show="auth">
-      <span>Inbox</span>
+
+      <span>Inbox({{messageCount}})</span>
+     <v-badge
+          color="pink"
+          dot
+        >
       <v-icon>mdi-email</v-icon>
+    </v-badge>
     </v-btn>
+
+    
     <v-btn to="/contact">
       <span>Contact</span>
       <v-icon>mdi-phone</v-icon>
@@ -73,18 +83,33 @@
 </template>
 
 <script>
+import uniqid from 'uniqid';
 import config from '../config/config-header.js';
+import cons from '../config/const.js';
+import postApi from '../apis/postApi.js';
+import updateApi from '../apis/updateApi.js';
+import getApi from '../apis/getApi.js';
+import deleteApi from '../apis/deleteApi.js';
+import paystack from 'vue-paystack';
+
  export default {
+  
      data(){
       return{
-drawer: false,
+      drawer: false,
       group: null,
+      g:5,
+      messageCount:"",
+      COUNT_INBOX:getApi.COUNT_INBOX,
          }
      } ,
     
      computed:{
       auth(){
        return localStorage.getItem('token')
+      },
+      msgCount(){
+         
       },
       token(){
        return localStorage.getItem('token')
@@ -132,7 +157,11 @@ drawer: false,
            timer: 5000});}) },
      },
      created(){
-
+          this.COUNT_INBOX().then(r=>{
+            this.messageCount=r.data;
+          }).catch(e=>{
+            alert(e.response.data.message)
+          });
      },
      updated(){
 

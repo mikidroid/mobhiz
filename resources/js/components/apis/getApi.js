@@ -6,6 +6,10 @@ export default {
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/users',CONFIG)},
 
+  COUNT_INBOX:function(){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.get('/api/inbox/count',CONFIG)},
+
   DASHBOARD:function(){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.get('/api/dashboard',CONFIG)},

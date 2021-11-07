@@ -118,6 +118,11 @@ class MessageController extends Controller
         where('reciever_username','=',Auth::user()
         ->username)->where('body','LIKE',"%$val%")->latest('id')->get();
         return response()->json(['outbox'=>$outbox,'inbox'=>$inbox]);
-        
+    }
+    
+    public function inboxCount(){
+      $countMsg=message::where('reciever_username','=',Auth::user()->username)->where('read','=',0)->get()->count();
+      return $countMsg;
+    
     }
 }

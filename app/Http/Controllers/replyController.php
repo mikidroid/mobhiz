@@ -40,6 +40,9 @@ class replyController extends Controller
          $file=time().'-'.$request->file->getClientOriginalName();
          $request->file->storeAs('public/reply',$file);
         }
+        $msgRead=message::find($request->message_id);
+        $msgRead->read=0;
+        $msgRead->save();
          $store=Reply::create([
            'user_id'=>$request->user_id,
            'message_id'=>$request->message_id,

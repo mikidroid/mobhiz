@@ -3,6 +3,9 @@
 <h3>Dashboard</h3>
 <div class="my-2 text-caption">Welcome back • <b>{{user.firstname}}</b></div>
    <!-- Row1 -->
+   
+   {{messageCount}}
+   
    <div class="row">
      <div class="mt-2 col-md-6 col-sm-10"> 
       <v-row class="mb-5">
@@ -187,6 +190,8 @@ export default{
       registerProduct:"",
       replaceCert:"",
       DASHBOARD:getApi.DASHBOARD,
+      MESSAGES:getApi.MESSAGES,
+      COUNT_INBOX:getApi.COUNT_INBOX,
   }
  },
  methods:{
@@ -194,6 +199,7 @@ export default{
         
  },
  created(){
+
      this.DASHBOARD().then(r=>{
        this.trademark=r.data.trademark;
        this.cac=r.data.businessName;

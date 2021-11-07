@@ -53,7 +53,8 @@ Route::middleware('auth:sanctum')->post('/replace-cert-order', [ordersController
 Route::middleware('auth:sanctum')->resource('/orders', ordersController::class);
 Route::middleware('auth:sanctum')->get('/orders/search/{val}',[ ordersController::class,'search']);
 Route::middleware('auth:sanctum')->resource('/message', MessageController::class);
-Route::middleware('auth:sanctum')->get('/message/search/{val}',[ messageController::class,'search']);
+Route::middleware('auth:sanctum')->get('/message/search/{val}',[MessageController::class,'search']);
+Route::middleware('auth:sanctum')->get('/inbox/count',[MessageController::class,'inboxCount']);
 Route::middleware('auth:sanctum')->resource('/reply', replyController::class);
 Route::middleware('auth:sanctum')->resource('/users', userController::class);
 Route::middleware('auth:sanctum')->get('/users/search/{val}',[ userController::class,'search']);
