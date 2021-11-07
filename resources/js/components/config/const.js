@@ -11,7 +11,7 @@ EMAIL_PASSWORD:"Cronaldo--007",
 WHATSAPP_LINK:"https://wa.me/+2347030844342",
 PHONE_1:"07030844342",
 PHONE_2:"08051860405",
-PERSONAL_EMAIL:"abisorlar@gmail.com",
+PERSONAL_EMAIL:"michaelphardy00@gmail.com",
 
 //Site details
 SITE_NAME:"MOBHIZ",

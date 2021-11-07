@@ -37,6 +37,7 @@ import cons from '../config/const.js';
   data(){
     return{
      SITE_NAME:cons.SITE_NAME,
+     PERSONAL_EMAIL:cons.PERSONAL_EMAIL,
      errors:{},
      form:{firstname:"",}}},
   
@@ -73,6 +74,9 @@ import cons from '../config/const.js';
             showConfirmButton:false,
             timer:3000, });
           let send_email = new sendE(this.form.email,this.emailSubject,this.emailBody).sendEmail();
+          if(send_email){
+            let msg_admin=new sendE(this.PERSONAL_EMAIL,'New registration on '+this.SITE_NAME,'Congrats! you have a new client with username: <b>'+this.form.username+'</b> on '+this.SITE_NAME+'. Please check your dashboard to view client details.').sendEmail();
+          }
           this.errors="";
           this.form={};
           this.$router.push('/login') })

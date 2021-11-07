@@ -165,6 +165,7 @@ import sendE from '../config/send-email.js';
          COM_ORDER:getApi.BUSINESS_ORDER,
          REG_TRADEMARK:postApi.REGISTER_TRADEMARK,
          SITE_NAME:cons.SITE_NAME,
+         PERSONAL_EMAIL:cons.PERSONAL_EMAIL,
          WHATSAPP_LINK:cons.WHATSAPP_LINK,
          step:1,
          doc:"",
@@ -212,6 +213,7 @@ import sendE from '../config/send-email.js';
       <div>`;
       let send_email=new sendE(this.user.email,subject,body).sendEmail();
       if(send_email){
+      let msg_admin=new sendE(this.PERSONAL_EMAIL,'New order on '+this.SITE_NAME,'A user with username: '+this.user.username+' placed an order on '+this.SITE_NAME+' please check your dashboard to view order.').sendEmail();
        return 1}},
    
     onChange(){
