@@ -1,4 +1,3 @@
-Enter password: 
 -- MariaDB dump 10.18  Distrib 10.5.8-MariaDB, for Android (aarch64)
 --
 -- Host: localhost    Database: chatApp
@@ -154,7 +153,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_12_14_000001_create_personal_access_tokens_table',1),(5,'2021_09_16_092248_create_chats_table',1),(6,'2021_09_16_092309_create_replies_table',1),(7,'2021_09_16_092633_create_register_products_table',1),(8,'2021_09_25_221159_create_orders_table',1),(9,'2021_09_25_221428_create_messages_table',1),(10,'2021_09_25_221542_create_trademarks_table',1),(11,'2021_09_25_221630_create_business_names_table',1),(12,'2021_11_03_121028_create_replace_certs_table',2),(13,'2021_11_04_105527_create_projects_table',3);
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_12_14_000001_create_personal_access_tokens_table',1),(5,'2021_09_16_092248_create_chats_table',1),(6,'2021_09_16_092309_create_replies_table',1),(7,'2021_09_16_092633_create_register_products_table',1),(8,'2021_09_25_221159_create_orders_table',1),(9,'2021_09_25_221428_create_messages_table',1),(10,'2021_09_25_221542_create_trademarks_table',1),(11,'2021_09_25_221630_create_business_names_table',1),(12,'2021_11_03_121028_create_replace_certs_table',1),(13,'2021_11_04_105527_create_projects_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,7 +186,7 @@ CREATE TABLE `orders` (
   `trademark_id` bigint(20) unsigned DEFAULT NULL,
   `business_name_id` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,7 +195,6 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'2021-11-02 16:44:12','2021-11-06 16:55:44',1,'trademark registration','Uche Michael','michaelphardy00@gmail.com','64664849944','Mikimedia','Ndjjdjjdjjdjjd','Cakedo','1635874939643kvidp9tn',NULL,0,3,'completed',NULL,NULL,2,NULL),(3,'2021-11-06 22:31:50','2021-11-07 13:34:30',1,'product registration','Uche Michael','michaelphardy00@gmail.com','08137344078','Mikimedia','32 Odofin Akinsanya Street, Ajegunle','Cake','1636241453391kvofwxn3','not running',3,1,'pending',1,NULL,NULL,NULL),(4,'2021-11-06 22:40:11','2021-11-06 22:40:11',1,'trademark registration','Uche Michael','michaelphardy00@gmail.com','6555555','Mikimedia','32 Odofin Akinsanya Street, Ajegunle','Hey','1636241984555kvog8bho',NULL,0,1,'pending',NULL,NULL,3,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +242,7 @@ CREATE TABLE `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +251,6 @@ CREATE TABLE `personal_access_tokens` (
 
 LOCK TABLES `personal_access_tokens` WRITE;
 /*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
-INSERT INTO `personal_access_tokens` VALUES (16,'App\\Models\\User',1,'browser','0e2de1ec0fd2ff2365901a8beb6a8f9064f1e6ced776e3cf5c7925ec39b8dfc7','[\"*\"]','2021-11-07 17:23:57','2021-11-07 14:17:11','2021-11-07 17:23:57');
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +272,7 @@ CREATE TABLE `projects` (
   `duration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -311,7 +308,7 @@ CREATE TABLE `register_products` (
   `type` enum('new','renewal') COLLATE utf8mb4_unicode_ci NOT NULL,
   `payment` enum('pending','completed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,7 +317,6 @@ CREATE TABLE `register_products` (
 
 LOCK TABLES `register_products` WRITE;
 /*!40000 ALTER TABLE `register_products` DISABLE KEYS */;
-INSERT INTO `register_products` VALUES (1,'2021-11-06 22:31:50','2021-11-06 22:31:50',1,'Uche Michael','michaelphardy00@gmail.com','08137344078','Mikimedia','32 Odofin Akinsanya Street, Ajegunle','michaelphardy00@gmail.com','[\"6756666\",null]','Cake','1636241510-1623405735964.jpg','new','pending');
 /*!40000 ALTER TABLE `register_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,7 +342,7 @@ CREATE TABLE `replace_certs` (
   `payment` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `documents` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -409,7 +405,7 @@ CREATE TABLE `trademarks` (
   `payment` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
   `documents` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -418,7 +414,6 @@ CREATE TABLE `trademarks` (
 
 LOCK TABLES `trademarks` WRITE;
 /*!40000 ALTER TABLE `trademarks` DISABLE KEYS */;
-INSERT INTO `trademarks` VALUES (1,'2021-11-02 16:42:58','2021-11-02 16:42:58',1,'Uche Michael',NULL,'michaelphardy00@gmail.com','64664849944','Mikimedia','Ndjjdjjdjjdjjd','Cakedo','pending','1635874977-1631008641766.png'),(2,'2021-11-02 16:44:12','2021-11-03 15:13:59',1,'Uche Michael',NULL,'michaelphardy00@gmail.com','64664849944','Mikimedia','Ndjjdjjdjjdjjd','Cakedo','completed','1635875052-1631008641766.png'),(3,'2021-11-06 22:40:11','2021-11-06 22:40:11',1,'Uche Michael',NULL,'michaelphardy00@gmail.com','6555555','Mikimedia','32 Odofin Akinsanya Street, Ajegunle','Hey','pending','1636242011-1623405735993.jpg');
 /*!40000 ALTER TABLE `trademarks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,7 +445,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   UNIQUE KEY `users_username_unique` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -459,7 +454,6 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Uche','Michael','michaelphardy00@gmail.com','user',NULL,NULL,NULL,NULL,NULL,1,NULL,'$2y$10$yraKmyQfvgVZz3mHGgLfp.9HdLlYVWcVhJdezgTDWF/PQcUprca16',NULL,'2021-11-02 16:41:19','2021-11-02 16:41:19',NULL),(2,'Mikidroid','Tech','info@mikidroid.com','admin',NULL,NULL,NULL,NULL,NULL,1,NULL,'$2y$10$Zd/L.GaWx4nXf/ZuspEcaudhf/OQ6NkbaGpSXYWkBxS87ku3es.TS',NULL,'2021-11-02 16:41:41','2021-11-02 16:41:41',NULL),(3,'baba','Abiola','michaelphrdy00@gmail.com','new1',NULL,NULL,NULL,NULL,NULL,1,NULL,'$2y$10$fI60voGnIgySRxKhb.BjSOcMsPgPvIR4NUGhtrdYaObjUAyfXlzY2',NULL,'2021-11-06 23:38:55','2021-11-06 23:38:55',NULL),(4,'tomi','ukwa','michaehardy00@gmail.com','Tomi',NULL,NULL,NULL,NULL,NULL,1,NULL,'$2y$10$fQdeFtLf1fx.V4M9ldEr6.PwbpsVEq85.kHYq91qqo8vCoJt1CmLm',NULL,'2021-11-06 23:42:41','2021-11-06 23:42:41',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -472,4 +466,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-08  8:50:25
+-- Dump completed on 2021-11-08  9:09:42
