@@ -37,6 +37,7 @@ import cons from '../config/const.js';
   data(){
     return{
      SITE_NAME:cons.SITE_NAME,
+     SITE_LINK:cons.SITE_LINK,
      PERSONAL_EMAIL:cons.PERSONAL_EMAIL,
      errors:{},
      form:{firstname:"",}}},

@@ -56,9 +56,9 @@
        Register
       </v-list-item-title>
      </v-list-item>
- <v-list-item v-show="auth">
+ <v-list-item v-show="auth" to="/admin/profile" >
       <v-list-item-avatar>
-       <img src="/storage/core/logo.png" >
+   <v-icon>mdi-account</v-icon>
       </v-list-item-avatar>
       <v-list-item-title>
        Profile
@@ -99,6 +99,8 @@
      } ,
     
      computed:{
+      token(){
+       return localStorage.getItem('token')},
       auth(){
        return localStorage.getItem('token')
       },

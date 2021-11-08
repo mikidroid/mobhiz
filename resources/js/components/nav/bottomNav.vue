@@ -59,7 +59,7 @@
        Register
       </v-list-item-title>
      </v-list-item>
- <v-list-item v-show="auth">
+ <v-list-item v-show="auth" to="/user/profile" >
       <v-list-item-avatar>
    <v-icon>mdi-account</v-icon>
       </v-list-item-avatar>
@@ -161,7 +161,7 @@ import paystack from 'vue-paystack';
           this.COUNT_INBOX().then(r=>{
             this.messageCount=r.data;
           }).catch(e=>{
-            alert(e.response.data.message)
+            //alert(e.response.data.message)
           });
      },
      updated(){

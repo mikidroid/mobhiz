@@ -32,7 +32,7 @@ Vue.config.productionTip = false;
 /*Uses*/
 
 axios.defaults.withCredentials = true;
-window.axios.defaults.baseURL = "http://127.0.0.1:8000";
+//window.axios.defaults.baseURL = "mobhiz.com.ng";
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.use(Vuex);
