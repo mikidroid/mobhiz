@@ -20,10 +20,16 @@
     </v-btn>
     
 
-    <v-btn to="/admin/messages" v-show="auth">
-      <span>Inbox</span>
+     <v-btn to="/user/messages" v-show="auth">
 
+      <span>Inbox({{messageCount}})</span>
+     <v-badge
+          color="pink"
+          dot
+          
+        >
       <v-icon>mdi-email</v-icon>
+    </v-badge>
     </v-btn>
     
    <v-menu
@@ -82,7 +88,10 @@ import config from '../config/config-header.js';
     data(){
       return{
         drawer: false,
-        group: null,}},
+        group: null,
+        messageCount:"",
+        COUNT_INBOX:getApi.COUNT_INBOX,
+      }},
     
     computed:{
       auth(){
@@ -130,7 +139,11 @@ import config from '../config/config-header.js';
            timer: 5000});})},  },
            
      created(){
-
+          this.COUNT_INBOX().then(r=>{
+            this.messageCount=r.data;
+          }).catch(e=>{
+            alert(e.response.data.message)
+          });
      },
      updated(){
 

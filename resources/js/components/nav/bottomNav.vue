@@ -22,6 +22,7 @@
      <v-badge
           color="pink"
           dot
+          
         >
       <v-icon>mdi-email</v-icon>
     </v-badge>
