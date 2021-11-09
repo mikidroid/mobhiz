@@ -160,9 +160,7 @@ import paystack from 'vue-paystack';
      created(){
           this.COUNT_INBOX().then(r=>{
             this.messageCount=r.data;
-          }).catch(e=>{
-            //alert(e.response.data.message)
-          });
+          })
      },
      updated(){
 

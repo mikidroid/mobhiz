@@ -7,7 +7,7 @@ PAYSTACK_KEY:
 //Admin details
 ADMIN_EMAIL:"info@mobhiz.com.ng",
 EMAIL_HOST:"mobhiz.com.ng",
-EMAIL_PASSWORD:"Mobhiz--2021",
+EMAIL_PASSWORD:"mobhiz--2021",
 WHATSAPP_LINK:"https://wa.me/+2347030844342",
 PHONE_1:"07030844342",
 PHONE_2:"08051860405",

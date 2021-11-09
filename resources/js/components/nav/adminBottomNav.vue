@@ -20,7 +20,7 @@
     </v-btn>
     
 
-     <v-btn to="/user/messages" v-show="auth">
+     <v-btn to="/admin/messages" v-show="auth">
 
       <span>Inbox({{messageCount}})</span>
      <v-badge
@@ -141,9 +141,7 @@ import config from '../config/config-header.js';
      created(){
           this.COUNT_INBOX().then(r=>{
             this.messageCount=r.data;
-          }).catch(e=>{
-            //alert(e.response.data.message)
-          });
+          })
      },
      updated(){
 

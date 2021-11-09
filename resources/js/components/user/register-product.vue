@@ -287,8 +287,6 @@ import sendE from '../config/send-email.js';
              this.step=4;}
            })
            .catch(e=>{
-             this.statu=e.response.data.message;
-             this.statu2=e.response.data.line;
              this.$swal.fire({
                position: 'top-end',
                icon: 'error',

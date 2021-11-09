@@ -83,7 +83,8 @@ import sendE from '../config/send-email.js';
      data(){
       return{
          VIEW_REGISTERED_PRODUCT:getApi.VIEW_REGISTERED_PRODUCT,
-         data:""
+         data:"",
+         id:this.$route.params.id,
          }
      } ,
     
@@ -100,7 +101,7 @@ import sendE from '../config/send-email.js';
         
      },
      created(){
-       this.VIEW_REGISTERED_PRODUCT(this.$route.params.id)
+       this.VIEW_REGISTERED_PRODUCT(this.id)
        .then(r=>{
          this.data=r.data;
        })
