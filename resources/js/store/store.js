@@ -17,9 +17,10 @@ export const store = new Vuex.Store({
       success:"",
       errors:"",
       adminNav:false,
+      loading:false,
       token:"",
       test:[{'name':'uche','message':'hello'},{'name':'uche','message':'hello'}],
-      loading:true
+  
  },
  
  getters:{

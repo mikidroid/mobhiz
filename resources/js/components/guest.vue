@@ -4,6 +4,12 @@
 <drawerNav></drawerNav>
 <v-content >
  <v-container class="col-md-9 col-lg-9">
+ <div v-show="loading" class="text-center">
+  <b-spinner style="opacity:0.7;index-z:-1;width: 2rem; height: 2rem;" variant="primary" type="grow" label="Spinning"></b-spinner>
+<b-spinner style="opacity:0.7;index-z:-1;width: 2rem; height: 2rem;" variant="primary" label="Spinning"></b-spinner>
+<b-spinner type="grow" style="opacity:0.7;index-z:-1;width: 2rem; height: 2rem;" variant="primary" label="Spinning"></b-spinner>
+
+</div>
 <transition name="fade">
  <router-view>
  </router-view>
@@ -28,7 +34,7 @@ Vue.component('drawerNav', require('./nav/drawerNav.vue').default)
  export default {
      data(){
       return{
-
+       loading:this.$store.state.loading,
          }
      } ,
     
