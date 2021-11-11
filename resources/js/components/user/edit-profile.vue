@@ -92,7 +92,6 @@ import paystack from 'vue-paystack';
         loading:false,
         UPDATE_USER:updateApi.UPDATE_USER,
         form:{
-          phone:"",
           city:"",
           gender:"",
           country:"",
