@@ -104,7 +104,7 @@
 <project-slide class="mt-6"></project-slide>
   
    <div style="width:50%;float:left">
-    <a class="text-decoration-none" href="mailto:info@mikidroid.com">
+    <a class="text-decoration-none" :href="'mailto:'+ADMIN_EMAIL">
     <div style="height:180px" class="card shadow text-center alert-warning m-1 mt-5" >
     <div class="card-body py-7">
       <v-icon class="h5--text p-1" large>mdi-email</v-icon>
@@ -116,7 +116,7 @@
    </div>
    
    <div style="width:50%;float:left">
-  <a class="text-decoration-none" href="tel:+2348137344078">
+  <a class="text-decoration-none" :href="'tel:'+PHONE_1">
      <div style="height:180px" class="card text-center alert-success shadow m-1 mt-5" >
     <div class="card-body py-7">
       <v-icon class="h5--text p-1" large>mdi-phone</v-icon>
@@ -185,6 +185,8 @@ created(){
 data () {
       return {
         WHATSAPP_LINK:cons.WHATSAPP_LINK,
+        ADMIN_EMAIL:cons.ADMIN_EMAIL,
+        PHONE_1:cons.PHONE_1,
         items: [
           {
             src: '/storage/home-slide/slide1.jpg',
