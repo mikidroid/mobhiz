@@ -12,13 +12,11 @@
   <div class="alert-danger" 
   v-text="errors.email"></div>
    <input type="text" class="form-control" name="email" v-model="form.email">
-   
-
    <label for="password" class="mt-2">Password:</label>
   <div class="alert-danger" 
   v-text="errors.password"></div>
    <input type="password" class="form-control" name="password" v-model="form.password">
-   <button type="submit" class="btn-dark btn mt-3">Login</button>
+   <button type="submit" class="btn-dark btn mt-3">Login <loader v-show="loading"></loader> </button>
   </form>
  </div>
 </template>
@@ -31,7 +29,8 @@ import config from '../config/config-header.js';
   
   data(){
    return{
-    errors:{},
+     loading:false,
+     errors:{},
      form:{
       tokenName:"user-default"
      }
@@ -53,13 +52,13 @@ Eerrors(){
   },
   
   created(){
- this.$store.state.loading=true;
+ 
   },
   methods:{
    
-login(){
-    
-    this.axios.post('/api/login',this.form).
+    login(){
+     this.loading=true;
+     this.axios.post('/api/login',this.form).
           then((r)=>{
            this.$swal.fire({
             title:"Logged in Successfully!",
@@ -68,7 +67,6 @@ login(){
             position:"top-end",
             showConfirmButton:false,
             timer:3000, });
-           
             localStorage.setItem('token',r.data.token);
             let token=localStorage.getItem('token');
               const Config=new config(token);
@@ -80,21 +78,15 @@ login(){
                   }
                   localStorage.setItem('user',JSON.stringify(r.data.user));
                    this.$router.go('/user');
-                })
-.
+                   this.loading=false;
+                }).
           catch((err)=>{
-           
               this.errors=err.response.data.errors;
-           
-          })
-                
-              
-          })
-              .
+              this.loading=false;})
+           }).
           catch((err)=>{
-           
               this.errors=err.response.data.errors;
-           
+              this.loading=false;
           }); 
 
    

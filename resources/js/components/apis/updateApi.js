@@ -24,4 +24,8 @@ export default {
    UPDATE_PROJECT:function(val,doc){
     let CONFIG=new config(localStorage.getItem('token')).getT()
     return this.axios.post('/api/project/'+val,doc,CONFIG)},
+    
+   UPDATE_USER:function(val,doc){
+    let CONFIG=new config(localStorage.getItem('token')).getT()
+    return this.axios.post('/api/users/'+val,doc,CONFIG)},
 }

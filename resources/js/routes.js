@@ -31,6 +31,7 @@ import editRegisteredReplaceCert from './components/user/edit-registered-replace
 //Others
 import Dashboard from './components/user/dashboard.vue' ;
 import Profile from './components/user/profile.vue' ;
+import EditProfile from './components/user/edit-profile.vue' ;
 import myOrders from './components/user/my-orders.vue' ;
 import messages from './components/user/messages.vue' ;
 import viewMessage from './components/user/view-message.vue' ;
@@ -42,7 +43,7 @@ import adminProfile from './components/admin/profile.vue' ;
 import Project from './components/admin/project.vue' ;
 import viewProject from './components/pages/view-project.vue' ;
 import editProject from './components/admin/edit-project.vue' ;
-import adminEditProfile from './components/admin/edit-profile.vue';
+import AdminEditProfile from './components/admin/edit-profile.vue';
 import adminOrders from './components/admin/my-orders.vue' ;
 import adminRegisteredProducts from './components/admin/registered-products.vue' ;
 import adminViewRegisteredProduct from './components/admin/view-registered-product.vue' ;
@@ -128,6 +129,9 @@ export const routes = [
             {name: 'profile',
             path: 'profile',
             component:Profile},
+            {name: 'edit-profile',
+            path: 'edit-profile',
+            component:EditProfile},
             {name: 'my-orders',
             path: 'my-orders',
             component:myOrders},
@@ -217,6 +221,9 @@ export const routes = [
            {name: 'profile',
            path: 'profile',
            component:adminProfile},
+           {name: 'admin-edit-profile',
+           path: 'edit-profile',
+           component:AdminEditProfile},
            {name: 'project',
            path: 'project',
            component:Project},

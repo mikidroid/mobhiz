@@ -1,6 +1,17 @@
-<template> <div class="text-center text-secondary " style="" v-if="this.$store.state.loading" >
-<i class="fa fa-spinner fa-spin fa-8x fa-fw"></i>
-<span class="sr-only">Loading...</span>
-        </div>
-        
+<template>
+<b-spinner style=" height:1rem;width:1rem" class="text-info" variant="primary" label="Spinning"></b-spinner>
 </template>
+
+<script>
+  export default{
+    props:{
+      loader:false,
+    },
+    data(){
+      return{
+        
+      }
+    },
+    
+  }
+</script>

@@ -1,8 +1,6 @@
 <template >
  <div class="container text-white">
 
-
-
   <h2 class="" >Register</h2>
   <hr/>
 
@@ -24,7 +22,7 @@
    <input type="text" class="form-control" name="username" v-model="form.username">
    <label for="password" class="mt-3">Password:</label>
    <input type="password" class="form-control" name="password" v-model="form.password">
- <button type="submit" class="btn-dark btn mt-3">Register</button>
+ <button type="submit" class="btn-dark btn mt-3">Register <loader v-show="loading"></loader> </button>
   </form>
  </div>
 </template>
@@ -68,7 +66,7 @@ import cons from '../config/const.js';
   created(){},
   methods:{
    register(){
-     this.$store.commit('SET_LOADING',true);
+     this.loading=true;
       this.axios.post('/api/register',this.form)
       .then(r=>{
           this.$swal.fire({
@@ -81,14 +79,16 @@ import cons from '../config/const.js';
           let send_email = new sendE(this.form.email,this.emailSubject,this.emailBody).sendEmail();
           if(send_email){
             let msg_admin=new sendE(this.PERSONAL_EMAIL,'New registration on '+this.SITE_NAME,'Congrats! you have a new client with username: <b>'+this.form.username+'</b> on '+this.SITE_NAME+'. Please check your dashboard to view client details.').sendEmail();
-            this.loading=false;
           }
           this.errors="";
           this.form={};
-          this.$router.push('/login') })
+          this.$router.push('/login');
+          this.loading=false;
+        
+      })
       .catch(err=>{
           this.errors=err.response.data.errors;
-            this.$store.state.loading=false;
+            this.loading=false;
       });
    }
            }
